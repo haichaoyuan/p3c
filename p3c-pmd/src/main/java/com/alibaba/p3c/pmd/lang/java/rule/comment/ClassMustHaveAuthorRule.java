@@ -28,7 +28,8 @@ import net.sourceforge.pmd.lang.java.ast.Comment;
 
 /**
  * [Mandatory] Every class should include information of author(s) and date.
- *
+ * [强制] 每个类必须包含作者和日期信息
+ * 其实就是检查注释，正则查找 @author, 没查找date
  * @author keriezhang
  * @date 2016/12/14
  */
@@ -74,6 +75,8 @@ public class ClassMustHaveAuthorRule extends AbstractAliCommentRule {
         return super.visit(decl, data);
     }
 
+
+
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
         assignCommentsToDeclarations(cUnit);
@@ -95,6 +98,7 @@ public class ClassMustHaveAuthorRule extends AbstractAliCommentRule {
         } else {
             String commentContent = comment.getImage();
             boolean hasAuthor = AUTHOR_PATTERN.matcher(commentContent).matches();
+            //todo : 正则查找作者,若无报错，哈哈
             if (!hasAuthor) {
                 ViolationUtils.addViolationWithPrecisePosition(this, decl, data,
                     I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".author", decl.getImage()));

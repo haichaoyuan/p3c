@@ -36,7 +36,7 @@ import net.sourceforge.pmd.lang.java.ast.JavaNode;
 
 /**
  * [Recommended] Codes or configuration that is noticed to be obsoleted should be resolutely removed from projects.
- *
+ * [推荐] 代码或者配置 被标记废弃(obsoleted), 将被删除
  * @author keriezhang
  * @date 2017/04/14
  */

@@ -36,6 +36,8 @@ import org.jaxen.JaxenException;
  * [Mandatory] Abstract methods (including methods in interface) should be commented by Javadoc.
  * Javadoc should include method instruction, description of parameters, return values and possible exception.
  *
+ * [强制] 抽象方法(包括接口中的方法)必须用 Javadoc 注释
+ * Javadoc 将包含方法指令(instruction), 参数描述，返回值和可能存在的异常
  * @author keriezhang
  * @date 2016/12/14
  */
@@ -60,12 +62,15 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
                 if (!method.isAbstract()) {
                     continue;
                 }
+                //寻找抽象类的抽象方法
                 Comment comment = method.comment();
                 if (null == comment || !(comment instanceof FormalComment)) {
+                    // <![CDATA[抽象方法【%s】必须使用javadoc注释]]>
                     ViolationUtils.addViolationWithPrecisePosition(this, method, data,
                         I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".abstract",
                             method.getMethodName()));
                 } else {
+                    // 有注释再去判断格式对不对
                     this.checkMethodCommentFormat(method, data);
                 }
             }
@@ -84,6 +89,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
         for (Node node : methodNodes) {
             ASTMethodDeclaration method = (ASTMethodDeclaration)node;
             Comment comment = method.comment();
+            // 接口方法
             if (null == comment || !(comment instanceof FormalComment)) {
                 ViolationUtils.addViolationWithPrecisePosition(this, method, data,
                     I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".interface",
@@ -118,6 +124,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
         for (Node variableDeclaratorId : variableDeclaratorIds) {
             ASTVariableDeclaratorId param = (ASTVariableDeclaratorId)variableDeclaratorId;
             String paramName = param.getImage();
+            // 参数查询
             Pattern paramNamePattern = Pattern.compile(".*@param\\s+" + paramName + ".*", Pattern.DOTALL);
 
             if (!paramNamePattern.matcher(commentContent).matches()) {
@@ -128,6 +135,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
         }
 
         // return values
+        //匹配 return 字符串哦
         if (!method.isVoid() && !RETURN_PATTERN.matcher(commentContent).matches()) {
 
             ViolationUtils.addViolationWithPrecisePosition(this, method, data,

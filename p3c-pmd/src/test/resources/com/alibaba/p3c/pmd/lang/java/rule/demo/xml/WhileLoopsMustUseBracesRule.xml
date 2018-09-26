@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+
+    <code-fragment id="while-have-block"><![CDATA[
+class Example {
+        void bar() {
+            int a = 0;
+            while (baz) {
+               buz.doSomething();
+            }
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>while must have block</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="while-have-block"/>
+    </test-code>
+
+    <code-fragment id="while-no-block"><![CDATA[
+class Example {
+        void bar() {
+            int a = 0;
+            while (baz)
+               buz.doSomething();
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>while must have block</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="while-no-block"/>
+    </test-code>
+</test-data>

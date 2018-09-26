@@ -506,4 +506,8 @@
     </entry>
 
 
+    <!-- demo -->
+    <entry key="java.demo.rule.msg">
+        <![CDATA[我写的一个demo yeah]]>
+    </entry>
 </properties>

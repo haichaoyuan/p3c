@@ -35,6 +35,8 @@ import net.sourceforge.pmd.lang.java.ast.Comment;
  * [Mandatory] Single line comments in a method should be put above the code to be commented, by using // and
  * multiple lines by using \/* *\/. Alignment for comments should be noticed carefully.
  *
+ * [强制] 方法的单行注释将放置在代码前，并使用 // 或使用多行 \/**\/ ,注释的对齐特别注意
+ * 就是注释不要放在代码后面，可以不要
  * @author keriezhang
  * @date 2016/12/14
  */
@@ -51,6 +53,7 @@ public class AvoidCommentBehindStatementRule extends AbstractAliCommentRule {
                 lastNode = (AbstractJavaNode)value;
             } else if (value instanceof Comment) {
                 Comment comment = (Comment)value;
+                //同行注释
                 if (lastNode != null && (comment.getBeginLine() == lastNode.getBeginLine())
                     && (comment.getEndColumn() > lastNode.getBeginColumn())) {
                     addViolationWithMessage(data, lastNode,

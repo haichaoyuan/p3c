@@ -20,7 +20,7 @@ import com.alibaba.p3c.pmd.I18nResources;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.rule.comments.AbstractCommentRule;
 
-/**
+/** ali 阿里？， 抽象注释规则
  * @author caikang
  * @date 2017/06/21
  */

@@ -508,4 +508,8 @@ Note: If attribute is null or does not exist, ${var} will be shown directly on w
         <![CDATA[variable [%s] should add ! after $]]>
     </entry>
 
+    <!-- demo -->
+    <entry key="java.demo.rule.msg">
+        <![CDATA[one demo yeah]]>
+    </entry>
 </properties>

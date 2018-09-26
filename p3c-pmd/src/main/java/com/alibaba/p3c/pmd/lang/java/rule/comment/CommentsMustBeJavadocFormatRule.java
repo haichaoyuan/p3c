@@ -46,7 +46,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * [Mandatory] Javadoc should be used for classes, class variables and methods.
  * The format should be '\/** comment *\/', rather than '// xxx'.
- *
+ * [强制] Java 类、变量、方法注释必须是 javeDoc, 而且必须 \/** comment *\/, 而不是 '// XXX
+ * '
  * @author keriezhang
  * @date 2016/12/14
  */
@@ -137,7 +138,9 @@ public class CommentsMustBeJavadocFormatRule extends AbstractAliCommentRule {
     }
 
     private void checkComment(AbstractJavaAccessNode decl, Object data, MessageMaker maker) {
+        // comment 来自 assignCommentsToDeclarations 方法设置的
         Comment comment = decl.comment();
+        // 简单判断，不是单行注释，不是多行注释
         if (comment instanceof SingleLineComment || comment instanceof MultiLineComment) {
             addViolationWithMessage(data, decl,
                 maker.make(), comment.getBeginLine(), comment.getEndLine());
