@@ -32,6 +32,7 @@ interface AliBaseApplicationComponent : ApplicationComponent {
     override fun disposeComponent() {
     }
 
+
     override fun initComponent() {
     }
 }

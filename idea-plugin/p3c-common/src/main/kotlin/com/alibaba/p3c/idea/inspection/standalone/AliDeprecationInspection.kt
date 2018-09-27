@@ -19,6 +19,7 @@ import com.alibaba.p3c.idea.config.P3cConfig
 import com.alibaba.p3c.idea.i18n.P3cBundle
 import com.alibaba.p3c.idea.inspection.AliBaseInspection
 import com.alibaba.p3c.idea.util.HighlightDisplayLevels
+import com.alibaba.p3c.pmd.lang.java.rule.demo.WhileLoopsMustUseBracesRule
 import com.alibaba.smartfox.idea.common.util.getService
 import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.LocalQuickFix
@@ -87,14 +88,24 @@ class AliDeprecationInspection : DeprecationInspection, AliBaseInspection {
     class DeprecationInspectionProblemsHolder(private val holder: ProblemsHolder, onTheFly: Boolean) : ProblemsHolder(
             holder.manager, holder.file, onTheFly) {
 
+//        override fun registerProblem(psiElement: PsiElement,
+//                @Nls(capitalization = Nls.Capitalization.Sentence) descriptionTemplate: String,
+//                fixes: Array<LocalQuickFix>?) {
+//            holder.registerProblem(psiElement, getMessage(descriptionTemplate), *(fixes ?: emptyArray()))
+//        }
         override fun registerProblem(psiElement: PsiElement,
-                @Nls(capitalization = Nls.Capitalization.Sentence) descriptionTemplate: String,
+                @Nls descriptionTemplate: String,
                 fixes: Array<LocalQuickFix>?) {
             holder.registerProblem(psiElement, getMessage(descriptionTemplate), *(fixes ?: emptyArray()))
         }
 
+//        override fun registerProblem(psiElement: PsiElement,
+//                @Nls(capitalization = Nls.Capitalization.Sentence) descriptionTemplate: String,
+//                highlightType: ProblemHighlightType, fixes: Array<LocalQuickFix>?) {
+//            holder.registerProblem(psiElement, getMessage(descriptionTemplate), highlightType, *(fixes ?: emptyArray()))
+//        }
         override fun registerProblem(psiElement: PsiElement,
-                @Nls(capitalization = Nls.Capitalization.Sentence) descriptionTemplate: String,
+                @Nls descriptionTemplate: String,
                 highlightType: ProblemHighlightType, fixes: Array<LocalQuickFix>?) {
             holder.registerProblem(psiElement, getMessage(descriptionTemplate), highlightType, *(fixes ?: emptyArray()))
         }
