@@ -30,12 +30,22 @@
         <action class="com.alibaba.p3c.idea.action.SwitchLanguageAction"
                 id="com.alibaba.p3c.idea.action.SwitchLanguageAction"
                 icon="P3cIcons.LANGUAGE">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </action>
+        <action class="com.alibaba.p3c.idea.action.DemoAction" id="DemoAction"
+                popup="true" text="这是测试" icon="P3cIcons.ALIBABA">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+
         <group popup="true" id="com.alibaba.p3c.analytics.action_group" text="编码规约" icon="P3cIcons.ALIBABA">
             <reference ref="AliP3CInspectionAction"/>
             <reference ref="ToggleProjectInspectionAction"/>
             <reference ref="com.alibaba.p3c.idea.action.SwitchLanguageAction"/>
+            <reference ref="DemoAction"/>
             <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="RunMenu" anchor="last"/>
         </group>
     </actions>
 

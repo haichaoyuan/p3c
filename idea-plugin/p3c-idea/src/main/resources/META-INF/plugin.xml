@@ -1,10 +1,19 @@
 <idea-plugin>
-    <id>com.alibaba.p3c.smartfox</id>
-    <name>Alibaba Java Coding Guidelines</name>
-    <description>Alibaba Java Coding Guidelines plugin support.</description>
+    <!--<id>com.alibaba.p3c.smartfox</id>-->
+    <id>com.xh.p3c.codeStylePreview</id>
+    <!--<name>Alibaba Java Coding Guidelines</name>-->
+    <name>xuehai code review</name>
+    <!--<description>Alibaba Java Coding Guidelines plugin support.</description>-->
+    <description>学海代码监测插件支持</description>
 
     <change-notes>
         <![CDATA[
+         <ul>
+        1.1.0
+        <li>
+        学海代码监测插件支持
+        </li>
+         </ul>
           <ul>
         1.0.5
         <li>
@@ -55,4 +64,5 @@
     <depends>com.intellij.modules.vcs</depends>
     <depends>com.intellij.modules.xml</depends>
     <depends>com.intellij.modules.xdebugger</depends>
+
 </idea-plugin>

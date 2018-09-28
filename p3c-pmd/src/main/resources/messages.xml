@@ -510,4 +510,7 @@
     <entry key="java.demo.rule.msg">
         <![CDATA[我写的一个demo yeah]]>
     </entry>
+    <entry key="java.demo.rule.MethodMustHaveCommentRule">
+        <![CDATA[方法需要增加完备注释]]>
+    </entry>
 </properties>

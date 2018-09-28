@@ -12,6 +12,7 @@
 
         <example>
 <![CDATA[
+    while 语句必须有括号
     /**
      * 
      * XXX class function description.
@@ -20,6 +21,27 @@
     public class XxClass implements Serializable {
         private static final long serialVersionUID = 113323427779853001L;
         //剩下全靠编
+    }
+]]>
+        </example>
+    </rule>
+
+    <rule name="MethodMustHaveCommentRule" message="java.demo.rule.MethodMustHaveCommentRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.demo.MethodMustHaveCommentRule">
+        <description>方法需要增加完备注释，参数的说明，返回值得说明都需要</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    /**
+     * 这是注释
+     * @param x 这是参数x意思
+     * @param y 这是参数y意思
+     * @return 这是返回值
+     */
+    public int b(int x, int y){
+        int i = 0;
+        return i;
     }
 ]]>
         </example>

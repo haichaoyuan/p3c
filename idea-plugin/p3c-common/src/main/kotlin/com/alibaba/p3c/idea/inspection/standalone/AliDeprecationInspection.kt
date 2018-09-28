@@ -19,7 +19,6 @@ import com.alibaba.p3c.idea.config.P3cConfig
 import com.alibaba.p3c.idea.i18n.P3cBundle
 import com.alibaba.p3c.idea.inspection.AliBaseInspection
 import com.alibaba.p3c.idea.util.HighlightDisplayLevels
-import com.alibaba.p3c.pmd.lang.java.rule.demo.WhileLoopsMustUseBracesRule
 import com.alibaba.smartfox.idea.common.util.getService
 import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.LocalQuickFix

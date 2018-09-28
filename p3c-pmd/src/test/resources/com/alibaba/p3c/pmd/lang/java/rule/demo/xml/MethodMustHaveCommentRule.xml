@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+    <!-- 没有注释-->
+    <code-fragment id="method-have-no-comment"><![CDATA[
+class Example {
+        void bar() {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method have no comment</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="method-have-no-comment"/>
+    </test-code>
+
+    <!-- // 注释-->
+    <code-fragment id="method-have-single-comment"><![CDATA[
+class Example {
+        //
+        void bar() {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method have single comment</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="method-have-single-comment"/>
+    </test-code>
+
+    <!-- // 注释-->
+    <code-fragment id="method-have-single-comment-have-data"><![CDATA[
+class Example {
+        // 注释
+        void bar() {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-have-single-comment-have-data</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="method-have-single-comment-have-data"/>
+    </test-code>
+
+    <!-- /* */ 注释-->
+    <code-fragment id="method-have-formal-comment-no-data"><![CDATA[
+class Example {
+        /*
+         *
+         **/
+        void bar() {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-have-formal-comment-no-data</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="method-have-formal-comment-no-data"/>
+    </test-code>
+
+    <!-- /** */ 注释-->
+    <code-fragment id="method-have-formal-comment"><![CDATA[
+class Example {
+         /** 注释
+         * @param a a上课了
+         * @param b b上两节课
+         * @return 1 是
+         */
+        int bar(int a, int b) {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-have-formal-comment</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="method-have-formal-comment"/>
+    </test-code>
+
+    <!-- /** */ 注释-->
+    <code-fragment id="method-have-formal-comment-no-data2"><![CDATA[
+class Example {
+         /**
+         * @param a
+         */
+        void bar(int a, int b) {
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-have-formal-comment-no-data2</description>
+        <expected-problems>3</expected-problems>
+        <code-ref id="method-have-formal-comment-no-data2"/>
+    </test-code>
+
+
+    <!-- /** */ 注释里参数和return 也写点东西-->
+    <code-fragment id="method-param-and-return-no-data"><![CDATA[
+class Example {
+         /**
+         * 注释
+         * @param x
+         * @param y
+         * @return
+         */
+        public int b(int x, int y){
+            int i = 0;
+            return i;
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-param-and-return-no-data</description>
+        <expected-problems>3</expected-problems>
+        <code-ref id="method-param-and-return-no-data"/>
+    </test-code>
+</test-data>

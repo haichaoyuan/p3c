@@ -11,6 +11,7 @@ public class DemoRulesTest extends SimpleAggregatorTst {
         //[2] ruleName 得正确，getRuleByName 方法根据字符串比较来查找
         addRule(RULESET, "WhileLoopsMustUseBracesRule");
         //[3]  需要规则测试文件了。Couldn't find xml/WhileLoopsMustUseBracesRule.xml
+        addRule(RULESET, "MethodMustHaveCommentRule");
         super.setUp();
     }
 

@@ -54,8 +54,14 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
     private static final Pattern EMPTY_CONTENT_PATTERN = Pattern.compile("[/*\\n\\r\\s]+(@.*)?", Pattern.DOTALL);
     private static final Pattern RETURN_PATTERN = Pattern.compile(".*@return.*", Pattern.DOTALL);
 
+    /**
+     * @param decl
+     * @param data
+     * @return
+     */
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration decl, Object data) {
+        //类层往下找
         if (decl.isAbstract()) {
             List<ASTMethodDeclaration> methods = decl.findDescendantsOfType(ASTMethodDeclaration.class);
             for (ASTMethodDeclaration method : methods) {
@@ -113,6 +119,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
         }
 
         // description of parameters
+        // 多个参数
         List<Node> variableDeclaratorIds;
         try {
             variableDeclaratorIds = method.findChildNodesWithXPath(METHOD_VARIABLE_DECLARATOR_XPATH);
@@ -120,7 +127,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
             throw new RuntimeException(
                 "XPath expression " + METHOD_VARIABLE_DECLARATOR_XPATH + " failed: " + e.getLocalizedMessage(), e);
         }
-
+        // 遍历参数
         for (Node variableDeclaratorId : variableDeclaratorIds) {
             ASTVariableDeclaratorId param = (ASTVariableDeclaratorId)variableDeclaratorId;
             String paramName = param.getImage();
@@ -163,6 +170,7 @@ public class AbstractMethodOrInterfaceMethodMustUseJavadocRule extends AbstractA
 
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
+        //把注释放进方法里
         assignCommentsToDeclarations(cUnit);
         return super.visit(cUnit, data);
     }

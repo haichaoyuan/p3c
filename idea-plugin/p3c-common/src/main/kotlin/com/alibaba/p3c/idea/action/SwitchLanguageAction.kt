@@ -26,8 +26,8 @@ import com.intellij.openapi.application.ex.ApplicationManagerEx
 import com.intellij.openapi.project.DumbAware
 
 /**
- *
- *
+ * 切换语言
+ * 写入配置，提示重启
  * @author caikang
  * @date 2017/06/20
  */

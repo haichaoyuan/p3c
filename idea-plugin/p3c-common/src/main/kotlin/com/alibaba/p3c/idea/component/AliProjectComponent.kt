@@ -27,7 +27,8 @@ import com.intellij.openapi.vfs.VirtualFileListener
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.PsiManager
 
-/**
+/** 监测java、vm 文件变化
+ *  看代码是有缓存存储所有文件，将有变化的文件置为改变状态
  * @author caikang
  * @date 2016/12/13
  */
