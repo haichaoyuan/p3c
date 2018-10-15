@@ -27,7 +27,8 @@ import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 
 /**
  * [Mandatory] Class names should be nouns in UpperCamelCase except domain models: DO, BO, DTO, VO, etc.
- *
+ * [强制]3. 类型使用 UpperCamelCase 风格，一些专属名词除外（DO,BTO,VO,DAO,BO,DAOImpl,YunOs,AO,PO）
+ * 正则匹配 I?([A-Z][a-z0-9]+)+， 第一个可选I，然后跟着大写字母+ n 个小写或数字，如此多个。就是随便大写字母小写字母就能骗过了
  * @author changle.lq
  * @date 2017/04/16
  */

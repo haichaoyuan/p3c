@@ -35,7 +35,8 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] Since NullPointerException can possibly be thrown while calling the equals method of Object,
  * equals should be invoked by a constant or an object that is definitely not null.
- *
+ * [强制] 6. 由于调用Object 的equals 方法容易抛空指针异常，equals将由常量或者不为空的对象来调用
+ * 看起来很简单的规则，写的真是繁琐，没看懂
  * @author zenghou.fw
  * @date 2016/11/29
  */
@@ -62,6 +63,7 @@ public class EqualsAvoidNullRule extends AbstractAliRule {
             }
             for (Node invocation : equalsInvocations) {
                 // if arguments of equals is complicate expression, skip the check
+                // 如果equal 是复杂语句，跳过检查
                 List<? extends Node> simpleExpressions = invocation.findChildNodesWithXPath(INVOCATION_PREFIX_XPATH);
                 if (simpleExpressions == null || simpleExpressions.isEmpty()) {
                     return super.visit(node, data);

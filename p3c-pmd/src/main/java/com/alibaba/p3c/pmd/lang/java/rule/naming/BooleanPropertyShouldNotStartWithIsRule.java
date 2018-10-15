@@ -25,7 +25,9 @@ import net.sourceforge.pmd.lang.java.ast.ASTVariableDeclaratorId;
 /**
  * [Mandatory] Do not add 'is' as prefix while defining Boolean variable, since it may cause a serialization exception
  * in some Java Frameworks.
- *
+ * [强制] 8. 不要定义布尔变量时使用 "is" 作为前缀，因为部分框架解析会引发序列化错误
+ * 如 isDelete 变量，则方法也是 isDelete(), 反向解析时会"误以为" 对应熟悉名称是 delete ，导致取不到
+ * 判断那些DO、DAO、VO、DAO 结尾的这些需要框架解析的类，里面字段类型为boolean的字段 且不能以is 开头
  * @author changle.lq
  * @date 2017/04/16
  */

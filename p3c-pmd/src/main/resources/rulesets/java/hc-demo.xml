@@ -28,7 +28,7 @@
 
     <rule name="MethodMustHaveCommentRule" message="java.demo.rule.MethodMustHaveCommentRule"
           class="com.alibaba.p3c.pmd.lang.java.rule.demo.MethodMustHaveCommentRule">
-        <description>方法需要增加完备注释，参数的说明，返回值得说明都需要</description>
+        <description>方法需要增加完备注释，参数的说明，返回值的说明都需要</description>
         <priority>3</priority>
 
         <example>

@@ -23,7 +23,7 @@ import net.sourceforge.pmd.lang.ast.Node;
 
 /**
  * [Mandatory] Brackets are a part of an Array type. The definition could be: String[] args;
- *
+ * [强制]7. 类型与中括号紧挨相连来表示数组
  * @author changle.lq
  * @date 2017/04/16
  */

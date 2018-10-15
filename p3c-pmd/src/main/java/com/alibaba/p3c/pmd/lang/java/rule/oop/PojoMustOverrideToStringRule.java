@@ -30,7 +30,7 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] The toString method must be implemented in a POJO class. The super.toString method should be called
  * in front of the whole implementation if the current class extends another POJO class.
- *
+ * [强制] POJO类 必须实现 toString 方法，如果继承另一个POJO,注意在前面加一下super.toString
  * @author zenghou.fw
  * @date 2016/11/25
  */

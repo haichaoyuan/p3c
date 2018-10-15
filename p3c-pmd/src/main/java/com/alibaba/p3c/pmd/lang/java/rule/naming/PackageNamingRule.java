@@ -24,7 +24,8 @@ import net.sourceforge.pmd.lang.ast.Node;
 /**
  * [Mandatory] Package should be named in lowercase characters. There should be only one English word after
  * each dot. Package names are always in singular format while class name can be in plural format if necessary.
- *
+ * [强制] 9. 包名使用小写，点分隔符之间只能有一个英语单词，包名使用单数形式
+ * 正则意思是，小写字母或数字 加上 "." 加上 小写字母或数字
  * @author changle.lq
  * @date 2017/04/16
  */

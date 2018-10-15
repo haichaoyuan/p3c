@@ -32,7 +32,7 @@ import org.jaxen.JaxenException;
  * 3) [Recommended] Local variables should be primitive data types.
  *
  * check only 1) here
- *
+ * [强制]8. 所有的POJO 类必须是包装类
  * @author zenghou.fw
  * @date 2016/11/25
  */

@@ -27,7 +27,7 @@ import net.sourceforge.pmd.lang.java.rule.junit.AbstractJUnitRule;
 
 /**
  * [Mandatory] Test cases shall be started with the class names to be tested and ended with Test.
- *
+ * [强制] 6. 测试用例必须以需测试的类名开始并以test结尾
  * @author changle.lq
  * @date 2017/04/16
  */

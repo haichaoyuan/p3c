@@ -22,7 +22,8 @@ import net.sourceforge.pmd.lang.java.ast.ASTLiteral;
 /**
  * [Mandatory] 'L' instead of 'l' should be used for long or Long variable because 'l' is easily to
  * be regarded as number 1 in mistake.
- *
+ * [强制]使用long 或者 Long 类型的变量，数值后面使用大写的 'L' 替代小写的 'l', 因为小写的'l'容易跟数字1混淆
+ * 逻辑是判断文字是Long 类型且以小写'l'结尾就提示。
  * @author shengfang.gsf
  * @date 2016/12/13
  */

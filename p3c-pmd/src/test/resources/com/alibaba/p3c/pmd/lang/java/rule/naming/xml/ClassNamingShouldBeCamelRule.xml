@@ -102,4 +102,21 @@ public class RoutingBranchRoutePO{
         <expected-problems>0</expected-problems>
         <code-ref id="CamelClassNaming6" />
     </test-code>
+
+
+
+
+    <code-fragment id="CamelClassNaming60">
+        <![CDATA[
+public class CamelClassNameRuleTest {
+    class Abc{}
+    class AaBbCc{}
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>Class Name Should Camel111</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="CamelClassNaming60" />
+    </test-code>
 </test-data>

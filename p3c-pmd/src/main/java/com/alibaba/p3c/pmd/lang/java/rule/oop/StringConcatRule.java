@@ -36,7 +36,8 @@ import org.jaxen.JaxenException;
 
 /**
  * [Recommended] Use the append method in StringBuilder inside a loop body when concatenating multiple strings.
- *
+ * [推荐] 18. 当循环体内 连接多个字符串，使用 StringBuilder 的 append 方法
+ * 也是没看懂，
  * @author zenghou.fw
  * @date 2017/04/11
  */

@@ -24,7 +24,8 @@ import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 
 /**
  * [Mandatory] Abstract class names must start with Abstract or Base.
- *
+ * [强制] 6. 抽象类名必须以Abstract 或 Base 开头
+ * 1. 注意，此处继承自 AbstractXpathRule
  * @author changle.lq
  * @date 2017/04/16
  */

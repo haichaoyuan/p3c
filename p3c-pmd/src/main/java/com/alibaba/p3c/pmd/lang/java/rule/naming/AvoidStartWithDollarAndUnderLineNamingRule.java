@@ -25,7 +25,7 @@ import net.sourceforge.pmd.lang.java.ast.ASTVariableDeclaratorId;
 
 /**
  * [Mandatory] All names should not start or end with an underline or a dollar sign.
- *
+ * [强制] 1. 所有名字不能使用下划线和美元符号开始或者结束
  * @author changle.lq
  * @date 2017/04/16
  */

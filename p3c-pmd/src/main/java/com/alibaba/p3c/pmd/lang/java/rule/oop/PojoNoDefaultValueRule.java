@@ -29,7 +29,7 @@ import org.jaxen.JaxenException;
 
 /**
  * [Mandatory] While defining POJO classes like DO, DTO, VO, etc., do not assign any default values to the members.
- *
+ * [强制] 9. 当定义 pojo类，类似DO、DTO、VO，不要设定任何默认值
  * @author zenghou.fw
  * @date 2016/11/22
  */

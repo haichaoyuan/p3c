@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * [Mandatory] Exception class names must be ended with Exception.
- *
+ *  [强制] 6. 继承Exception 的异常类必须以 Exception 结尾
  * @author changle.lq
  * @date 2017/04/16
  */
@@ -38,6 +38,7 @@ public class ExceptionClassShouldEndWithExceptionRule extends AbstractAliRule {
     @Override
     public Object visit(ASTExtendsList node, Object data) {
         ASTClassOrInterfaceType astClassOrInterfaceType = node.getFirstChildOfType(ASTClassOrInterfaceType.class);
+        //找不到 或者 类不是继承 Throwable, Exception 也是继承自 Throwable
         if ((astClassOrInterfaceType == null) || (!(TypeHelper.isA(astClassOrInterfaceType, Throwable.class)))) {
             return super.visit(node, data);
         }

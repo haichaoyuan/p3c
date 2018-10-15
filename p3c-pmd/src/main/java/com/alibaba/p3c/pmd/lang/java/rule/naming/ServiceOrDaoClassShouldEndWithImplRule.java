@@ -24,7 +24,7 @@ import net.sourceforge.pmd.lang.ast.Node;
 /**
  * [Mandatory] All Service and DAO classes must be interface based on SOA principle. Implementation class names
  * should be ended with Impl.
- *
+ * [强制] 14. 所有Service 和 DAO 类，必须基于SOA 原理，继承类名必须以Impl 结尾
  * @author changle.lq
  * @date 2017/04/16
  */

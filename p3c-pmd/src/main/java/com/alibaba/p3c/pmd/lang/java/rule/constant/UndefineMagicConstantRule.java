@@ -22,18 +22,15 @@ import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
 import com.alibaba.p3c.pmd.lang.java.util.namelist.NameListConfig;
 
 import net.sourceforge.pmd.lang.ast.Node;
-import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
-import net.sourceforge.pmd.lang.java.ast.ASTForStatement;
-import net.sourceforge.pmd.lang.java.ast.ASTIfStatement;
-import net.sourceforge.pmd.lang.java.ast.ASTLiteral;
-import net.sourceforge.pmd.lang.java.ast.ASTWhileStatement;
+import net.sourceforge.pmd.lang.java.ast.*;
 import net.sourceforge.pmd.util.StringUtil;
 
 import org.jaxen.JaxenException;
 
 /**
  * [Mandatory] Magic values, except for predefined, are forbidden in coding.
- *
+ * [强制]未被预先定义的魔法值，将禁止出现在代码中
+ * 先剔除白名单的值，再判断是否与if语句、while语句、for语句再同一行。可通过换行逃脱掉，if语句、while语句、for语句的条件写成多行
  * @author shengfang.gsf
  * @date 2016/12/13
  */
@@ -41,11 +38,15 @@ public class UndefineMagicConstantRule extends AbstractAliRule {
 
     /**
      * white list for undefined variable, may be added
+     * 常量白名单，类似1，-1，0
      */
     private final static List<String> LITERAL_WHITE_LIST = NameListConfig.NAME_LIST_SERVICE.getNameList(
         UndefineMagicConstantRule.class.getSimpleName(), "LITERAL_WHITE_LIST");
-
+    /**
+     * 存在文本，不是变量
+     */
     private final static String XPATH = "//Literal/../../../../..[not(VariableInitializer)]";
+
 
     /**
      * An undefined that belongs to non-looped if statements
@@ -62,6 +63,7 @@ public class UndefineMagicConstantRule extends AbstractAliRule {
             List<Node> parentNodes = node.findChildNodesWithXPath(XPATH);
 
             for (Node parentItem : parentNodes) {
+                //获取文本，变量会是 name, null 是 NullLiteral
                 List<ASTLiteral> literals = parentItem.findDescendantsOfType(ASTLiteral.class);
                 for (ASTLiteral literal : literals) {
                     if (inBlackList(literal) && !currentLiterals.contains(literal)) {
@@ -91,12 +93,13 @@ public class UndefineMagicConstantRule extends AbstractAliRule {
         if (name == null) {
             return false;
         }
-        // filter white list
+        // filter white list 白名单过滤
         for (String whiteItem : LITERAL_WHITE_LIST) {
             if (whiteItem.equals(name)) {
                 return false;
             }
         }
+        // 判断是否是if语句、while语句、for语句的魔法值
         ASTIfStatement ifStatement = literal.getFirstParentOfType(ASTIfStatement.class);
         if (ifStatement != null && lineNum == ifStatement.getBeginLine()) {
             ASTForStatement forStatement = ifStatement.getFirstParentOfType(ASTForStatement.class);

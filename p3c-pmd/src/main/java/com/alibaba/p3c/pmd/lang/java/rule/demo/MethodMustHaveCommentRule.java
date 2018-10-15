@@ -45,7 +45,7 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
             if (null == comment || !(comment instanceof FormalComment)) {
                 // <![CDATA[抽象方法【%s】必须使用javadoc注释]]>
                 ViolationUtils.addViolationWithPrecisePosition(this, method, data,
-                        I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".abstract",
+                        I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".method",
                                 method.getMethodName()));
             } else {
                 // /** */格式，有注释再去判断格式对不对

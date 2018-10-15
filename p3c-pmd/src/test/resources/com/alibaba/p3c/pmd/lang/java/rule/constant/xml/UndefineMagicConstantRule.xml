@@ -4,7 +4,7 @@
     <code-fragment id="constants-ok"><![CDATA[
     public class Foo {
         private final static  String notWarn = "666l";
-        } 
+        }
     ]]>
     </code-fragment>
 
@@ -62,7 +62,7 @@
 	 public class Foo {        
         private void method(String path) {
 	         if (null == path || !path.startsWith("/home/admin/leveldb/")
-	                || path.split("/").length <= 5) { 
+	                || path.split("/").length <= 5) {
 	         }
 	    }
 	 }        

@@ -30,7 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * [Mandatory] Constant variable names should be written in upper characters separated by underscores. These names
  * should be semantically complete and clear.
- *
+ * [强制] 5. 常量命名必须全部大写，单词间使用下划线隔开。命名必须语义完整且清晰
  * @author changle.lq
  * @date 2017/04/16
  */
@@ -47,11 +47,13 @@ public class ConstantFieldShouldBeUpperCaseRule extends AbstractAliRule {
             return super.visit(node, data);
         }
         //If the variable is of type Log  or Logger,do not check
+        //
         ASTClassOrInterfaceType classOrInterfaceType = node.getFirstDescendantOfType(ASTClassOrInterfaceType.class);
         if (classOrInterfaceType != null && LOG_VARIABLE_TYPE_SET.contains(classOrInterfaceType.getImage())) {
             return super.visit(node, data);
         }
         //filter by white list，such as the serialVersionUID
+        // 白名单 比如 serialVersionUID
         String constantName = node.jjtGetChild(1).jjtGetChild(0).getImage();
         boolean inWhiteList = StringUtils.isEmpty(constantName) || WHITE_LIST.contains(constantName)
             || constantName.endsWith(SERVICE_SUFFIX);

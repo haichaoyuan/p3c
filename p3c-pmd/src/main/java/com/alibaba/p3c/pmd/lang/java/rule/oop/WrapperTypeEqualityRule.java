@@ -26,7 +26,7 @@ import net.sourceforge.pmd.lang.java.ast.ASTPrimaryExpression;
 
 /**
  * [Mandatory] The wrapper classes should be compared by equals method rather than by symbol of '==' directly.
- *
+ * [强制] 包装类必须使用equals 方法而不是直接使用 "==" 符号
  * @author zenghou.fw
  * @date 2016/11/22
  */
@@ -43,6 +43,8 @@ public class WrapperTypeEqualityRule extends AbstractAliRule {
         }
 
         // possible elements around "==" are PrimaryExpression or UnaryExpression(e.g. a == -2)
+        // equal语句，找到两个表达式，且两个表达式的值都是包装类型
+        // "==" 是  PrimaryExpression类型，
         List<ASTPrimaryExpression> expressions = node.findChildrenOfType(ASTPrimaryExpression.class);
         if (expressions.size() == NumberConstants.INTEGER_SIZE_OR_LENGTH_2) {
             if (NodeUtils.isWrapperType(expressions.get(0)) &&

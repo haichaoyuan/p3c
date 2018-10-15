@@ -30,7 +30,8 @@ import net.sourceforge.pmd.lang.vm.ast.ASTComment;
 
 /**
  * [Mandatory] All enumeration type fields should be commented as Javadoc style.
- * [强制] 所有枚举类型的字段必须使用 JaveDoc 类型注释
+ * [强制] 5. 所有枚举类型的字段必须使用 JaveDoc 类型注释
+ *
  * @author keriezhang
  * @date 2016/12/14
  */
@@ -48,27 +49,27 @@ public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
         for (Entry<Integer, Node> entry : itemsByLineNumber.entrySet()) {
             Node value = entry.getValue();
 
-            if(isReport){
+            if (isReport) {
                 Node enumBody = value.jjtGetParent();
                 Node enumDeclaration = enumBody.jjtGetParent();
                 addViolationWithMessage(data, enumBody,
                         I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
                                 enumDeclaration.getImage()));
                 isReport = false;
-            } else
-            if (value instanceof ASTEnumDeclaration) {
+            } else if (value instanceof ASTEnumDeclaration) {
+                // 类声明
                 isPreviousEnumDecl = true;
             } else if (value instanceof ASTEnumConstant && isPreviousEnumDecl) {
-                //todo 这个意思是类声明(ASTEnumDeclaration)和常量(ASTEnumConstant),中间有个其他属性，这里是注释
+                //这个意思是类声明(ASTEnumDeclaration)和枚举常量(ASTEnumConstant),中间没有其他属性，这里是注释
                 Node enumBody = value.jjtGetParent();
                 Node enumDeclaration = enumBody.jjtGetParent();
                 addViolationWithMessage(data, enumBody,
-                    I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
-                        enumDeclaration.getImage()));
+                        I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
+                                enumDeclaration.getImage()));
                 isPreviousEnumDecl = false;
-            }else if (value instanceof Comment && isPreviousEnumDecl) {
-                //todo 判断注释格式，是否\/**\/
-                if(value instanceof SingleLineComment || value instanceof MultiLineComment){
+            } else if (value instanceof Comment && isPreviousEnumDecl) {
+                //判断注释格式，是否\/**\/
+                if (value instanceof SingleLineComment || value instanceof MultiLineComment) {
                     isReport = true;
                     isPreviousEnumDecl = false;
                 } else {
@@ -92,7 +93,7 @@ public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
         NodeSortUtils.addNodesToSortedMap(itemsByLineNumber, contantDecl);
 
         NodeSortUtils.addNodesToSortedMap(itemsByLineNumber, cUnit.getComments());
-        //todo 构建的SortedMap 的key 是用行数左移16位加上列数，保证代码属性顺序
+        //构建的SortedMap 的key 是用行数左移16位加上列数，保证代码属性顺序
         return itemsByLineNumber;
     }
 
