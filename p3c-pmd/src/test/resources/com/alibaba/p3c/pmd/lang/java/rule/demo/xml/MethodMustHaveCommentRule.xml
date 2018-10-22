@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test-data>
     <!-- 没有注释-->
+    <code-fragment id="method-have-annotation-comment"><![CDATA[
+    public class Tmp extends Object{
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method have annotation comment</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="method-have-annotation-comment"/>
+    </test-code>
+
+
+    <!-- 没有注释-->
     <code-fragment id="method-have-no-comment"><![CDATA[
 class Example {
         void bar() {

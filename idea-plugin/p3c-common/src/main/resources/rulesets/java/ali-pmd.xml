@@ -4,9 +4,15 @@
          xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
+    <!-- for -->
+    <rule ref="rulesets/java/xh-comment.xml"/>
+    <rule ref="rulesets/java/xh-constant.xml"/>
+    <rule ref="rulesets/java/xh-naming.xml"/>
+    <rule ref="rulesets/java/xh-oop.xml"/>
+
     <!--<rule ref="rulesets/java/ali-concurrent.xml"/>-->
     <!--<rule ref="rulesets/java/ali-comment.xml"/>-->
-    <rule ref="rulesets/java/hc-demo.xml"/>
+
     <!--<rule ref="rulesets/java/ali-naming.xml">-->
         <!--<exclude name="ArrayNamingShouldHaveBracketRule"/>-->
     <!--</rule>-->

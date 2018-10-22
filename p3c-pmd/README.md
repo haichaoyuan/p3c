@@ -1,249 +1,211 @@
 # P3C-PMD
+[toc]
 
-## <font color="green">Build requirements</font>
-- JDK 1.7+
-- Maven 3
+## 自定义规则
+### MethodMustHaveCommentRule 
+1. 方法必须拥有完备注释，必须使用 /* */
+2. 方法注释增加参数说明，返回值说明
+3. 剔除 Override 重载的方法，去除get、set、is前缀的方法，去除Dao后缀的类，和一些特殊类(比如DaoMaster)。
+## P3C-PMD插件规则
+### 编程规约（一）命名风格
+- 实现了1、3、4、5、6、7、8、9、14 等11条规则
+- 其中可用规则(7个)：
+- 1-AvoidStartWithDollarAndUnderLineNamingRule、
+- 3-ClassNamingShouldBeCamelRule、
+- 4-LowerCamelCaseVariableNamingRule、
+- 5-ConstantFieldShouldBeUpperCaseRule、
+- 6-AbstractClassShouldStartWithAbstractNamingRule、
+- 7-ArrayNamingShouldHaveBracketRule、
+- 9-PackageNamingRule
 
-## <font color="green">Use as dependency</font>
+#### AvoidStartWithDollarAndUnderLineNamingRule
+- 选用：可用
+- [强制]1. [强制] 所有名字不能使用下划线和美元符号开始或者结束
+- 与规则 LowerCamelCaseVariableNamingRule 冲突，**最好修改LowerCamelCaseVariableNamingRule**
 
-### <font color="green">Maven</font>
-```xml
-<dependency>
-    <groupId>com.alibaba.p3c</groupId>
-    <artifactId>p3c-pmd</artifactId>
-    <version>1.3.0</version>
-</dependency>
+#### ClassNamingShouldBeCamelRule
+- 选用：可用
+- 详细：[强制]3. 类型使用 UpperCamelCase 风格，一些专属名词除外（DO,BTO,VO,DAO,BO,DAOImpl,YunOs,AO,PO）
+- 正则匹配 I?([A-Z][a-z0-9]+)+， 第一个可选I，然后跟着大写字母+ n 个小写或数字，如此多个。就是随便大写字母小写字母就能骗过了
+- 后期可添加一些自定义专属名词
+
+#### LowerCamelCaseVariableNamingRule
+- 选用：可用
+- [强制]4. 方法名，参数名，成员变量名，本地变量名必须使用 lowerCamelCase
+- 正则：[a-z|$][a-z0-9]*([A-Z][a-z0-9]*)* ，小写字母或者美元符号$开头，中间跟着没有或一个或多个 小写字母或者数字，最后0个或一个或多个大写、小写、数字组合
+- 使用这个正则去匹配方法名，就是方法名也可以使用$符号开头
+
+
+
+#### ConstantFieldShouldBeUpperCaseRule
+- 选用：可用
+- [强制] 5. 常量命名必须全部大写，单词间使用下划线隔开。
+-  优先提供白名单，比如排除 serialVersionUID
+
+
+
+
+#### AbstractClassShouldStartWithAbstractNamingRule
+- 选用： 可用
+- [强制] 6. 抽象类名必须以Abstract 或 Base 开头
+- 详细：Abstract 属性为 true, Image 属性不匹配 Abstract|Base
+- 
+
+#### ExceptionClassShouldEndWithExceptionRule
+- 选用：一般
+- [强制] 6. 继承Exception 的异常类必须以 Exception 结尾
+
+#### TestClassShouldEndWithTestNamingRule
+- 选用：一般
+- [强制] 6. 测试用例必须以需测试的类名开始并以test结尾
+
+#### ArrayNamingShouldHaveBracketRule
+- 选用：可用
+- [强制]7. 类型与中括号紧挨相连来表示数组
+- 使用int[] arratDemo，而不是String argcs[] 来表示数组
+- 
+
+#### BooleanPropertyShouldNotStartWithIsRule
+- 选用：一般
+- [强制] 8. 不要定义布尔变量时使用 "is" 作为前缀，因为部分框架解析会引发序列化错误
+- 如 isDelete 变量，则方法也是 isDelete(), 反向解析时会"误以为" 对应熟悉名称是 delete ，导致取不到
+- 判断那些DO、DAO、VO、DAO 结尾的这些需要框架解析的类，里面字段类型为boolean的字段 且不能以is 开头
+
+
+
+#### PackageNamingRule
+- 选用：可用
+- [强制] 9. 包名使用小写，点分隔符之间只能有一个英语单词，包名使用单数形式
+- 正则意思是，小写字母或数字 加上 "." 加上 小写字母或数字
+
+#### ServiceOrDaoClassShouldEndWithImplRule
+- 选用：一般
+- [强制] 14. 所有Service 和 DAO 类，必须基于SOA 原理，继承类名必须以Impl 结尾
+
+
+
+### 编程规约（二）常量定义
+- 实现了1、2等2条规则；
+- 其中可用规则(2个)：
+- 1-UndefineMagicConstantRule
+- 2-UpperEllRule
+
+#### UndefineMagicConstantRule
+- 选用：可用
+- [强制]1. 未被预先定义的魔法值，将禁止出现在代码中
+- 先剔除白名单的值，再判断是否与if语句、while语句、for语句再同一行。可通过换行逃脱掉，if语句、while语句、for语句的条件写成多行
+- 
+
+#### UpperEllRule
+- 选用：可用
+- [强制]2. 使用long 或者 Long 类型的变量，数值后面使用大写的 'L' 替代小写的 'l', 因为小写的'l'容易跟数字1混淆
+ - 逻辑是判断文字是Long 类型且以小写'l'结尾就提示。
+
+
+
+### 编程规约（四）OOP规约
+- 其中可用规则(3个)：
+- 6-EqualsAvoidNullRule
+- 7-WrapperTypeEqualityRule
+- 18-StringConcatRule
+
+#### EqualsAvoidNullRule
+- 选用：可用
+- [强制] 6. 由于调用Object 的equals 方法容易抛空指针异常，equals将由常量或者不为空的对象来调用
+- 看起来很简单的规则，写的真是繁琐，没看懂。简单来说就是对象 equals 字符串，字符串放前面。但是Integer 这样的类型，就没法翻转了，还是使用前判空为佳。
+- 
+
+#### WrapperTypeEqualityRule
+- 选用：可用
+- [强制] 7. 包装类必须使用equals 方法而不是直接使用 "==" 符号
+
+#### PojoMustUsePrimitiveFieldRule
+- 选用：一般
+- [强制]8. 所有的POJO 类必须是包装类
+- 
+
+#### PojoNoDefaultValueRule
+- 选用：一般
+- [强制] 9. 当定义 pojo类，类似DO、DTO、VO，不要设定任何默认值
+
+
+#### PojoMustOverrideToStringRule
+- 选用：一般
+- [强制] 12. POJO类 必须实现 toString 方法，如果继承另一个POJO,注意在前面加一下super.toString
+
+
+#### StringConcatRule
+- 选用： 可用
+- [推荐] 18. 当循环体内 连接多个字符串，使用 StringBuilder 的 append 方法
+- 也是没看懂，
+
+
+
+
+
+### 编程规约（五）集合处理
+
+
+
+
+### 编程规约（六）并发处理
+
+
+
+
+### 编程规约（七）控制语句
+
+
+
+### 编程规约（八）注释规约
+- 实现了1、2、3、4、5、6等6条规则；
+- 其中可用规则(2个)：
+- 5-EnumConstantsMustHaveCommentRule
+- 6-RemoveCommentedCodeRule
+
+#### CommentsMustBeJavadocFormatRule
+- 选用：有全部监测注释 MethodMustHaveCommentRule，可不用
+- 详细：[强制] 1. Java 类、变量、方法、字段的注释必须是 javeDoc, 而且必须 \/** comment *\/, 而不是 '// XXX  
+
+#### AbstractMethodOrInterfaceMethodMustUseJavadocRule
+- 选用：有全部监测注释 MethodMustHaveCommentRule，可不用
+- 详细：[强制]2. 抽象方法(包括接口中的方法)必须用 Javadoc 注释
+
+#### ClassMustHaveAuthorRule
+- 选用：可不用，现在大多直接拷贝代码，无意义
+- 详细： [强制]3. 每个类必须包含作者和日期信息其实就是检查注释，正则查找 @author, 没查找date
+
+#### AvoidCommentBehindStatementRule
+- 选用：可不用，单行注释有人习惯放后面，为了看着方便
+- 详细：[强制]4.  方法的单行注释将放置在代码前，并使用 // 或使用多行 \/**\/ ,注释的对齐特别注意
+
+#### EnumConstantsMustHaveCommentRule
+- 选用：**可用**
+- 详细： [强制]5. 所有枚举类型的字段必须使用 JaveDoc 类型注释  
+例子：
+
 ```
-### <font color="green">Gradle</font>
-```groovy
-compile 'com.alibaba.p3c:p3c-pmd:1.3.0'
+public enum Level {
+    /**
+     * high, medium and low
+     */
+    HIGH, MEDIUM, LOW
+}
 ```
 
-## <font color="green">Rules</font>
-
-P3C-PMD implements 49 rules involved in *Alibaba Java Coding Guidelines*, based on PMD ([https://github.com/pmd/pmd](https://github.com/pmd/pmd)).
-
-### <font color="green">Concurrency</font>
-* 1 ``[Mandatory]`` Customized ThreadLocal variables must be recycled, especially when using thread pools in which threads are often reused. Otherwise, it may affect subsequent business logic and cause unexpected problems such as memory leak.
-* 2 ``[Mandatory]`` A meaningful thread name is helpful to trace the error information, so assign a name when creating threads or thread pools.  
-Positive example:
-
-    ```java
-    public class TimerTaskThread extends Thread {
-        public TimerTaskThread(){
-            super.setName("TimerTaskThread"); … }
-    ```
-* 3 ``[Mandatory]`` Threads should be provided by thread pools. Explicitly creating threads is not allowed. 
-Note: Using thread pool can reduce the time of creating and destroying thread and save system resource. If we do not use thread pools, lots of similar threads will be created which lead to "running out of memory" or over-switching problems.
-* 4 ``[Mandatory]`` A thread pool should be created by ThreadPoolExecutor rather than Executors. These would make the parameters of the thread pool understandable. It would also reduce the risk of running out of system resources.
-Note: Below are the problems created by usage of Executors for thread pool creation:  
-    1. FixedThreadPool and SingleThreadPool:
-         Maximum request queue size Integer.MAX_VALUE. A large number of requests might cause OOM.
-    2. CachedThreadPool and ScheduledThreadPool:  
-        The number of threads which are allowed to be created is Integer.MAX_VALUE. Creating too many threads might lead to OOM.
-* 5 ``[Mandatory]`` SimpleDataFormat is unsafe, do not define it as a static variable. If you have to, lock or Apache DateUtils class must be used.
-Positive example: Pay attention to thread-safety when using DateUtils. It is recommended to use below:
-
-    ```java
-    private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {  
-        @Override  
-        protected DateFormat initialValue() {  
-            return new SimpleDateFormat("yyyy-MM-dd");  
-        }  
-    };  
-    ```
-    Note: In JDK8, Instant can be used to replace Date; likewise Calendar is replaced by LocalDateTime, and SimpleDateFormatter is replaced by DateTimeFormatter.
-* 6 ``[Mandatory]`` Run multiple TimeTask by using ScheduledExecutorService rather than Timer, because Timer will kill all running threads in case of failure to catch exceptions.
-* 7 ``[Recommended]`` When using CountDownLatch to convert asynchronous operations to synchronous ones, each thread must call countdown method before quitting. Make sure to catch any exception during thread running, to let countdown method be executed. If main thread cannot reach await method, program will return until timeout.
-Note: Be careful, exception thrown by a child thread cannot be caught by main thread.
-* 8 ``[Recommended]`` Avoid using Random instance by multiple threads. Although it is thread-safe, competition on the same seed will damage performance.
-Note: Random instance includes instances of java.util.Random and Math.random().  
-Positive example:  
-After JDK7, ThreadLocalRandom API can be used directly. But before JDK7, instance needs to be created in each thread.
-
-### <font color="green">Collection</font>
-
-* 1 ``[Mandatory]`` Do not cast subList in class ArrayList, otherwise ClassCastException will be thrown: java.util.RandomAccessSubList cannot be cast to java.util.ArrayList.  
-Note: subList of ArrayList is an inner class, which is a view of ArrayList. All operations on the Sublist will affect the original list finally.
-* 2 ``[Mandatory]`` When using subList, be careful while modifying the size of original list. It might cause ConcurrentModificationException when performing traversing, adding or deleting on the subList.
-* 3 ``[Mandatory]`` Use toArray(T[] array) to convert list to array. The input array type should be the same with the list whose size is list.size().
-Counter example: Do not use toArray method without arguments. Since the return type is Object[], ClassCastException will be thrown when casting it to a different array type.
-Positive example:
-
-    ```java
-        List<String> list = new ArrayList<String>(2);
-        list.add("guan");
-        list.add("bao");        
-        String[] array = new String[list.size()];
-        array = list.toArray(array);
-    ```
-Note: When using toArray method with arguments, if input array size is not large enough, the method will re-assign the size internally, and then return the address of new array. If the size is larger than needed, the value of index[list.size()] will be set to null while other values remain the same. Defining an input with the same size of the list is recommended.
-* 4 ``[Mandatory]`` Do not use methods which will modify the list after using Arrays.asList to convert array to list, otherwise methods like add/remove/clear will throw UnsupportedOperationException.
-Note: The result of asList is the inner class of Arrays, which does not implement methods to modify itself. Arrays.asList is only a transferred interface, data inside which is stored as an array.
-
-    ```java
-    String[] str = new String[] { "a", "b" };
-    List<String> list = Arrays.asList(str); 
-    ```
-Case 1: list.add("c"); will throw a runtime exception.  
-Case 2: str[0]= "gujin"; list.get(0) will be modified.
-* 5 ``[Mandatory]`` Do not remove or add elements to a collection in a foreach loop. Please use Iterator to remove an item. Iterator object should be synchronized when executing concurrent operations.  
-Counter example:
-
-    ```java
-    List<String> a = new ArrayList<String>();
-    a.add("1");
-    a.add("2");
-    for (String temp : a) {
-        if ("1".equals(temp)) {
-            a.remove(temp);
-        }
-    }
-    ```
-    Note: If you try to replace "1" with "2", you will get an unexpected result.
-Positive example:
-
-    ```java
-    Iterator<String> it = a.iterator();
-    while (it.hasNext()) {    
-            String temp =  it.next();             
-            if (delete condition) {              
-                  it.remove();       
-            }
-        }    
-    ```
-* 6``[Recommended]`` Set a size when initializing a collection if possible.  
-Note: Better to use ArrayList(int initialCapacity) to initialize ArrayList.
+#### RemoveCommentedCodeRule
+- 选用：**可用** 
+- 详细： [推荐]6. 双斜杠注释掉的包导入代码、字段声明、方法将删除；javeDoc 注释和三斜杠注释可被保留
 
 
-### <font color="green">Naming Conventions</font>
-* 1 ``[Mandatory]`` No identifier name should start or end with an underline or a dollar sign.  
-Counter example: _name / __name / $Object / name_ / name$ / Object$
-
-* 2 ``[Mandatory]`` Using Chinese, Pinyin, or Pinyin-English mixed spelling in naming is strictly prohibited. Accurate English spelling and grammar will make the code readable, understandable, and maintainable.
-Positive example: alibaba / taobao / youku / Hangzhou. In these cases, Chinese proper names in Pinyin are acceptable.
-
-* 3 ``[Mandatory]`` Class names should be nouns in UpperCamelCase except domain models: DO, BO, DTO, VO, etc.
-Positive example: MarcoPolo / UserDO / HtmlDTO / XmlService / TcpUdpDeal / TaPromotion
-Counter example: macroPolo / UserDo / HTMLDto / XMLService / TCPUDPDeal / TAPromotion
-
-* 4 ``[Mandatory]`` Method names, parameter names, member variable names, and local variable names should be written in lowerCamelCase.
-Positive example: localValue / getHttpMessage() / inputUserId
-
-* 5 ``[Mandatory]`` Constant variable names should be written in upper characters separated by underscores. These names should be semantically complete and clear.
-Positive example: MAX_STOCK_COUNT
-Counter example: MAX_COUNT
-
-* 6 ``[Mandatory]`` Abstract class names must start with Abstract or Base. Exception class names must end with Exception. Test cases shall start with the class names to be tested and end with Test.
-
-* 7 ``[Mandatory]`` Brackets are a part of an Array type. The definition could be: String[] args;
-Counter example: String args[];
-
-* 8 ``[Mandatory]`` Do not add 'is' as prefix while defining Boolean variable, since it may cause a serialization exception in some Java Frameworks.
-Counter example: boolean isSuccess; The method name will be isSuccess() and then RPC framework will deduce the variable name as 'success', resulting in a serialization error since it cannot find the correct attribute.
-
-* 9 ``[Mandatory]`` Package should be named in lowercase characters. There should be only one English word after each dot. Package names are always in singular format while class name can be in plural format if necessary.  
-Positive example: com.alibaba.open.util can be used as package name for utils;
-* 10 There are mainly two rules for interface and corresponding implementation class naming:
-    1. ``[Mandatory]`` All Service and DAO classes must be interface based on SOA principle. Implementation class names should be ended with Impl.  
-Positive example: CacheServiceImpl to implement CacheService.
-    2. ``[Recommended]`` If the interface name is to indicate the ability of the interface, then its name should be adjective.  
-Positive example: AbstractTranslator to implement Translatable.
-
-### <font color="green">Constant Conventions</font>
-
-* 1 ``[Mandatory]`` Magic values, except for predefined, are forbidden in coding.
-Counter example: String key="Id#taobao_" + tradeId;
-* 2 ``[Mandatory]`` 'L' instead of 'l' should be used for long or Long variable because 'l' is easily to be regarded as number 1 in mistake.  
-Counter example: Long a=2l, it is hard to tell whether it is number 21 or Long 2.
-### <font color="green">OOP</font>
-* 3 ``[Mandatory]`` Using a deprecated class or method is prohibited.  
-Note: For example, decode(String source, String encode) should be used instead of the deprecated method decode(String encodeStr). Once an interface has been deprecated, the interface provider has the obligation to provide a new one. At the same time, client programmers have the obligation to check out what its new implementation is.
-* 4 ``[Mandatory]`` Since NullPointerException can possibly be thrown while calling the equals method of Object, equals should be invoked by a constant or an object that is definitely not null.  
-Positive example: "test".equals(object);  
-Counter example: object.equals("test");  
-Note: java.util.Objects#equals (a utility class in JDK7) is recommended.
-
-* 5 ``[Mandatory]`` The wrapper classes should be compared by equals method rather than by symbol of '==' directly.  
-Note: Consider this assignment: Integer var = ?. When it fits the range from -128 to 127, we can use == directly for a comparison. Because the Integer object will be generated by IntegerCache.cache, which reuses an existing object. Nevertheless, when it fits the complementary set of the former range, the Integer object will be allocated in Heap, which does not reuse an existing object. This is an [implementation-level detail](https://docs.oracle.com/javase/specs/jls/se9/html/jls-5.html#jls-5.1.7-300) that should NOT be relied upon. Hence using the equals method is always recommended.
-* 6 ``[Mandatory]`` Rules for using primitive data types and wrapper classes:
-    1. Members of a POJO class must be wrapper classes.
-    2. The return value and arguments of a RPC method must be wrapper classes.
-    3. ``[Recommended]`` Local variables should be primitive data types.    
-Note: In order to remind the consumer of explicit assignments, there are no initial values for members in a POJO class. As a consumer, you should check problems such as NullPointerException and warehouse entries for yourself.
- Positive example: As the result of a database query may be null, assigning it to a primitive date type will cause a risk of NullPointerException because of Unboxing.  
- Counter example: Consider the output of a transaction volume's amplitude, like ±x%. As a primitive data, when it comes to a failure of calling a RPC service, the default return value: 0% will be assigned, which is not correct. A hyphen like - should be assigned instead. Therefore, the null value of a wrapper class can represent additional information, such as a failure of calling a RPC service, an abnormal exit, etc.
-* 7 ``[Mandatory]`` While defining POJO classes like DO, DTO, VO, etc., do not assign any default values to the members.  
-* 8 ``[Mandatory]`` The toString method must be implemented in a POJO class. The super.toString method should be called in front of the whole implementation if the current class extends another POJO class.  
-Note: We can call the toString method in a POJO directly to print property values in order to check the problem when a method throws an exception in runtime.
-* 9 ``[Recommended]`` Use the append method in StringBuilder inside a loop body when concatenating multiple strings.  
-
-    Counter example:
-
-    ```java
-    String str = "start";  
-    for(int i=0; i<100; i++) {  
-        str = str + "hello";  
-    }
-    ```
-    
-    Note: According to the decompiled bytecode file, for each iteration, it allocates a new StringBuilder object, appends a string, and finally returns a String object via the toString method. This is a tremendous waste of memory, especially when the iteration count is large.
-
-### <font color="green">Flow Control Statements</font>
-* 1 ``[Mandatory]`` In a switch block, each case should be finished by break/return. If not, a note should be included to describe at which case it will stop. Within every switch block, a default statement must be present, even if it is empty.
-* 2 ``[Mandatory]`` Braces are used with if, else, for, do and while statements, even if the body contains only a single statement. Avoid using the following example:
-
-    ```java
-    if (condition) statements; 
-    ```
-* 3 ``[Recommended]`` Do not use complicated expressions in conditional statements (except for frequently used methods like getXxx/isXxx). Using boolean variables to store results of complicated expressions temporarily will increase the code's readability.
-Note: Logic within many if statements are very complicated. Readers need to analyze the final results of the conditional expression to understand the branching logic.  
-Positive example:
-
-    ```java
-    // please refer to the pseudo-code as follows 
-    boolean existed = (file.open(fileName, "w") != null) && (...) || (...);
-    if (existed) {
-        //...
-    }  
-    ```
-
-    Counter example:  
-
-    ```java
-    if ((file.open(fileName, "w") != null) && (...) || (...)) {
-       // ...
-    }
-    ```
-
-### <font color="green">Exception</font>
-* 4 ``[Mandatory]`` Make sure to invoke the rollback if a method throws an Exception. Rollbacks are based on the context of the coding logic.
-* 5 ``[Mandatory]`` Never use return within a finally block. A return statement in a finally block will cause exceptions or result in a discarded return value in the try-catch block.
-* 6 ``[Recommended]`` One of the most common errors is NullPointerException. Pay attention to the following situations:
-    * 1 If the return type is primitive, return a value of wrapper class may cause NullPointerException.
-      Counter example: public int f() { return Integer } Unboxing a null value will throw a NullPointerException.
-    * 2 The return value of a database query might be null.
-    * 3 Elements in collection may be null, even though Collection.isEmpty() returns false.
-    * 4 Return values from an RPC might be null.
-    * 5 Data stored in sessions might by null.
-    * 6 Method chaining, like obj.getA().getB().getC(), is likely to cause NullPointerException.  
-      Positive example: Use Optional to avoid null check and NPE (Java 8+).
-
-### <font color="green">Code Comments</font>
-* 1 ``[Mandatory]`` Javadoc should be used for classes, class variables and methods. The format should be '/** comment **/', rather than '// xxx'.  
-Note: In IDE, Javadoc can be seen directly when hovering, which is a good way to improve efficiency.
-* 2 ``[Mandatory]`` Abstract methods (including methods in interface) should be commented by Javadoc. Javadoc should include method instruction, description of parameters, return values and possible exceptions.
-* 3 ``[Mandatory]`` Every class should include information of author(s) and date.
-* 4 ``[Mandatory]`` Single line comments in a method should be put above the code to be commented, by using // and multiple lines by using /* */. Alignment for comments should be noticed carefully.
-* 5 ``[Mandatory]`` All enumeration type fields should be commented as Javadoc style.
-
-
-### <font color="green">Other</font>
-* 1``[Mandatory]`` Avoid using *Apache Beanutils* to copy attributes.
-* 2 ``[Mandatory]`` When using regex, precompile needs to be done in order to increase the matching performance and preferably stored as a constant.  
-Note: Do not define Pattern pattern = Pattern.compile(.); within method body.
-* 3 ``[Mandatory]`` Variables must add exclamatory mark when passing to velocity engine from backend, like $!{var}.  
-Note: If attribute is null or does not exist, ${var} will be shown directly on web pages.
-* 4 ``[Mandatory]`` The return type of Math.random() is double, value range is 0<=x<1 (0 is possible). If a random integer is required, do not multiply x by 10 then round the result. The correct way is to use nextInt or nextLong method which belong to Random Object.
-* 5 ``[Mandatory]`` Use System.currentTimeMillis() to get the current millisecond. Do not use new Date().getTime().   
-Note: In order to get a more accurate time, use System.nanoTime(). In JDK8, use Instant class to deal with situations like time statistics.
+## IDEA 自带规则
+1. long或者Long初始赋值时，必须使用大写的L，不能是小写的l，小写容易跟数字1混淆，造成误解。
+2. Map/Set的key为自定义对象时，必须重写hashCode和equals。
+3. Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用equals。
+4. 不能使用过时的类或方法。
+5. 中括号是数组类型的一部分，数组定义如下
+6. 后台输送给页面的变量必须加感叹号，${var}——中间加感叹号！
+7. 在if/else/for/while/do语句中必须使用大括号，即使只有一行代码，避免使用下面的形式
+8. 所有的包装类对象之间值的比较，全部使用equals方法比较。
+9. 所有的覆写方法，必须加@Override注解
+10. 避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。
