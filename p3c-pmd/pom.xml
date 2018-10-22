@@ -8,11 +8,11 @@
         <version>9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.alibaba.p3c</groupId>
-    <artifactId>p3c-pmd</artifactId>
+    <groupId>com.xh.p3c</groupId>
+    <artifactId>xh-p3c-pmd</artifactId>
     <version>2.0.0</version>
     <packaging>jar</packaging>
-    <name>p3c-pmd</name>
+    <name>xh-p3c-pmd</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <pmd.version>5.5.2</pmd.version>
