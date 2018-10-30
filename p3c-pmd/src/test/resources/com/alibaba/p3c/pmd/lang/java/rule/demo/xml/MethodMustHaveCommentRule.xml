@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test-data>
     <!-- 没有注释-->
+    <code-fragment id="method-main-activity"><![CDATA[
+    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button btn1, btn2;
+    TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(this);
+        btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(this);
+        textView = findViewById(R.id.textView);
+    }
+
+    public String getString() {
+        return null;
+    }
+
+    public void abc(){
+
+    }
+
+    private static String aDistanceTime(long time2) {
+        Date now = new Date();
+        long day = 0;// 天数
+        long hour = 0;// 小时
+        long min = 0;// 分钟
+        time2 = time2 * 1000l;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button1) {
+            textView.setText("button1_click");
+            Toast.makeText(this, "点击 button 1", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.button2) {
+            textView.setText("button2_click");
+            Toast.makeText(this, "点击 button 2", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method main activity</description>
+        <expected-problems>3</expected-problems>
+        <code-ref id="method-main-activity"/>
+    </test-code>
+
+    <!-- 没有注释-->
     <code-fragment id="method-have-annotation-comment"><![CDATA[
     public class Tmp extends Object{
         @Override

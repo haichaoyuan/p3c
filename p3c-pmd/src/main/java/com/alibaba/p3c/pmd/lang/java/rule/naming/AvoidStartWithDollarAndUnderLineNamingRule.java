@@ -37,24 +37,27 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
-        if (node.getImage().startsWith(DOLLAR) || node.getImage().startsWith(UNDERSCORE)) {
-            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, node.getImage()));
+        String image = node.getImage();
+        if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
+            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
         }
         return super.visit(node, data);
     }
 
     @Override
     public Object visit(ASTVariableDeclaratorId node, Object data) {
-        if (node.getImage().startsWith(DOLLAR) || node.getImage().startsWith(UNDERSCORE)) {
-            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, node.getImage()));
+        String image = node.getImage();
+        if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
+            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
         }
         return super.visit(node, data);
     }
 
     @Override
     public Object visit(ASTMethodDeclarator node, Object data) {
-        if (node.getImage().startsWith(DOLLAR) || node.getImage().startsWith(UNDERSCORE)) {
-            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, node.getImage()));
+        String image = node.getImage();
+        if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
+            ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
         }
         return super.visit(node, data);
     }

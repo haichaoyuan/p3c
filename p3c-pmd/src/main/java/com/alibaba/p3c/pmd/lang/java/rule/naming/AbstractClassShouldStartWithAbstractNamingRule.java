@@ -18,7 +18,6 @@ package com.alibaba.p3c.pmd.lang.java.rule.naming;
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.AbstractXpathRule;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
-
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 
@@ -26,23 +25,27 @@ import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
  * [Mandatory] Abstract class names must start with Abstract or Base.
  * [强制] 6. 抽象类名必须以Abstract 或 Base 开头
  * 1. 注意，此处继承自 AbstractXpathRule
+ * 2. 剔除监测类 OpenHelper
+ *
  * @author changle.lq
  * @date 2017/04/16
  */
 public class AbstractClassShouldStartWithAbstractNamingRule extends AbstractXpathRule {
     private static final String XPATH = "//ClassOrInterfaceDeclaration"
-        + " [@Abstract='true' and @Interface='false'][not (matches(@Image,'^(Abstract|Base).*'))]";
+            + " [@Abstract='true' and @Interface='false'][not (matches(@Image,'^(Abstract|Base).*'))][(matches(@Image,'^(Abstract|Base).*'))]" +
+            "[not (matches(@Image,'^(OpenHelper).*'))]";
 
     public AbstractClassShouldStartWithAbstractNamingRule() {
         setXPath(XPATH);
     }
 
+
     @Override
     public void addViolation(Object data, Node node, String arg) {
         if (node instanceof ASTClassOrInterfaceDeclaration) {
             ViolationUtils.addViolationWithPrecisePosition(this, node, data,
-                I18nResources.getMessage("java.naming.AbstractClassShouldStartWithAbstractNamingRule.violation.msg",
-                    node.getImage()));
+                    I18nResources.getMessage("java.naming.AbstractClassShouldStartWithAbstractNamingRule.violation.msg",
+                            node.getImage()));
         } else {
             super.addViolation(data, node, arg);
         }

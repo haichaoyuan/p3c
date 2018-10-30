@@ -2,15 +2,20 @@ package com.alibaba.p3c.pmd.lang.java.rule.demo;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.comment.AbstractAliCommentRule;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
+import com.alibaba.p3c.pmd.lang.java.rule.util.Utils;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 import net.sourceforge.pmd.PMD;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.*;
 import org.jaxen.JaxenException;
 
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * 方法必须要注释
+ */
 public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
     //错误消息的key
     private static final String MESSAGE_KEY_PREFIX
@@ -29,12 +34,16 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
     private static final Pattern RETURN_PATTERN = Pattern.compile(".*@return\\s+[\\u4e00-\\u9fa5_a-zA-Z0-9_]+.*", Pattern.DOTALL);
 
 
+    private HashSet<String> mFieldList;//字段列表
+
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
         //把注释放进方法里
         assignCommentsToDeclarations(cUnit);
         return super.visit(cUnit, data);
     }
+
+
 
     /**
      * 获取类的所有方法，先判断注释格式是否
@@ -45,47 +54,20 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
      */
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration decl, Object data) {
-        //[1] 去除 Dao 后缀, DaoMaster, DaoSession
-        String className = decl.getImage();
-        if (className != null) {
-            if ((className.endsWith("Dao") || className.equals("DaoMaster") || className.equals("DaoSession")
-                    || className.endsWith("Test"))) {
-                return super.visit(decl, data);
-            }
-        }
+        //[1] 去除 Dao 后缀,test后缀，Table后缀， DaoMaster, DaoSession
+        if (checkClassName(decl)) return super.visit(decl, data);
 
+        // 找到字段列表，用于 getter setter
+        mFieldList = initFieldList(decl);
         //类层往下找
         List<ASTMethodDeclaration> methods = decl.findDescendantsOfType(ASTMethodDeclaration.class);
-
         for (ASTMethodDeclaration method : methods) {
-
+            String methodName = method.getMethodName();
             //[2] 注解是 Override 不检测
-            Node methodParent = method.jjtGetParent();
-            // 方法的父节点的第一个孩子 看是不是注解(ASTAnnotation)
-            if (methodParent.jjtGetNumChildren() > 0 && methodParent.jjtGetChild(0) instanceof ASTAnnotation) {
-                ASTAnnotation annotation = (ASTAnnotation) methodParent.jjtGetChild(0);
-                //ASTAnnotation -> MarkerAnnotation -> Name
-                if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof ASTMarkerAnnotation) {
-                    ASTMarkerAnnotation markerAnnotation = (ASTMarkerAnnotation) annotation.jjtGetChild(0);
-                    if (markerAnnotation.jjtGetNumChildren() > 0 && markerAnnotation.jjtGetChild(0) instanceof ASTName) {
-                        ASTName name = (ASTName) markerAnnotation.jjtGetChild(0);
-                        String image = name.getImage();
-                        if (image.equals("Override")) {
-                            //注解是 Override 不检测
-                            return super.visit(decl, data);
-                        }
-                    }
-                }
-            }
+            if (jumpWhenOverride(method)) continue;
 
             // [3] 方法，get前缀，set前缀，is 前缀
-            String methodName = method.getMethodName();
-            if (methodName != null) {
-                if (methodName.startsWith("get") || methodName.startsWith("set") || methodName.startsWith("is")) {
-                    return super.visit(decl, data);
-                }
-            }
-
+            if (jumpWhenGetterAndSetter(methodName, mFieldList)) continue;
 
             Comment comment = method.comment();
             if (null == comment || !(comment instanceof FormalComment)) {
@@ -99,6 +81,99 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
             }
         }
         return super.visit(decl, data);
+    }
+
+
+    /**
+     * 判断是否字段的getter setter 方法
+     *
+     * @param methodName 方法名
+     * @param fieldList 字段列表
+     * @return 字段的getter setter 方法则返回 true
+     */
+    private boolean jumpWhenGetterAndSetter(String methodName, HashSet<String> fieldList) {
+        if (methodName != null) {
+            //假定的字段
+            String assumeField = null;
+            if (methodName.startsWith("get") || methodName.startsWith("set")) {
+                assumeField = methodName.substring(3);
+            }
+            if (methodName.startsWith("is")) {
+                assumeField = methodName.substring(2);
+            }
+            if(!Utils.isEmpty(assumeField) && fieldList.contains(assumeField.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 当方法被 Override 注解时，则跳过
+     *
+     * @param method 方法
+     * @return 方法被 Override 注解则返回 true
+     */
+    private boolean jumpWhenOverride(ASTMethodDeclaration method) {
+        Node methodParent = method.jjtGetParent();
+        // 方法的父节点的第一个孩子 看是不是注解(ASTAnnotation)
+        if (methodParent.jjtGetNumChildren() > 0 && methodParent.jjtGetChild(0) instanceof ASTAnnotation) {
+            ASTAnnotation annotation = (ASTAnnotation) methodParent.jjtGetChild(0);
+            //ASTAnnotation -> MarkerAnnotation -> Name
+            if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof ASTMarkerAnnotation) {
+                ASTMarkerAnnotation markerAnnotation = (ASTMarkerAnnotation) annotation.jjtGetChild(0);
+                if (markerAnnotation.jjtGetNumChildren() > 0 && markerAnnotation.jjtGetChild(0) instanceof ASTName) {
+                    ASTName name = (ASTName) markerAnnotation.jjtGetChild(0);
+                    String image = name.getImage();
+                    if ("Override".equals(image)) {
+                        //注解是 Override 不检测
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 类里查找所有字段
+     *
+     * @param decl decl
+     * @return 字段列表
+     */
+    private HashSet<String> initFieldList(ASTClassOrInterfaceDeclaration decl) {
+        List<ASTFieldDeclaration> fieldDeclarations = decl.findDescendantsOfType(ASTFieldDeclaration.class);
+        HashSet<String> fieldList = new HashSet<>();//字段列表
+        // List<ASTFieldDeclaration> -> ASTFieldDeclaration -> ASTVariableDeclarator -> ASTVariableDeclaratorId
+        if (!Utils.isListEmpty(fieldDeclarations)) {
+            for (ASTFieldDeclaration fieldDeclaration : fieldDeclarations) {
+                for (int j = 0; j < fieldDeclaration.jjtGetNumChildren(); j++) {
+                    if (fieldDeclaration.jjtGetChild(j) instanceof ASTVariableDeclarator) {
+                        ASTVariableDeclarator astVariableDeclarator = (ASTVariableDeclarator) fieldDeclaration.jjtGetChild(j);
+                        if (astVariableDeclarator.jjtGetChild(0) instanceof ASTVariableDeclaratorId) {
+                            ASTVariableDeclaratorId declaratorId = (ASTVariableDeclaratorId) astVariableDeclarator.jjtGetChild(0);
+                            String image = declaratorId.getImage();
+                            if(!Utils.isEmpty(image)){
+                                //增加一部，转换成小写，方便比较
+                                fieldList.add(image.toLowerCase());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return fieldList;
+    }
+
+    /**
+     * [1] 检查类名，去除 Dao 后缀,test后缀，Table后缀， DaoMaster, DaoSession
+     *
+     * @param decl decl
+     * @return 无需监测，返回true
+     */
+    private boolean checkClassName(ASTClassOrInterfaceDeclaration decl) {
+        String mClassName = decl.getImage();
+        return CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
     }
 
     /**
@@ -174,36 +249,5 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
 
     public static void main(String[] arg) {
         PMD.main(arg);
-//        Pattern paramNamePattern = Pattern.compile(".*@param\\s+a\\s+\\w+", Pattern.DOTALL);
-//        Pattern paramNamePattern = Pattern.compile(".*@param\\s+a\\s+[\\u4e00-\\u9fa5_a-zA-Z0-9_]+.*", Pattern.DOTALL);
-//
-//        String a0 = "/** aaa\n" +
-//                "         * @param b \n" +
-//                "         */";
-//        System.out.println("0: "+ paramNamePattern.matcher(a0).matches());
-//
-//        String a01 = "/** aaa\n" +
-//                "         * @paramba \n" +
-//                "         */";
-//        System.out.println("01: "+ paramNamePattern.matcher(a01).matches());
-//
-//        String a = "/** aaa\n" +
-//                "         * @param a \n" +
-//                "         */";
-//        System.out.println("1: "+ paramNamePattern.matcher(a).matches());
-//
-//        String a2 = "/** aaa\n" +
-//                "         * @param a a\n" +
-//                "         */";
-//        System.out.println("2: "+ paramNamePattern.matcher(a2).matches());
-//        String a3 = "/** aaa\n" +
-//                "         * @param a 在\n" +
-//                "         */";
-//        System.out.println("3: "+ paramNamePattern.matcher(a3).matches());
-//
-//        String a4 = "/** aaa\n" +
-//                "         * @param a i am a boy \n" +
-//                "         */";
-//        System.out.println("4: "+ paramNamePattern.matcher(a4).matches());
     }
 }

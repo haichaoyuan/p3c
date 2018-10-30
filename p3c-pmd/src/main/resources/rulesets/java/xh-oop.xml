@@ -40,7 +40,33 @@
         </example>
     </rule>
 
+    <rule name="StringConcatRule"
+          language="java"
+          message="java.oop.StringConcatRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.oop.StringConcatRule">
+        <description>java.oop.StringConcatRule.rule.msg.desc</description>
+        <priority>3</priority>
 
+        <example>
+            <![CDATA[
+            Negative example:
+                String result;
+                for (String string : tagNameList) {
+                    result = result + string;
+                }
+            ]]>
+                    </example>
+                    <example>
+                        <![CDATA[
+            Positive example:
+                StringBuilder stringBuilder = new StringBuilder();
+                for (String string : tagNameList) {
+                    stringBuilder.append(string);
+                }
+                String result = stringBuilder.toString();
+            ]]>
+        </example>
+    </rule>
 
 
 
@@ -107,33 +133,5 @@
 			<!--]]>-->
         <!--</example>-->
     <!--</rule>-->
-
-    <rule name="StringConcatRule"
-          language="java"
-          message="java.oop.StringConcatRule.rule.msg"
-          class="com.alibaba.p3c.pmd.lang.java.rule.oop.StringConcatRule">
-        <description>java.oop.StringConcatRule.rule.msg.desc</description>
-        <priority>3</priority>
-
-        <example>
-            <![CDATA[
-Negative example:
-    String result;
-    for (String string : tagNameList) {
-        result = result + string;
-    }
-]]>
-        </example>
-        <example>
-            <![CDATA[
-Positive example:
-    StringBuilder stringBuilder = new StringBuilder();
-    for (String string : tagNameList) {
-        stringBuilder.append(string);
-    }
-    String result = stringBuilder.toString();
-]]>
-        </example>
-    </rule>
 
 </ruleset>

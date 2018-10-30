@@ -1,4 +1,5 @@
 <test-data>
+
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest">
         <![CDATA[
         public class VariableNameRuleTest {
@@ -116,7 +117,7 @@ public interface BizConstants {
      public class MockTest{
         @Mock
         void $clinit(){}
-     }   
+     }
     ]]>
     </code-fragment>
     <test-code>

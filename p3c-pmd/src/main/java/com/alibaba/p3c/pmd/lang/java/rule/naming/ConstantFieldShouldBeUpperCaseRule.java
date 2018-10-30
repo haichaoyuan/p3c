@@ -20,9 +20,11 @@ import java.util.Set;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 import com.alibaba.p3c.pmd.lang.java.util.namelist.NameListConfig;
 
+import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceType;
 import net.sourceforge.pmd.lang.java.ast.ASTFieldDeclaration;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
  * [Mandatory] Constant variable names should be written in upper characters separated by underscores. These names
  * should be semantically complete and clear.
  * [强制] 5. 常量命名必须全部大写，单词间使用下划线隔开。命名必须语义完整且清晰
+ * 不去监测类名包含Dao后缀
  * @author changle.lq
  * @date 2017/04/16
  */
@@ -41,8 +44,20 @@ public class ConstantFieldShouldBeUpperCaseRule extends AbstractAliRule {
     private static final Set<String> WHITE_LIST = new HashSet<>(NameListConfig.NAME_LIST_SERVICE.getNameList(
         "ConstantFieldShouldBeUpperCaseRule", "WHITE_LIST"));
 
+    private boolean excludeByClassName;//排序一些不检测的类
+
+    @Override
+    public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
+        String mClassName = node.getImage();
+        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        return super.visit(node, data);
+    }
+
     @Override
     public Object visit(ASTFieldDeclaration node, Object data) {
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         if (!(node.isStatic() && node.isFinal())) {
             return super.visit(node, data);
         }
