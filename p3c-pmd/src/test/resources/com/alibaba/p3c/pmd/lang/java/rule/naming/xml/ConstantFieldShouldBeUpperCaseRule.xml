@@ -1,7 +1,7 @@
 <test-data>
     <code-fragment id="ConstantFieldNamingRule">
     <![CDATA[
-    public class ConstantFieldNameRuleTest {
+    public class ConstantFieldNameRule {
     private  static final int MAX = 5;
     private  static final long serialVersionUID = 1L;
     //except Log
@@ -25,7 +25,7 @@
 
     <code-fragment id="ConstantFieldNamingRule1">
         <![CDATA[
-    public class ConstantFieldNameRuleTest {
+    public class ConstantFieldNameRule {
     private  static final int MAX = 5;
     private  static final long serialVersionUID = 1L;
     //Log除外
