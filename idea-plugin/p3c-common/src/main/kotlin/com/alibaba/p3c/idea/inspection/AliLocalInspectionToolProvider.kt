@@ -70,15 +70,17 @@ class AliLocalInspectionToolProvider : InspectionToolProvider {
         val ruleNames: MutableList<String> = Lists.newArrayList<String>()!!
         private val CLASS_LIST = Lists.newArrayList<Class<*>>()
         private val nativeInspectionToolClass = arrayListOf<Class<out LocalInspectionTool>>(
+                //todo :先去除idea特有的规则
 //                AliMissingOverrideAnnotationInspection::class.java,
 //                AliAccessStaticViaInstanceInspection::class.java,
 //                AliDeprecationInspection::class.java,
 //                MapOrSetKeyShouldOverrideHashCodeEqualsInspection::class.java,
-//                AliArrayNamingShouldHaveBracketInspection::class.java,
 //                AliControlFlowStatementWithoutBracesInspection::class.java,
-//                AliEqualsAvoidNullInspection::class.java,
-//                AliLongLiteralsEndingWithLowercaseLInspection::class.java,
-//                AliWrapperTypeEqualityInspection::class.java
+
+                AliLongLiteralsEndingWithLowercaseLInspection::class.java,
+                AliEqualsAvoidNullInspection::class.java,
+                AliArrayNamingShouldHaveBracketInspection::class.java,
+                AliWrapperTypeEqualityInspection::class.java
         )
         val javaShouldInspectChecker = object : ShouldInspectChecker {
             override fun shouldInspect(file: PsiFile): Boolean {
@@ -113,15 +115,13 @@ class AliLocalInspectionToolProvider : InspectionToolProvider {
         init {
             I18nResources.changeLanguage(P3cConfig::class.java.getService().locale)
             Thread.currentThread().contextClassLoader = AliLocalInspectionToolProvider::class.java.classLoader
-            // todo :先去除idea 的规则
             initPmdInspection()
-//            initNativeInspection()
+            initNativeInspection()
         }
 
         private fun initNativeInspection() {
             val pool = ClassPool.getDefault()
             pool.insertClassPath(ClassClassPath(DelegateLocalInspectionTool::class.java))
-            // todo :先去除idea 的规则
             nativeInspectionToolClass.forEach {
                 pool.insertClassPath(ClassClassPath(it))
                 val cc = pool.get(DelegateLocalInspectionTool::class.java.name)

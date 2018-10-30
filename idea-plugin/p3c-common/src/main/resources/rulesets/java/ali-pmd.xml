@@ -6,9 +6,16 @@
 
     <!-- for -->
     <rule ref="rulesets/java/xh-comment.xml"/>
-    <rule ref="rulesets/java/xh-constant.xml"/>
-    <rule ref="rulesets/java/xh-naming.xml"/>
-    <rule ref="rulesets/java/xh-oop.xml"/>
+    <rule ref="rulesets/java/xh-constant.xml">
+        <exclude name="UpperEllRule"/>
+    </rule>
+    <rule ref="rulesets/java/xh-naming.xml">
+        <exclude name="ArrayNamingShouldHaveBracketRule"/>
+    </rule>
+    <rule ref="rulesets/java/xh-oop.xml">
+        <exclude name="EqualsAvoidNullRule"/>
+        <exclude name="WrapperTypeEqualityRule"/>
+    </rule>
 
     <!--<rule ref="rulesets/java/ali-concurrent.xml"/>-->
     <!--<rule ref="rulesets/java/ali-comment.xml"/>-->

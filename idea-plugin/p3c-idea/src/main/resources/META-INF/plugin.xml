@@ -2,60 +2,25 @@
     <!--<id>com.alibaba.p3c.smartfox</id>-->
     <id>com.xh.p3c.codeStylePreview</id>
     <!--<name>Alibaba Java Coding Guidelines</name>-->
-    <name>xuehai code review</name>
+    <name>Xuehai Code Review</name>
     <!--<description>Alibaba Java Coding Guidelines plugin support.</description>-->
     <description>学海代码监测插件支持</description>
 
     <change-notes>
         <![CDATA[
-         <ul>
-        1.1.0
-        <li>
-        学海代码监测插件支持
-        </li>
-         </ul>
           <ul>
-        1.0.5
+        2.0.1
         <li>
-        Add rule [Recommended] The total number of lines for a method should not be more than 80.
+        1. MethodMustHaveCommentRule 解决bug, 本地监测到一个方法有 Override 注解，剩下方法就不去监测了
+        </li><li>2. MethodMustHaveCommentRule 完善 getter & setter规则，判断get、set、is前缀，再截取后面的字符串再去字段里查找，有没有相同的。
+        </li><li>3. ConstantFieldShouldBeUpperCaseRule 增加 不去监测类名包含Dao后缀
+        </li><li>4. AbstractClassShouldStartWithAbstractNamingRule 剔除监测类 OpenHelper
         </li>
-        <li>
-        Add rule [Recommended] Avoid using the negation operator '!'.
-        </li>
-        <li>
-        Add rule [Mandatory] When doing date formatting, "y" should be written in lowercase for "year" in a pattern statement
-        </li>
-         <li>https://github.com/alibaba/p3c/issues/264</li>
-         </ul>
-          <ul>
-        1.0.4
-         <li>fix https://github.com/alibaba/p3c/issues/217</li>
-        <li>fix https://github.com/alibaba/p3c/issues/208</li>
-        <li>fix https://github.com/alibaba/p3c/issues/195</li>
-        </ul>
-         <ul>
-        1.0.3
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/191">https://github.com/alibaba/p3c/issues/191</a></li>
-        </ul>
-         <ul>
-        1.0.2
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/185">https://github.com/alibaba/p3c/issues/185</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/189">https://github.com/alibaba/p3c/issues/189</a></li>
-        </ul>
-         <ul>
-        1.0.1
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/149">https://github.com/alibaba/p3c/issues/149</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/60">https://github.com/alibaba/p3c/issues/60</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/58">https://github.com/alibaba/p3c/issues/58</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/68">https://github.com/alibaba/p3c/issues/68</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/68">https://github.com/alibaba/p3c/issues/68</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/112">https://github.com/alibaba/p3c/issues/112</a></li>
-        <li>fix <a href="https://github.com/alibaba/p3c/issues/127">https://github.com/alibaba/p3c/issues/127</a></li>
         </ul>
         ]]>
     </change-notes>
     <vendor>alibaba</vendor>
-    <version>1.0.0</version>
+    <version>2.0.1</version>
     <idea-version since-build="141.0"/>
     <depends optional="true">com.intellij.velocity</depends>
     <depends optional="true" config-file="p3c.xml">com.intellij.modules.java</depends>
