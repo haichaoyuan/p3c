@@ -26,6 +26,7 @@ import com.alibaba.p3c.pmd.lang.java.util.namelist.NameListConfig;
 
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceType;
+import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.ast.ASTFieldDeclaration;
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,18 +45,17 @@ public class ConstantFieldShouldBeUpperCaseRule extends AbstractAliRule {
     private static final Set<String> WHITE_LIST = new HashSet<>(NameListConfig.NAME_LIST_SERVICE.getNameList(
         "ConstantFieldShouldBeUpperCaseRule", "WHITE_LIST"));
 
-    private boolean excludeByClassName;//排序一些不检测的类
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
         String mClassName = node.getImage();
-        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        super.exeExcludeByClassName(mClassName);
         return super.visit(node, data);
     }
 
     @Override
     public Object visit(ASTFieldDeclaration node, Object data) {
-        if(excludeByClassName){
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         if (!(node.isStatic() && node.isFinal())) {

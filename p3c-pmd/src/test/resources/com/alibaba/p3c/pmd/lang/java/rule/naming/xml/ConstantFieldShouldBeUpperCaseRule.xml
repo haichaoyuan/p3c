@@ -1,4 +1,146 @@
 <test-data>
+    <code-fragment id="DaoTest">
+        <![CDATA[
+    public class CreditBlackResBeanDao extends AbstractDao<CreditBlackResBean, Long> {
+
+    public static final String TABLENAME = "CREDIT_BLACK_RES_BEAN";
+
+    /**
+     * Properties of entity CreditBlackResBean.<br/>
+     * Can be used for QueryBuilder and for referencing column names.
+     */
+    public static class Properties {
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property StudentName = new Property(1, String.class, "studentName", false, "STUDENT_NAME");
+        public final static Property StudentId = new Property(2, int.class, "studentId", false, "STUDENT_ID");
+        public final static Property ClassId = new Property(3, int.class, "classId", false, "CLASS_ID");
+        public final static Property Credit = new Property(4, int.class, "credit", false, "CREDIT");
+    }
+
+
+    public CreditBlackResBeanDao(DaoConfig config) {
+        super(config);
+    }
+
+    public CreditBlackResBeanDao(DaoConfig config, DaoSession daoSession) {
+        super(config, daoSession);
+    }
+
+    /** Creates the underlying database table. */
+    public static void createTable(Database db, boolean ifNotExists) {
+        String constraint = ifNotExists? "IF NOT EXISTS ": "";
+        db.execSQL("CREATE TABLE " + constraint + "\"CREDIT_BLACK_RES_BEAN\" (" + //
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"STUDENT_NAME\" TEXT," + // 1: studentName
+                "\"STUDENT_ID\" INTEGER NOT NULL ," + // 2: studentId
+                "\"CLASS_ID\" INTEGER NOT NULL ," + // 3: classId
+                "\"CREDIT\" INTEGER NOT NULL );"); // 4: credit
+    }
+
+    /** Drops the underlying database table. */
+    public static void dropTable(Database db, boolean ifExists) {
+        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"CREDIT_BLACK_RES_BEAN\"";
+        db.execSQL(sql);
+    }
+
+    @Override
+    protected final void bindValues(DatabaseStatement stmt, CreditBlackResBean entity) {
+        stmt.clearBindings();
+
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+
+        String studentName = entity.getStudentName();
+        if (studentName != null) {
+            stmt.bindString(2, studentName);
+        }
+        stmt.bindLong(3, entity.getStudentId());
+        stmt.bindLong(4, entity.getClassId());
+        stmt.bindLong(5, entity.getCredit());
+    }
+
+    @Override
+    protected final void bindValues(SQLiteStatement stmt, CreditBlackResBean entity) {
+        stmt.clearBindings();
+
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+
+        String studentName = entity.getStudentName();
+        if (studentName != null) {
+            stmt.bindString(2, studentName);
+        }
+        stmt.bindLong(3, entity.getStudentId());
+        stmt.bindLong(4, entity.getClassId());
+        stmt.bindLong(5, entity.getCredit());
+    }
+
+    @Override
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    }
+
+    @Override
+    public CreditBlackResBean readEntity(Cursor cursor, int offset) {
+        CreditBlackResBean entity = new CreditBlackResBean( //
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // studentName
+            cursor.getInt(offset + 2), // studentId
+            cursor.getInt(offset + 3), // classId
+            cursor.getInt(offset + 4) // credit
+        );
+        return entity;
+    }
+
+    @Override
+    public void readEntity(Cursor cursor, CreditBlackResBean entity, int offset) {
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setStudentName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setStudentId(cursor.getInt(offset + 2));
+        entity.setClassId(cursor.getInt(offset + 3));
+        entity.setCredit(cursor.getInt(offset + 4));
+     }
+
+    @Override
+    protected final Long updateKeyAfterInsert(CreditBlackResBean entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
+    }
+
+    @Override
+    public Long getKey(CreditBlackResBean entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean hasKey(CreditBlackResBean entity) {
+        return entity.getId() != null;
+    }
+
+    @Override
+    protected final boolean isEntityUpdateable() {
+        return true;
+    }
+
+}
+
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>end with Dao can be skip</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="DaoTest" />
+    </test-code>
+
+
     <code-fragment id="ConstantFieldNamingRule">
     <![CDATA[
     public class ConstantFieldNameRule {

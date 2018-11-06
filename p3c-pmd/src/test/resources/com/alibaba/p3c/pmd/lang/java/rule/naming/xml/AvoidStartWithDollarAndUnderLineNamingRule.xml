@@ -1,7 +1,7 @@
 <test-data>
     <code-fragment id="AvoidStartWithDollarAndUnderLine">
         <![CDATA[
-public class AvoidStartWithDollarAndUnderLineNamingRuleTest {
+public class AvoidStartWithDollarAndUnderLineNamingRule {
     private String $1;
     private String _1;
     public void $sayHello(){}
@@ -18,7 +18,7 @@ public class AvoidStartWithDollarAndUnderLineNamingRuleTest {
 
     <code-fragment id="AvoidStartWithDollarAndUnderLine1">
         <![CDATA[
-public class AvoidStartWithDollarAndUnderLineNamingRuleTest {
+public class AvoidStartWithDollarAndUnderLineNamingRule {
     private String s;
     public void sayHello(){}
 }

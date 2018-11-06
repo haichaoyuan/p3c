@@ -2,7 +2,7 @@
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest">
         <![CDATA[
-        public class VariableNameRuleTest {
+        public class VariableNameRule {
     private String abC;
     private String AbC;
     private String abCd;
@@ -21,7 +21,7 @@
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest1">
         <![CDATA[
-        public class VariableNameRuleTest {
+        public class VariableNameRule {
     private String abCdeFghKmi123;
 }
     ]]>
@@ -84,7 +84,7 @@ public interface BizConstants {
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest5">
         <![CDATA[
-        public class demoTest{
+        public class VariableNameRule{
         public static String ENV_LOCAL = "local";
         public static String ENV_PROJECT = "project";
         }
@@ -99,7 +99,7 @@ public interface BizConstants {
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest6">
         <![CDATA[
-        public class FinalVariableTest{
+        public class FinalVariable{
         public static String ENV_LOCAL = "local";
         public static String ENV_PROJECT = "project";
         private final int MAX_LENGTH =  5;
@@ -114,7 +114,7 @@ public interface BizConstants {
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest7">
         <![CDATA[
-     public class MockTest{
+     public class Mock{
         @Mock
         void $clinit(){}
      }

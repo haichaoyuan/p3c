@@ -18,6 +18,7 @@ package com.alibaba.p3c.pmd.lang.java.rule;
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.fix.FixClassTypeResolver;
 
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
@@ -29,8 +30,11 @@ import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
  * @date 2016/11/20
  */
 public abstract class AbstractAliRule extends AbstractJavaRule {
+    private boolean excludeByClassName;//排序一些不检测的类
+
     @Override
     public Object visit(ASTCompilationUnit node, Object data) {
+        excludeByClassName = false;
         FixClassTypeResolver classTypeResolver = new FixClassTypeResolver(AbstractAliRule.class.getClassLoader());
         node.setClassTypeResolver(classTypeResolver);
         node.jjtAccept(classTypeResolver, data);
@@ -56,6 +60,24 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
     public void addViolationWithMessage(Object data, Node node, String message, Object[] args) {
         super.addViolationWithMessage(data, node,
             String.format(I18nResources.getMessageWithExceptionHandled(message), args));
+    }
+
+    /** 当前类是否被排除
+     * @param mClassName 类名
+     */
+    public void exeExcludeByClassName(String mClassName){
+        boolean tmp = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        if(tmp){//防止单个类文件里面有多个类
+            excludeByClassName = true;
+        }
+    }
+
+    public boolean isExcludeByClassName() {
+        return excludeByClassName;
+    }
+
+    public void setExcludeByClassName(boolean excludeByClassName) {
+        this.excludeByClassName = excludeByClassName;
     }
 }
 

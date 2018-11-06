@@ -1,7 +1,7 @@
 <test-data>
     <code-fragment id="CamelClassNaming">
         <![CDATA[
-public class CamelClassNameRuleTest {
+public class CamelClassNameRule {
     class CamelclassnameRuleTest{}
     class CamelclassNameRuleTest{}
     class camelClassNameRuleTest{}
@@ -26,9 +26,9 @@ public class CamelClassNameRuleTest {
     </code-fragment>
     <test-code>
         <description>Class Name Should Camel</description>
-        <expected-problems>6</expected-problems>
+        <expected-problems>5</expected-problems>
         <code-ref id="CamelClassNaming" />
-        <expected-linenumbers>4,5,7,13,14,18</expected-linenumbers>
+        <expected-linenumbers>5,7,13,14,18</expected-linenumbers>
     </test-code>
 
 

@@ -38,12 +38,10 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
 
     private static final String MESSAGE_KEY_PREFIX = "java.naming.LowerCamelCaseVariableNamingRule.violation.msg";
     private Pattern pattern = Pattern.compile("^[a-z|$][a-z0-9]*([A-Z][a-z0-9]*)*(DO|DTO|VO|DAO)?$");
-    private boolean excludeByClassName;//排序一些不检测的类
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
-        String mClassName = node.getImage();
-        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        super.exeExcludeByClassName(node.getImage());
         return super.visit(node, data);
     }
 
@@ -56,7 +54,7 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
      */
     @Override
     public Object visit(final ASTVariableDeclaratorId node, Object data) {
-        if(excludeByClassName){
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         // Constant named does not apply to this rule
@@ -91,7 +89,7 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
     @Override
 
     public Object visit(ASTMethodDeclarator node, Object data) {
-        if(excludeByClassName){
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         if (!(pattern.matcher(node.getImage()).matches())) {

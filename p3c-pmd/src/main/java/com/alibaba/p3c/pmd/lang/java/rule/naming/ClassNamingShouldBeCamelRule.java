@@ -43,7 +43,8 @@ public class ClassNamingShouldBeCamelRule extends AbstractAliRule {
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
-        if(CheckExcludeClassNameUtil.isExcludeByClassName(node.getImage())){
+        super.exeExcludeByClassName(node.getImage());
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         for (String s : CLASS_NAMING_WHITE_LIST) {

@@ -36,12 +36,11 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
     private static final String FORMAT = I18nResources.getMessage(
         "java.naming.AvoidStartWithDollarAndUnderLineNamingRule.violation.msg");
 
-    private boolean excludeByClassName;//排序一些不检测的类
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
-        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(node.getImage());
-        if(excludeByClassName){
+        super.exeExcludeByClassName(node.getImage());
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         String image = node.getImage();
@@ -53,7 +52,7 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
 
     @Override
     public Object visit(ASTVariableDeclaratorId node, Object data) {
-        if(excludeByClassName){
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         String image = node.getImage();
@@ -65,7 +64,7 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
 
     @Override
     public Object visit(ASTMethodDeclarator node, Object data) {
-        if(excludeByClassName){
+        if(super.isExcludeByClassName()){
             return super.visit(node, data);
         }
         String image = node.getImage();

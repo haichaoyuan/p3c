@@ -173,7 +173,8 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
      */
     private boolean checkClassName(ASTClassOrInterfaceDeclaration decl) {
         String mClassName = decl.getImage();
-        return CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        super.exeExcludeByClassName(mClassName);
+        return super.isExcludeByClassName();
     }
 
     /**
