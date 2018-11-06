@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 import com.alibaba.p3c.pmd.lang.java.util.namelist.NameListConfig;
 
@@ -42,6 +43,9 @@ public class ClassNamingShouldBeCamelRule extends AbstractAliRule {
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
+        if(CheckExcludeClassNameUtil.isExcludeByClassName(node.getImage())){
+            return super.visit(node, data);
+        }
         for (String s : CLASS_NAMING_WHITE_LIST) {
             if (node.getImage().contains(s)) {
                 return super.visit(node, data);

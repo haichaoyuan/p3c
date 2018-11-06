@@ -19,14 +19,11 @@ import java.util.regex.Pattern;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 
 import net.sourceforge.pmd.lang.ast.Node;
-import net.sourceforge.pmd.lang.java.ast.ASTAnnotationTypeDeclaration;
-import net.sourceforge.pmd.lang.java.ast.ASTFieldDeclaration;
-import net.sourceforge.pmd.lang.java.ast.ASTMethodDeclarator;
-import net.sourceforge.pmd.lang.java.ast.ASTTypeDeclaration;
-import net.sourceforge.pmd.lang.java.ast.ASTVariableDeclaratorId;
+import net.sourceforge.pmd.lang.java.ast.*;
 
 /**
  * [Mandatory] Method names, parameter names, member variable names, and local variable names should be written in
@@ -41,6 +38,16 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
 
     private static final String MESSAGE_KEY_PREFIX = "java.naming.LowerCamelCaseVariableNamingRule.violation.msg";
     private Pattern pattern = Pattern.compile("^[a-z|$][a-z0-9]*([A-Z][a-z0-9]*)*(DO|DTO|VO|DAO)?$");
+    private boolean excludeByClassName;//排序一些不检测的类
+
+    @Override
+    public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
+        String mClassName = node.getImage();
+        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
+        return super.visit(node, data);
+    }
+
+
 
     /** 变量
      * @param node
@@ -49,6 +56,9 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
      */
     @Override
     public Object visit(final ASTVariableDeclaratorId node, Object data) {
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         // Constant named does not apply to this rule
         ASTTypeDeclaration typeDeclaration = node.getFirstParentOfType(ASTTypeDeclaration.class);
         Node jjtGetChild = typeDeclaration.jjtGetChild(0);
@@ -81,6 +91,9 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
     @Override
 
     public Object visit(ASTMethodDeclarator node, Object data) {
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         if (!(pattern.matcher(node.getImage()).matches())) {
             ViolationUtils.addViolationWithPrecisePosition(this, node, data,
                 I18nResources.getMessage(MESSAGE_KEY_PREFIX + ".method", node.getImage()));

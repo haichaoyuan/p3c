@@ -17,6 +17,7 @@ package com.alibaba.p3c.pmd.lang.java.rule.naming;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
@@ -35,8 +36,14 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
     private static final String FORMAT = I18nResources.getMessage(
         "java.naming.AvoidStartWithDollarAndUnderLineNamingRule.violation.msg");
 
+    private boolean excludeByClassName;//排序一些不检测的类
+
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
+        excludeByClassName = CheckExcludeClassNameUtil.isExcludeByClassName(node.getImage());
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         String image = node.getImage();
         if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
             ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
@@ -46,6 +53,9 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
 
     @Override
     public Object visit(ASTVariableDeclaratorId node, Object data) {
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         String image = node.getImage();
         if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
             ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
@@ -55,6 +65,9 @@ public class AvoidStartWithDollarAndUnderLineNamingRule extends AbstractAliRule 
 
     @Override
     public Object visit(ASTMethodDeclarator node, Object data) {
+        if(excludeByClassName){
+            return super.visit(node, data);
+        }
         String image = node.getImage();
         if (image.startsWith(DOLLAR) || image.startsWith(UNDERSCORE)) {
             ViolationUtils.addViolationWithPrecisePosition(this, node, data, String.format(FORMAT, image));
