@@ -15,6 +15,7 @@
  */
 package com.alibaba.p3c.pmd.lang.java.rule.set;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
@@ -29,12 +30,15 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] Do not use toArray method without arguments. Since the return type is Object[], ClassCastException will
  * be thrown when casting it to a different array type。
- *
+ * [强制] 4. 不要使用无参数 toArray 方法，因为这个返回值是 Object[], 当转换成一个其他数组类型时类型转换错误将抛出
  * @author shengfang.gsf
  * @date 2016/12/13
  */
 public class ClassCastExceptionWithToArrayRule extends AbstractAliRule {
 
+    /**
+     * 类型转换，
+     */
     private static final String XPATH
         = "//CastExpression[Type/ReferenceType/ClassOrInterfaceType[@Image !=\"Object\"]]/PrimaryExpression";
 

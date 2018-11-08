@@ -28,7 +28,7 @@ import org.jaxen.JaxenException;
 
 /**
  * [Recommended] Set a size when initializing a collection if possible.
- *
+ * [推荐] 10.如果可能，初始化一个集合时尽量设置一个size
  * @author shengfang.gsf
  * @date 2017/04/06
  */
@@ -44,7 +44,7 @@ public class CollectionInitShouldAssignCapacityRule extends AbstractAliRule {
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
         try {
             // find Collection initialization
-            for (String collectionType : COLLECTION_LIST) {
+            for (String collectionType : COLLECTION_LIST) {//["HashMap","ConcurrentHashMap"]
                 visitByCollections(node, data, collectionType);
             }
         } catch (JaxenException e) {

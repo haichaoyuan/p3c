@@ -29,7 +29,7 @@ import org.jaxen.JaxenException;
 
 /**
  * [Mandatory] Make sure to invoke the rollback if a method throws an Exception.
- *
+ * [强制] 如果一个方法抛出异常，确保回滚被执行
  * @author caikang
  * @date 2017/03/29
  */

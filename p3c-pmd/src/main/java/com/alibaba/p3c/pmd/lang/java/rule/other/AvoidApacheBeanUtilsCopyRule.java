@@ -23,7 +23,8 @@ import net.sourceforge.pmd.lang.ast.Node;
 /**
  * Avoid using *Apache Beanutils* to copy attributes.
  * Note: *Spring BeanUtils* and *Cglib BeanCopier* are recommended to be used, which have better performance.
- * 
+ * 避免使用 Apache Beanutils 去拷贝属性
+ * 说明：Spring Beanutils 和 Cglib BeanCopier 建议使用，拥有更好的性能
  * @author keriezhang
  * @date 2016/12/14
  *

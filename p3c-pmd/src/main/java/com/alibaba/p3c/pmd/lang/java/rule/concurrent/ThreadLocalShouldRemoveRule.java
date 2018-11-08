@@ -33,6 +33,8 @@ import org.jaxen.JaxenException;
  * [Mandatory] Customized ThreadLocal variables must be recycled,
  * especially when using thread pools in which threads are often reused.
  * Otherwise, it may affect subsequent business logic and cause unexpected problems such as memory leak.
+ * [强制] 自定义 ThreadLocal 变量必须被回收，尤其是在线程经常被重用的线程池中。
+ * 否则，他可能影响子序列业务逻辑，引起未被期望的问题比如内存泄漏
  *
  * @author caikang
  * @date 2017/03/29

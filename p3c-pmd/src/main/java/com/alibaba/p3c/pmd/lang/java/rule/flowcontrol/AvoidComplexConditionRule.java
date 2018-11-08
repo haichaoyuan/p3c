@@ -24,7 +24,7 @@ import net.sourceforge.pmd.lang.ast.Node;
  * [Mandatory] Do not use complicated statements in conditional statements (except for frequently used methods
  * like getXxx/isXxx). Use boolean variables to store results of complicated statements temporarily will increase
  * the code's readability.
- *
+ * [强制？推荐] 5. 不要在条件语句里面使用复杂语句(除了常用方法如，getXxx、isXX), 使用临时布尔变量去存储复杂语句的值会增加代码可读性
  * @author zenghou.fw
  * @date 2017/04/11
  */

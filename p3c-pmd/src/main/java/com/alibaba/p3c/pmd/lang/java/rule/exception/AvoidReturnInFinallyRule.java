@@ -25,7 +25,8 @@ import net.sourceforge.pmd.lang.ast.Node;
  * [Mandatory] Never use return within a finally block.
  * A return statement in a finally block will cause exception or result
  * in a discarded return value in the try-catch block.
- * 
+ *  [强制] 7. 不要finally 块中使用 return 语句。
+ *  说明：finaly 块中return 语句返回后方法结束执行，不会再执行 try 块中的 return 语句
  * @author zenghou.fw
  * @date 2017/03/29
  */

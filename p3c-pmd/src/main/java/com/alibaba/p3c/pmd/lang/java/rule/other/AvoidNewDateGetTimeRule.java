@@ -23,7 +23,7 @@ import net.sourceforge.pmd.lang.ast.Node;
 
 /**
  * Use System.currentTimeMillis() to get the current millisecond. Do not use new Date().getTime().
- *
+ * [强制]5. 使用 System.currentTimeMillis() 去获取当前时间，而不是使用 new Date().getTime()
  * @author keriezhang
  * @date 2016/12/14
  */

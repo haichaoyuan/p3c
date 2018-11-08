@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * [Mandatory] When doing date formatting, "y" should be written in lowercase for "year" in a pattern statement.
- *
+ * [强制] 当使用 date 格式化，'y' 将被写成小写表示'year'的意思
  * Note: When doing date formatting, "yyyy" represents the day in which year, while "YYYY" represents the week in which
  * year (a concept introduced in JDK7). If a week is across two years, the returning "YYYY"represents the next year.
  * Some more points need to be notices:

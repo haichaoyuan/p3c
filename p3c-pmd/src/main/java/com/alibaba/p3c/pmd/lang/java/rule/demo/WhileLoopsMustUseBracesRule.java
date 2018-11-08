@@ -7,6 +7,9 @@ import net.sourceforge.pmd.lang.java.ast.ASTStatement;
 import net.sourceforge.pmd.lang.java.ast.ASTWhileStatement;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 
+/**
+ * While 循环体必须使用大括号
+ */
 public class WhileLoopsMustUseBracesRule extends AbstractJavaRule {
 
     @Override

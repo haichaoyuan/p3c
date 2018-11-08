@@ -26,7 +26,7 @@ import net.sourceforge.pmd.lang.java.ast.AbstractJavaTypeNode;
 /**
  * [Mandatory] Run multiple TimeTask by using ScheduledExecutorService rather than Timer
  * because Timer will kill all running threads in case of failing to catch exception.
- *
+ * [强制] 9. 使用ScheduledExecutorService 运行多个 TimeTask，而不是 Timer, 因为 Timer 将杀死所有运行中的线程万一捕获到异常而失败的时候
  * @author caikang
  * @date 2016/11/15
  */

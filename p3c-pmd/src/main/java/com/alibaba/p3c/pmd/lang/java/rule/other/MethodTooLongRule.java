@@ -29,7 +29,8 @@ import net.sourceforge.pmd.lang.java.ast.Token;
  * [Recommended] The total number of lines for a method should not be more than 80.
  * Note: The total number of lines, including the method signature, closing brace, codes, comments,
  * blank lines, line breaks and any invisible lines, should not be more than 80.
- *
+ * [建议]方法的总代码行数最好不要超过80行。
+ * 说明：总行数，包括方法签名、关闭括号、代码、注释、空白行，将不能超过80
  * @author keriezhang
  * @date 2018/1/9
  */

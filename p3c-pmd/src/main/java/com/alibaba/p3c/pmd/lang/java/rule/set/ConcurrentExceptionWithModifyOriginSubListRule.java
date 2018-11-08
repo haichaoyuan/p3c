@@ -28,7 +28,7 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] When using subList, be careful to modify the size of original list. It might cause
  * ConcurrentModificationException when performing traversing, adding or deleting on the subList.
- *
+ * [强制] 3. 当使用 subList 时，对于更改原始列表的数目要小心。当执行遍寻、增加、删除子列表时，可能发生 ConcurrentModificationException
  * @author shengfang.gsf
  * @date 2016/12/13
  */

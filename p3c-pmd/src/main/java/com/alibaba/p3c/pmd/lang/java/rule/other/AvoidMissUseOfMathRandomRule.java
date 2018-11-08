@@ -24,7 +24,7 @@ import net.sourceforge.pmd.lang.ast.Node;
  * [Mandatory] The return type of Math.random() is double, value range is 0&lt;=x&lt;1 (0 is possible).
  * If a random integer is required, do not multiply x by 10 then round the result.
  * The correct way is to use nextInt or nextLong method which belong to Random Object.
- *
+ * [强制] 4. Math.random() 的返回类型时 double ,值范围是 [0~1)，如果需要 int 类型，最正确的方式去使用 nextInte 或者 nextLong ,而不是放大十倍取整
  * @author keriezhang
  * @date 2017/04/14
  */

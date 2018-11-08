@@ -34,7 +34,7 @@ import org.jaxen.JaxenException;
 
 /**
  * [Recommended] If the return type is primitive, return a value of wrapper class may cause NullPointerException.
- *
+ * [建议] 如果返回类型时基础类型，返回该值得包装类可能引发空指针
  * @author changle.lq
  * @date 2017/04/16
  */

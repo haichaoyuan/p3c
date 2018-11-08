@@ -34,7 +34,7 @@ import org.jaxen.JaxenException;
  * 6.13 [Recommended] Avoid using Random instance by multiple threads.
  * Although it is safe to share this instance, competition on the same seed will damage performance.
  * Note: Random instance includes instances of java.util.Random and Math.random().
- *
+ * [建议] 11. 避免Random实例被多线程使用，虽然共享该实例是线程安全的，但是同个种子竞争将影响性能使用随机实例
  * @author caikang
  * @date 2017/03/29
  */

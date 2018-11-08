@@ -39,7 +39,7 @@ import org.jaxen.JaxenException;
  * [Mandatory] iBatis built in queryForList(String statementName, int start, int size) is not recommended.
  * Note: It may lead to OOM issue because its implementation is to retrieve all DB records of statementName's
  * corresponding SQL statement, then start, size subset is applied through subList.
- *
+ * [强制] 在queryForList(String statementName, int start, int size)的 iBatis 构建不建议
  * @author changle.lq
  * @date 2017/04/16
  */

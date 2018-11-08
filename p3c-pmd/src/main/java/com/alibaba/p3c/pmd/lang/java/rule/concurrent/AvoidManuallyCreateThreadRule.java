@@ -41,11 +41,13 @@ import net.sourceforge.pmd.lang.java.ast.Token;
  * Note: Using thread pool can reduce the time of creating and destroying thread and save system resource.
  * If we do not use thread pools, lots of similar threads will be created which lead to
  * "running out of memory" or over-switching problems.
- *
+ * [强制] 3. 线程最好被线程池提供。显示创建线程不被允许。
+ * 备注：使用线程可以减少创建线程、销毁线程、保存系统资源的时间，如果我们不使用线程池，一堆相似的线程将会被创建导致内存跑光或者过度切换问题
  * Detection rule
  * New Thread can only be created in ThreadFactory.newThread method,as Runtime.getRuntime().addShutdownHook() parameter,
  * or in static block
- *
+ * 监测规则
+ * 新的线程只能被 ThreadFactory.newThread 方法创建，作为 Runtime.getRuntime().addShutdownHook() 参数，或者静态代码
  * @author caikang
  * @date 2016/11/15
  * @see ThreadShouldSetNameRule

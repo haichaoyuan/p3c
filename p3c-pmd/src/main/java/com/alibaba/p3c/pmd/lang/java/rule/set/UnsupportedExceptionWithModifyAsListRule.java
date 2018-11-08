@@ -30,7 +30,7 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] Do not use methods which will modify the list after using Arrays.asList to convert array to list,
  * otherwise methods like add/remove/clear will throw UnsupportedOperationException.
- *
+ * [强制] 5.不要在使用完 Arrays.asList 强转成列表后再去更改列表的方法。否则add/remove/clear 方法将抛出异常
  * @author shengfang.gsf
  * @date 2016/12/13
  */

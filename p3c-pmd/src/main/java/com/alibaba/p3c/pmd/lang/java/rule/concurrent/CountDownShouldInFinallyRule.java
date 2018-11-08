@@ -30,9 +30,11 @@ import org.jaxen.JaxenException;
  * each thread must call countdown method before quitting.
  * Make sure to catch any exception during thread running, to let countdown method be executed.
  * If main thread cannot reach await method, program will return until timeout.
- *
+ * [建议] 10. 当使用 CountDownLatch 来进行异步转同步，每个线程必须在退出前调用 CountDown 方法。
+ * 确保捕获线程运行时的所有异常，让 CountDown 方法得以执行。
+ * 如果主线程不能到达 await 方法，程序将直到超时才能返回
  * Note: Be careful, exception thrown by sub-thread cannot be caught by main thread.
- *
+ * 说明：注意，子线程抛出的异常不能被主线程捕获
  * @author caikang
  * @date 2017/03/29
  */

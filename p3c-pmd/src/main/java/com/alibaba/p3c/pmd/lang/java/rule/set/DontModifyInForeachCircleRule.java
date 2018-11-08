@@ -28,6 +28,8 @@ import org.jaxen.JaxenException;
 /**
  * [Mandatory] Do not remove or add elements to a collection in a foreach loop. Please use Iterator to remove an item.
  * Iterator object should be synchronized when executing concurrent operations.
+ * [强制] 7. 不要在foreach 循环里去增加或者删除元素。请使用迭代器(Iterator) 来移除元素
+ * XPath 和 Java 结合
  *
  * @author shengfang.gsf
  * @date 2016/12/13
@@ -37,9 +39,12 @@ public class DontModifyInForeachCircleRule extends AbstractAliRule {
     private final static String ADD = ".add";
     private final static String REMOVE = ".remove";
     private final static String CLEAR = ".clear";
+    /**
+     * 双斜杠前缀，找到 ForStatement
+     */
     private final static String XPATH = "//ForStatement/Expression/PrimaryExpression/PrimaryPrefix/Name";
     private final static String CHILD_XPATH
-        = "Statement/Block/BlockStatement/Statement/StatementExpression/PrimaryExpression/PrimaryPrefix/Name";
+            = "Statement/Block/BlockStatement/Statement/StatementExpression/PrimaryExpression/PrimaryPrefix/Name";
 
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
@@ -64,8 +69,8 @@ public class DontModifyInForeachCircleRule extends AbstractAliRule {
                     }
                     if (judgeName(blockItem.getImage(), variableName)) {
                         addViolationWithMessage(data, blockItem,
-                            "java.set.DontModifyInForeachCircleRule.violation.msg",
-                            new Object[] {blockItem.getImage()});
+                                "java.set.DontModifyInForeachCircleRule.violation.msg",
+                                new Object[]{blockItem.getImage()});
                     }
                 }
             }
@@ -77,7 +82,7 @@ public class DontModifyInForeachCircleRule extends AbstractAliRule {
 
     private boolean judgeName(String name, String variableName) {
         return name != null && (name.equals(variableName + ADD) ||
-            name.equals(variableName + REMOVE) || name.equals(variableName + CLEAR));
+                name.equals(variableName + REMOVE) || name.equals(variableName + CLEAR));
     }
 
 }

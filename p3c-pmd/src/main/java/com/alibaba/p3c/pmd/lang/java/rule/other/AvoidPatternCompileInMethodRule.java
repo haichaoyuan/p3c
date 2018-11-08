@@ -25,7 +25,8 @@ import net.sourceforge.pmd.lang.java.ast.ASTLocalVariableDeclaration;
 /**
  * When using regex, precompile needs to be done in order to increase the matching performance.
  * Note: Do not define Pattern pattern = Pattern.compile(.); within method body.
- *
+ * [强制]1. 当使用正则时，预先编译可用提升匹配性能。
+ * 说明：不要在方法体里面定义 Pattern pattern = Pattern.compile(.);
  * @author keriezhang
  * @date 2016/12/14
  */

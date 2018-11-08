@@ -40,7 +40,10 @@ import net.sourceforge.pmd.lang.java.ast.ASTVariableDeclaratorId;
  * Detection rule  //TODO should review
  * 1. Use specific constructor while create thread pool
  * 2. Use Executors.defaultThreadFactory() is not allowed
- *
+ * [强制] 2.一个有意义的线程名对于追踪错误信息很有帮助，因此创建线程或者线程池时需要分配线程名
+ * 检查规则
+ * 1. 使用明确的构造函数创造线程池
+ * 2. Executors.defaultThreadFactory() 不可允许使用
  * @author caikang
  * @date 2016/11/16
  * @see AvoidManuallyCreateThreadRule

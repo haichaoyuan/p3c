@@ -32,7 +32,11 @@ import net.sourceforge.pmd.lang.java.ast.Token;
  * [Mandatory] A thread pool should be created by ThreadPoolExecutor rather than Executors.
  * These would make the parameters of the thread pool understandable.
  * It would also reduce the risk of running out of system resource.
- *
+ * [强制]4. 一个线程池将被 ThreadPoolExecutor 创建，而不是 Executors。
+ * ，也将减少跑光系统资源的风险。
+ * 说明：Executors 返回的线程池对象的弊端如下：
+ * 1). FixedThreadPool 和 SingleThreadPool. 允许请求队列长度为 Integer.MAX_VALUE, 可能会堆积大量的请求，从而导致OOM
+ * 2). CachedThreadPool 和 ScheduledThreadPool. 允许创建的线程数量为 Integer.MAX_VAULE, 可能会创建大量的线程，从而导致OOM
  * @author caikang
  * @date 2016/11/14
  */

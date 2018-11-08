@@ -24,7 +24,8 @@ import net.sourceforge.pmd.lang.ast.Node;
  * [Recommended] Avoid using the negation operator '!'.
  * Note: The negation operator is not easy to be quickly understood. There must be a positive
  * way to represent the same logic.
- *
+ * [推荐] 7. 避免使用取反立即。
+ * 说明：取反逻辑不好立即理解，并且取反逻辑必然存在对应的正向逻辑写法
  * @author zenghou.fw
  * @date 2017/11/21
  */

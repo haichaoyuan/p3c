@@ -23,7 +23,8 @@ import net.sourceforge.pmd.lang.java.ast.ASTSwitchStatement;
  * [Mandatory] In a switch block, each case should be finished by break/return.
  * If not, a note should be included to describe at which case it will stop. Within every switch block,
  * a default statement must be present, even if it is empty.
- *
+ * [强制] 1. 在一个 Switch 块，每个case 将使用 break\return 结束。
+ * 如果不这样做，最后增加一个备注描述何时停止。在每个 switch 块，默认语句将被书写，即使是空语句块。
  * @author zenghou.fw
  * @date 2016/11/17
  */
@@ -46,6 +47,7 @@ public class SwitchStatementRule extends AbstractAliRule {
      * @param data
      */
     private void checkDefault(ASTSwitchStatement node, Object data) {
+        //switch块缺少default语句
         final String switchCheckXpath = "SwitchLabel[@Default = 'true']";
         if (!node.hasDescendantMatchingXPath(switchCheckXpath)) {
             addViolationWithMessage(data, node, MESSAGE_KEY_PREFIX + ".nodefault");
@@ -54,7 +56,7 @@ public class SwitchStatementRule extends AbstractAliRule {
 
     /**
      * Check the availability of break, return, throw, continue in case statement
-     *
+     * switch中每个case需要通过break/return等来终止
      * @param node
      * @param data
      */

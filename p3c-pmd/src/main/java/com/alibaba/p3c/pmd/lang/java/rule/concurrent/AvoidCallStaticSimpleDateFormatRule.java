@@ -40,7 +40,8 @@ import net.sourceforge.pmd.lang.java.ast.Token;
 /**
  * [Mandatory] SimpleDataFormat is unsafe, do not define it as a static variable.
  * If have to, lock or DateUtils class must be used.
- *
+ * [强制] 5. SimpleDataFormat 是不安全的，不要把它定义成一个静态变量。如果必须需要，请使用锁机制或者DateUtils
+ * 实现过于简单
  * @author caikang
  * @date 2016/11/25
  */

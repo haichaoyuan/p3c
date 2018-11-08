@@ -29,7 +29,7 @@ import net.sourceforge.pmd.lang.java.ast.ASTWhileStatement;
  * <pre>
  * if (condition) statements;
  * </pre>
- *
+ * [强制] 2. 在 if/else/for/while/do 语句中必须使用大括号。
  * @author zenghou.fw
  * @date 2016/11/22
  */
@@ -41,12 +41,19 @@ public class NeedBraceRule extends AbstractAliRule {
     @Override
     public Object visit(ASTIfStatement node, Object data) {
         // SwitchStatement without {} fail by compilaton, no need to check here
+        // 找到If语句，查找子孙是否有 Blovk
         if (!node.hasDescendantMatchingXPath(STATEMENT_BLOCK)) {
             addViolationWithMessage(data, node, MESSAGE_KEY,
                 new Object[] {node.jjtGetFirstToken().toString()});
         }
         if (node.hasElse()) {
             // IfStatement with else have 2 expression blocks, should never throws NPE
+            //if (a > 0) {
+            //	    		b++;
+            //	    	} else if (a > -1) {
+            //	    		b++;
+            //	    	} else
+            //	    		b--; 结构会有两个 ASTIfStatement
             ASTStatement elseStms = node.findChildrenOfType(ASTStatement.class).get(1);
 
             if (!elseStms.hasDecendantOfAnyType(ASTBlock.class, ASTIfStatement.class)) {

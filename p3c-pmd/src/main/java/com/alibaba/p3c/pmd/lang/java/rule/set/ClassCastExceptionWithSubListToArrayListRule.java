@@ -28,12 +28,17 @@ import org.jaxen.JaxenException;
  * [Mandatory] Do not cast subList in class ArrayList, otherwise ClassCastException will be
  * thrown：java.util.RandomAccessSubList
  * cannot be cast to java.util.ArrayList ;
- *
+ * [强制] 2. 不要在 ArrayList 类里去强转 子列表，否则类型转换错误就会和你不期而遇,
+ * 即 java.util.RandomAccessSubList 不能强转成 java.util.ArrayList
+ * 因为对 subList 是ArrayList的一个视图，对其的所有操作都会反映到原列表上
  * @author shengfang.gsf
  * @date 2016/12/13
  */
 public class ClassCastExceptionWithSubListToArrayListRule extends AbstractAliRule {
 
+    /**
+     * 类型强转(CastExpression)，(ArrayList)XX..subList
+     */
     private static final String XPATH =
         "//CastExpression[Type/ReferenceType/ClassOrInterfaceType[@Image = "
             + "\"ArrayList\"]]/PrimaryExpression/PrimaryPrefix/Name[ends-with(@Image,'.subList')]";
