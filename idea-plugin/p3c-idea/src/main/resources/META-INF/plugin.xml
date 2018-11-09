@@ -8,14 +8,28 @@
 
     <change-notes>
         <![CDATA[
-          <ul>
-        2.0.1
-        <li>
-        1. MethodMustHaveCommentRule 解决bug, 本地监测到一个方法有 Override 注解，剩下方法就不去监测了
-        </li><li>2. MethodMustHaveCommentRule 完善 getter & setter规则，判断get、set、is前缀，再截取后面的字符串再去字段里查找，有没有相同的。
-        </li><li>3. ConstantFieldShouldBeUpperCaseRule 增加 不去监测类名包含Dao后缀
-        </li><li>4. AbstractClassShouldStartWithAbstractNamingRule 剔除监测类 OpenHelper
-        </li>
+        <ul>
+            2.0.3
+            <li>优化。 字段 is前缀的 getter & setter 方法。（感谢赵臻）</li>
+            <li>优化。 字段 m前缀的 getter & setter 方法。（感谢赵臻）</li>
+            <li>bug。 方法除Override 注解外还有其他注解，导致规则不生效。（感谢王永）</li>
+            <li>bug。 注解接口常量，按普通变量监测。（感谢云作业的付治学）</li>
+        </ul>
+        <ul>
+            2.0.2
+            <li>规则优化。ConstantFieldShouldBeUpperCaseRule 剔除对 Dao 后缀的监测</li>
+            <li>规则优化。AvoidStartWithDollarAndUnderLineNamingRule 剔除对 Dao 后缀的监测</li>
+            <li>规则优化。LowerCamelCaseVariableNamingRule 剔除对 Dao 后缀的监测</li>
+            <li>规则优化。ClassNamingShouldBeCamelRule 剔除对 Dao 后缀的监测</li>
+        </ul>
+        <ul>
+            2.0.1
+            <li>
+            1. MethodMustHaveCommentRule 解决bug, 本地监测到一个方法有 Override 注解，剩下方法就不去监测了
+            </li><li>2. MethodMustHaveCommentRule 完善 getter & setter规则，判断get、set、is前缀，再截取后面的字符串再去字段里查找，有没有相同的。
+            </li><li>3. ConstantFieldShouldBeUpperCaseRule 增加 不去监测类名包含Dao后缀
+            </li><li>4. AbstractClassShouldStartWithAbstractNamingRule 剔除监测类 OpenHelper
+            </li>
         </ul>
         ]]>
     </change-notes>
