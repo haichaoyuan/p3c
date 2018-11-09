@@ -40,4 +40,5 @@ public class WhileLoopsMustUseBracesRule extends AbstractJavaRule {
         //自身是  ASTStatement， 有孩子， 孩子的第一个节点是 ASTBlock
         return node instanceof ASTStatement && numChildren != 0 && node.jjtGetChild(0) instanceof ASTBlock;
     }
+
 }

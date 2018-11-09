@@ -2,10 +2,10 @@
     <code-fragment id="CamelClassNaming">
         <![CDATA[
 public class CamelClassNameRule {
-    class CamelclassnameRuleTest{}
-    class CamelclassNameRuleTest{}
-    class camelClassNameRuleTest{}
-    class camelClassNameruletest{}
+    class CamelclassnameRule{}
+    class CamelclassNameRule{}
+    class camelClassNameRule{}
+    class camelClassNamerule{}
     class CamelclassNameRuleTestDO{}
     class CamelclassNameRuleTestDODO{}
     class CamelclassNameRuleTestdo{}
@@ -28,7 +28,7 @@ public class CamelClassNameRule {
         <description>Class Name Should Camel</description>
         <expected-problems>5</expected-problems>
         <code-ref id="CamelClassNaming" />
-        <expected-linenumbers>5,7,13,14,18</expected-linenumbers>
+        <expected-linenumbers>4,5,7,13,14</expected-linenumbers>
     </test-code>
 
 

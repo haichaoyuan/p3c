@@ -35,6 +35,10 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
 
 
     private HashSet<String> mFieldList;//字段列表
+    private static final String TAG_IS = "is";
+    private static final String TAG_M = "m";
+    private static final String TAG_GET = "get";
+    private static final String TAG_SET = "set";
 
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
@@ -95,14 +99,14 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
         if (methodName != null) {
             //假定的字段
             String assumeField = null;
-            if (methodName.startsWith("get") || methodName.startsWith("set")) {
+            if (methodName.startsWith(TAG_GET) || methodName.startsWith(TAG_SET)) {
                 assumeField = methodName.substring(3);
             }
-            if (methodName.startsWith("is")) {
+            if (methodName.startsWith(TAG_IS)) {
                 assumeField = methodName.substring(2);
             }
             if(!Utils.isEmpty(assumeField) && fieldList.contains(assumeField.toLowerCase())){
-                return true;
+                    return true;
             }
         }
         return false;
@@ -117,17 +121,22 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
     private boolean jumpWhenOverride(ASTMethodDeclaration method) {
         Node methodParent = method.jjtGetParent();
         // 方法的父节点的第一个孩子 看是不是注解(ASTAnnotation)
-        if (methodParent.jjtGetNumChildren() > 0 && methodParent.jjtGetChild(0) instanceof ASTAnnotation) {
-            ASTAnnotation annotation = (ASTAnnotation) methodParent.jjtGetChild(0);
-            //ASTAnnotation -> MarkerAnnotation -> Name
-            if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof ASTMarkerAnnotation) {
-                ASTMarkerAnnotation markerAnnotation = (ASTMarkerAnnotation) annotation.jjtGetChild(0);
-                if (markerAnnotation.jjtGetNumChildren() > 0 && markerAnnotation.jjtGetChild(0) instanceof ASTName) {
-                    ASTName name = (ASTName) markerAnnotation.jjtGetChild(0);
-                    String image = name.getImage();
-                    if ("Override".equals(image)) {
-                        //注解是 Override 不检测
-                        return true;
+        if (methodParent.jjtGetNumChildren() > 0) {
+            for (int i = 0; i < methodParent.jjtGetNumChildren(); i++) {
+                // 考虑多个 注解情况
+                if(methodParent.jjtGetChild(i) instanceof ASTAnnotation){
+                    ASTAnnotation annotation = (ASTAnnotation) methodParent.jjtGetChild(i);
+                    //ASTAnnotation -> MarkerAnnotation -> Name
+                    if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof ASTMarkerAnnotation) {
+                        ASTMarkerAnnotation markerAnnotation = (ASTMarkerAnnotation) annotation.jjtGetChild(0);
+                        if (markerAnnotation.jjtGetNumChildren() > 0 && markerAnnotation.jjtGetChild(0) instanceof ASTName) {
+                            ASTName name = (ASTName) markerAnnotation.jjtGetChild(0);
+                            String image = name.getImage();
+                            if ("Override".equals(image)) {
+                                //注解是 Override 不检测
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -156,6 +165,14 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
                             if(!Utils.isEmpty(image)){
                                 //增加一部，转换成小写，方便比较
                                 fieldList.add(image.toLowerCase());
+                            }
+                            if(image.startsWith(TAG_IS)){
+                                //字段 是is 前缀，去除is再放入
+                                fieldList.add(image.substring(TAG_IS.length()).toLowerCase());
+                            }
+                            if(image.startsWith(TAG_M)){
+                                //字段 是m 前缀，去除m再放入
+                                fieldList.add(image.substring(TAG_M.length()).toLowerCase());
                             }
                         }
                     }

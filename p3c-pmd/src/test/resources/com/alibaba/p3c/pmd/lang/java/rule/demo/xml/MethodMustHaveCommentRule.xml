@@ -210,4 +210,64 @@ class Example {
     </test-code>
 
 
+     字段带is
+    <code-fragment id="field-has-is-pre"><![CDATA[
+class Example {
+        private boolean isGood;
+
+        public boolean isGood(){
+            return isGood;
+        }
+
+        public Void setGood(boolean isGood){
+            this.mGood = isGood;
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>field-has-is-pre</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="field-has-is-pre"/>
+    </test-code>
+
+    <!-- 字段带m-->
+    <code-fragment id="field-has-m-pre"><![CDATA[
+class Example {
+        private boolean mGood;
+
+        public boolean isGood(){
+            return mGood;
+        }
+
+        public Void setGood(boolean isGood){
+            this.mGood = isGood;
+        }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>field-has-m-pre</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="field-has-m-pre"/>
+    </test-code>
+
+    <!-- 字段带@override 外还有其他注解-->
+    <code-fragment id="method-with-override"><![CDATA[
+class Example implements View.OnClickListener{
+    @SuppressWarnings("rawtypes")
+    @Override
+    public void onClick(View v) {
+    }
+    }
+    ]]>
+    </code-fragment>
+
+    <test-code>
+        <description>method-with-override</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="method-with-override"/>
+    </test-code>
 </test-data>
