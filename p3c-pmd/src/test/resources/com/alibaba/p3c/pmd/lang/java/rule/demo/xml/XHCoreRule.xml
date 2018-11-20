@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+    <!-- getAppConfig方法检查-->
+    <test-code>
+        <description>brush-xh-application</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="no-method-get-app-config"/>
+    </test-code>
+    <code-fragment id="no-method-get-app-config"><![CDATA[
+public class AbcApplication extends XhBaseApplication {
+
+}
+    ]]>
+    </code-fragment>
+
+
+
+    <!-- getAppConfig方法检查-->
+    <test-code>
+        <description>brush-xh-application</description>
+        <expected-problems>2</expected-problems>
+        <code-ref id="no-method-get-micro-server-default-map"/>
+    </test-code>
+    <code-fragment id="no-method-get-micro-server-default-map"><![CDATA[
+public class AbcApplication extends XhBaseApplication {
+        @Override
+        protected BaseXHAppConfig getAppConfig() {
+            return null;
+        }
+}
+    ]]>
+    </code-fragment>
+
+
+
+    <!-- getAppConfig方法检查-->
+    <test-code>
+        <description>brush-xh-application</description>
+        <expected-problems>2</expected-problems>
+        <code-ref id="method-getMicroServerDefaultMap-no-hashmap"/>
+    </test-code>
+    <code-fragment id="method-getMicroServerDefaultMap-no-hashmap"><![CDATA[
+public class AbcApplication extends XhBaseApplication {
+    @Override
+    protected BaseXHAppConfig getAppConfig() {
+        return new BaseXHAppConfig() {
+            @Override
+            public Map<String, String> getMicroServerDefaultMap() {
+                return null;
+            }
+
+            @Override
+            public HttpConst.RequestStrategy getRequestStrategy() {
+                return HttpConst.RequestStrategy.STRATEGY_LIB_CURL;
+            }
+        };
+    }
+}
+    ]]>
+    </code-fragment>
+
+
+
+
+
+    <test-code>
+        <description>brush-xh-application</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="normal"/>
+    </test-code>
+    <code-fragment id="normal"><![CDATA[
+    package com.xh.xhsample.business;
+
+import android.support.annotation.NonNull;
+import android.widget.Toast;
+
+import com.xh.xhcore.common.base.XhBaseApplication;
+import com.xh.xhcore.common.config.BaseXHAppConfig;
+import com.xh.xhcore.common.config.IXHAppConfig;
+import com.xh.xhcore.common.config.XHAppConfigProxy;
+import com.xh.xhcore.common.http.XHMicroServer;
+import com.xh.xhcore.common.http.XHRequestCallBack;
+import com.xh.xhcore.common.http.strategy.HttpConst;
+import com.xh.xhsample.business.http.presenter.impl.MicroServerPresenter;
+import com.xuehai.provider.constants.CPVDConstants;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.xh.xhsample.business.TestConst.initServerEnvironment;
+
+
+/**
+ * Desc:
+ * Company: xuehai
+ * Copyright: Copyright (c) 2016
+ *
+ * @author yuyejiang
+ * @version 1.0
+ * @since 2016/10/27 0027
+ */
+public class XHApplication extends XhBaseApplication {
+
+    @Override
+    protected BaseXHAppConfig getAppConfig() {
+        return new BaseXHAppConfig() {
+            @Override
+            public Map<String, String> getMicroServerDefaultMap() {
+                return new HashMap<String, String>(5) {
+                    {
+                        //应用
+                        put("SB103016", "http://filesoss.yunzuoye.net");
+
+                    }
+                };
+            }
+
+            @Override
+            public MicroServerVersion getMicroServerVersion() {
+                return MicroServerVersion.VERSION2;
+            }
+
+            @Override
+            public HttpConst.RequestStrategy getRequestStrategy() {
+                return HttpConst.RequestStrategy.STRATEGY_LIB_CURL;
+            }
+        };
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sUserId = "1000";
+
+        initServerEnvironment();
+//        XHLog.setLogLevel(LogLevel.LOG_LEVEL_DEBUG);
+    }
+
+    @Override
+    public String getM() {
+        return getXHUserId();
+    }
+
+    @Override
+    public String getS() {
+        return getXHSessionId();
+    }
+
+    private int mEnvironment;
+
+    public void setEnvironment(int environment) {
+        mEnvironment = environment;
+    }
+
+    /**
+     * //这里应该是应用程序启动之后，从平台获取信息成功并初始化环境(从mCPVDUser中获取之后设置环境)之后的时候调用
+     */
+    @Override
+    public void initRootUrlMap() {
+        if (mEnvironment == CPVDConstants.Environment.DEVELOP) {
+            //开发环境
+            mUrlRootMap = new HashMap<String, String>(5) {
+                {
+                    //应用
+                    put("SB103016", "http://filesoss.yunzuoye.net");
+
+                }
+            };
+        } else if (mEnvironment == CPVDConstants.Environment.TEST) {
+            //测试环境
+            mUrlRootMap = new HashMap<String, String>(5) {
+                {
+                    //应用
+                    put("SB103016", "http://filesoss.yunzuoye.net");
+                }
+            };
+        } else {
+            //正式环境
+            mUrlRootMap = new HashMap<String, String>(5) {
+                {
+                    //应用
+                    put("SB103016", "http://filesoss.yunzuoye.net");
+                }
+            };
+        }
+    }
+
+    @Override
+    public String getC() {
+        return "1500";
+    }
+}
+
+
+    ]]>
+    </code-fragment>
+</test-data>

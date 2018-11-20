@@ -515,4 +515,7 @@ Note: If attribute is null or does not exist, ${var} will be shown directly on w
     <entry key="java.demo.rule.MethodMustHaveCommentRule">
         <![CDATA[method【%s】need comments]]>
     </entry>
+    <entry key="java.demo.rule.XHCoreRule">
+        <![CDATA[XHCore check]]>
+    </entry>
 </properties>

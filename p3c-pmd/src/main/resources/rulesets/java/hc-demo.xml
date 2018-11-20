@@ -47,4 +47,15 @@
         </example>
     </rule>
 
+    <rule name="XHCoreRule" message="java.demo.rule.XHCoreRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.demo.XHCoreRule">
+        <description>XHCore 检查</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    todo
+]]>
+        </example>
+    </rule>
 </ruleset>

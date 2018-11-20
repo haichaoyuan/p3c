@@ -21,6 +21,7 @@ public class CamelClassNameRule {
     class IAO{}
     class IpAO{}
     class CamelclassNameRuleTestAO{}
+    class XHApple{}
 }
     ]]>
     </code-fragment>
@@ -31,10 +32,22 @@ public class CamelClassNameRule {
         <expected-linenumbers>4,5,7,13,14</expected-linenumbers>
     </test-code>
 
+    <code-fragment id="XHApple">
+        <![CDATA[
+public class XHCoreRule {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>Class Name Should Camel1</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="XHApple" />
+    </test-code>
+
 
     <code-fragment id="CamelClassNaming1">
         <![CDATA[
-public class CamelClassNameRuleTest {
+public class CamelClassNameRule {
 }
     ]]>
     </code-fragment>
@@ -108,7 +121,7 @@ public class RoutingBranchRoutePO{
 
     <code-fragment id="CamelClassNaming60">
         <![CDATA[
-public class CamelClassNameRuleTest {
+public class CamelClassNameRule {
     class Abc{}
     class AaBbCc{}
 }

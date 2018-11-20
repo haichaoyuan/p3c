@@ -74,6 +74,39 @@ Positive example: For codes which are temporarily removed and likely to be reuse
     </rule>
 
 
+    <rule name="XHCoreRule" message="java.demo.rule.XHCoreRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.demo.XHCoreRule">
+        <description>XHCore 检查，包括微服务的使用</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    public class XHApplication extends XhBaseApplication implements Abc{
+
+    @Override
+    protected BaseXHAppConfig getAppConfig() {
+        return new BaseXHAppConfig() {
+            @Override
+            public Map<String, String> getMicroServerDefaultMap() {
+                return new HashMap<String, String>(5) {
+                    {
+                        //应用
+                        put("SB103016", "http://filesoss.yunzuoye.net");
+
+                    }
+                };
+            }
+
+            @Override
+            public MicroServerVersion getMicroServerVersion() {
+                return MicroServerVersion.VERSION2;
+            }
+        };
+    }
+}
+]]>
+        </example>
+    </rule>
 
 
 
