@@ -9,6 +9,11 @@
     <change-notes>
         <![CDATA[
         <ul>
+            2.0.4
+            <li>优化。ClassNamingShouldBeCamelRule 规则增加去除对 XH、DB、IO 的监测</li>
+            <li>新增。 XHCoreRule 规则，监测继承XHBaseApplication 的微服务配置监测</li>
+        </ul>
+        <ul>
             2.0.3
             <li>优化。 字段 is前缀的 getter & setter 方法。（感谢赵臻）</li>
             <li>优化。 字段 m前缀的 getter & setter 方法。（感谢赵臻）</li>

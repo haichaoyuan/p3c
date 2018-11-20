@@ -25,6 +25,9 @@ import org.apache.commons.io.IOUtils
 import java.io.Reader
 import java.util.concurrent.TimeUnit
 
+/**
+ *
+ */
 class SourceCodeProcessor(private val configuration: PMDConfiguration) {
     val logger = Logger.getInstance(javaClass)
 

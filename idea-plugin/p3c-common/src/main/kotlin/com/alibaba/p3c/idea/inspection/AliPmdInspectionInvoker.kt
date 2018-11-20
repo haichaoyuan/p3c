@@ -50,6 +50,9 @@ class AliPmdInspectionInvoker(
 
     private var violations: List<RuleViolation> = emptyList()
 
+    /**
+     * doInvoke
+     */
     fun doInvoke() {
         Thread.currentThread().contextClassLoader = javaClass.classLoader
         val processor = AliPmdProcessor(rule)

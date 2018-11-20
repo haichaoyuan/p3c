@@ -26,7 +26,7 @@ import com.siyeh.ig.InspectionGadgetsFix
 import com.siyeh.ig.numeric.LongLiteralsEndingWithLowercaseLInspection
 
 /**
- *
+ * Long 类型的数字后缀不可用用小写的l, 使用 LongLiteralsEndingWithLowercaseLInspection 来实现
  * Batch QuickFix Supported
  * @author caikang
  * @date 2017/01/20

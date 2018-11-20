@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils
 
 /**
  *
- *
+ * 避免 美元符号，下划线
  * @author caikang
  * @date 2017/02/28
  */

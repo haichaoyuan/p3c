@@ -22,7 +22,7 @@ import com.intellij.openapi.vcs.checkin.CheckinHandlerFactory
 
 /**
  *
- *
+ * Code checkIn , 代码 检入
  * @author caikang
  * @date 2017/05/04
  */
