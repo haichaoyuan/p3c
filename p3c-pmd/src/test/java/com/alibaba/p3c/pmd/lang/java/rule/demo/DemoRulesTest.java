@@ -10,8 +10,8 @@ public class DemoRulesTest extends SimpleAggregatorTst {
         //[1] RULESET 得正确，RuleSetReferenceId 方法 里根据名字查找
         //[2] ruleName 得正确，getRuleByName 方法根据字符串比较来查找
 //        addRule(RULESET, "WhileLoopsMustUseBracesRule");
-        //[3]  需要规则测试文件了。Couldn't find xml/WhileLoopsMustUseBracesRule.xml
-//        addRule(RULESET, "MethodDeclaratordMustHaveCommentRule");
+        //[3]  需要规则测试文件了。
+        addRule(RULESET, "MethodMustHaveCommentRule");
         //[4] XHCore 的规则
         addRule(RULESET, "XHCoreRule");
         super.setUp();

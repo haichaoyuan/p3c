@@ -15,9 +15,10 @@
     <test-code>
         <description>Variable name should be lowerCamelCase</description>
         <expected-problems>1</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest"/>
         <expected-linenumbers>3</expected-linenumbers>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest1">
         <![CDATA[
@@ -29,8 +30,9 @@
     <test-code>
         <description>Variable name should be lowerCamelCase1</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest1" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest1"/>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest2">
         <![CDATA[
@@ -43,9 +45,8 @@ public interface PluginConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase2</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest2" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest2"/>
     </test-code>
-
 
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest3">
@@ -60,9 +61,10 @@ public class PluginConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase3</description>
         <expected-problems>2</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest3" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest3"/>
         <expected-linenumbers>2,3</expected-linenumbers>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest4">
         <![CDATA[
@@ -79,8 +81,9 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase4</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest4" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest4"/>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest5">
         <![CDATA[
@@ -93,7 +96,7 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase5</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest5" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest5"/>
     </test-code>
 
 
@@ -109,8 +112,9 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase6</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest6" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest6"/>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest7">
         <![CDATA[
@@ -123,8 +127,9 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase7</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest7" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest7"/>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest8">
         <![CDATA[
@@ -139,8 +144,9 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase8</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest8" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest8"/>
     </test-code>
+
 
     <code-fragment id="LowerCamelCaseVariableNamingRuleTest9">
         <![CDATA[
@@ -156,7 +162,26 @@ public interface BizConstants {
     <test-code>
         <description>Variable name should be lowerCamelCase9</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="LowerCamelCaseVariableNamingRuleTest9" />
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest9"/>
+    </test-code>
+
+
+    <code-fragment id="LowerCamelCaseVariableNamingRuleTest9">
+        <![CDATA[
+    class A {
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface TYPE {
+    int DO_NO_THING = 0;
+    int DO_ONE_START_TO_END_ROUTE = 1;
+    int DO_ONE_CAR_TO_START_ROUTE = 2;
+    int DO_TWO_ROUTE = 3;
+    }}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>Variable name should be lowerCamelCase9</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="LowerCamelCaseVariableNamingRuleTest9"/>
     </test-code>
 </test-data>
 

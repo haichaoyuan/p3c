@@ -2,7 +2,6 @@ package com.alibaba.p3c.pmd.lang.java.rule.demo;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.comment.AbstractAliCommentRule;
-import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.rule.util.Utils;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 import net.sourceforge.pmd.PMD;
@@ -41,6 +40,11 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
     private static final String TAG_M = "m";
     private static final String TAG_GET = "get";
     private static final String TAG_SET = "set";
+
+    /**
+     * 忽略的注解
+     */
+    private static final String[] ignoreAnnotation = {"Override", "OnClick"};
 
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
@@ -139,9 +143,9 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
         for (ASTMethodDeclaration method : methods) {
             String methodName = method.getMethodName();
             storeFile(" [methodName]" + methodName);
-            //[2] 注解是 Override 不检测
-            if (jumpWhenOverride(method)) {
-                storeFile("     [exclude]jumpWhenOverride");
+            //[2] 注解是 Override， onClcik 不检测
+            if (jumpWhenAnnotationIgnore(method)) {
+                storeFile("     [exclude]jumpWhenAnnotationIgnore");
                 continue;
             }
 
@@ -191,13 +195,14 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
         return false;
     }
 
+
     /**
-     * 当方法被 Override 注解时，则跳过
+     * 当方法被 Override 注解、OnClick 注解时，则跳过
      *
      * @param method 方法
      * @return 方法被 Override 注解则返回 true
      */
-    private boolean jumpWhenOverride(ASTMethodDeclaration method) {
+    private boolean jumpWhenAnnotationIgnore(ASTMethodDeclaration method) {
         Node methodParent = method.jjtGetParent();
         // 方法的父节点的第一个孩子 看是不是注解(ASTAnnotation)
         if (methodParent.jjtGetNumChildren() > 0) {
@@ -206,14 +211,16 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
                 if (methodParent.jjtGetChild(i) instanceof ASTAnnotation) {
                     ASTAnnotation annotation = (ASTAnnotation) methodParent.jjtGetChild(i);
                     //ASTAnnotation -> MarkerAnnotation -> Name
-                    if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof ASTMarkerAnnotation) {
-                        ASTMarkerAnnotation markerAnnotation = (ASTMarkerAnnotation) annotation.jjtGetChild(0);
+                    if (annotation.jjtGetNumChildren() > 0 && annotation.jjtGetChild(0) instanceof AbstractJavaTypeNode) {
+                        AbstractJavaTypeNode markerAnnotation = (AbstractJavaTypeNode) annotation.jjtGetChild(0);
                         if (markerAnnotation.jjtGetNumChildren() > 0 && markerAnnotation.jjtGetChild(0) instanceof ASTName) {
                             ASTName name = (ASTName) markerAnnotation.jjtGetChild(0);
                             String image = name.getImage();
-                            if ("Override".equals(image)) {
-                                //注解是 Override 不检测
-                                return true;
+                            for (int j = 0; j < ignoreAnnotation.length; j++) {
+                                String s = ignoreAnnotation[j];
+                                if(s.equals(image)){
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -308,7 +315,7 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
             // 参数查询 \s ：空格 ，+ ：一个或多个
             // [2] 没有参数注释,paramName 后面的 \s: 一个或多个空格， \S : 一个或多个非空格，意思就是一个空格再加上非空格(文字)
             //.*@param\s+a\s+[\u4e00-\u9fa5_a-zA-Z0-9_]+.*
-            Pattern paramNamePattern = Pattern.compile(".*@param\\s+" + paramName + "\\s+[\\u4e00-\\u9fa5_a-zA-Z0-9_]+.*", Pattern.DOTALL);
+            Pattern paramNamePattern = Pattern.compile(".*@param\\s+" + paramName + "\\s+.?[\\u4e00-\\u9fa5_a-zA-Z0-9_]+.*", Pattern.DOTALL);
 
             if (!paramNamePattern.matcher(commentContent).matches()) {
                 storeFile("     [hit]paramName 参数格式不对");

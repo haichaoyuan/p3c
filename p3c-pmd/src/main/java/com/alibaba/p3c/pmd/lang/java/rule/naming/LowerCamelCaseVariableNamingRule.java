@@ -59,24 +59,25 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
         if (super.isExcludeByClassName()) {
             return super.visit(node, data);
         }
-        // Constant named does not apply to this rule
-        ASTTypeDeclaration typeDeclaration = node.getFirstParentOfType(ASTTypeDeclaration.class);
-        if (typeDeclaration.jjtGetNumChildren() > 0) {
-            //剔除 @Interface ,类型是ASTAnnotationTypeDeclaration
-            Node jjtGetChild = typeDeclaration.jjtGetChild(typeDeclaration.jjtGetNumChildren() - 1);
-            if (jjtGetChild instanceof ASTAnnotationTypeDeclaration) {
+        // static 、final 修饰，不检查
+        // 接口里的变量也是 static 、final 的
+        ASTFieldDeclaration astFieldDeclaration = node.getFirstParentOfType(ASTFieldDeclaration.class);
+        if(astFieldDeclaration != null){
+            //全局变量
+            boolean isNotCheck = astFieldDeclaration.isFinal() || astFieldDeclaration
+                    .isStatic();
+            if (isNotCheck) {
+                return super.visit(node, data);
+            }
+
+            //剔除 @Interface ,ASTFieldDeclaration 的父亲类型是ASTAnnotationTypeDeclaration
+            //AnnotationTypeDeclaration/AnnotationTypeBody/AnnotationTypeMemberDeclaration/FieldDeclaration/VariableDeclarator/VariableDeclaratorId
+            ASTAnnotationTypeMemberDeclaration astAnnotationTypeMemberDeclaration = astFieldDeclaration.getFirstParentOfType(ASTAnnotationTypeMemberDeclaration.class);
+            if(astAnnotationTypeMemberDeclaration != null){
                 return super.visit(node, data);
             }
         }
 
-        // static 、final 修饰，不检查
-        // 接口里的变量也是 static 、final 的
-        ASTFieldDeclaration astFieldDeclaration = node.getFirstParentOfType(ASTFieldDeclaration.class);
-        boolean isNotCheck = astFieldDeclaration != null && (astFieldDeclaration.isFinal() || astFieldDeclaration
-                .isStatic());
-        if (isNotCheck) {
-            return super.visit(node, data);
-        }
 
         // variable naming violate lowerCamelCase
         // violate 违反、侵害、妨碍、亵渎

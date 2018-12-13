@@ -30,15 +30,15 @@ public class NamingRulesTest extends SimpleAggregatorTst {
     @Override
     public void setUp() {
         addRule(RULESET, "ClassNamingShouldBeCamelRule");
-//        addRule(RULESET, "AbstractClassShouldStartWithAbstractNamingRule");
-//        addRule(RULESET, "ExceptionClassShouldEndWithExceptionRule");
-//        addRule(RULESET, "TestClassShouldEndWithTestNamingRule");
-//        addRule(RULESET, "LowerCamelCaseVariableNamingRule");
-//        addRule(RULESET, "AvoidStartWithDollarAndUnderLineNamingRule");
-//        addRule(RULESET, "ConstantFieldShouldBeUpperCaseRule");
-//        addRule(RULESET, "ServiceOrDaoClassShouldEndWithImplRule");
-//        addRule(RULESET, "BooleanPropertyShouldNotStartWithIsRule");
-//        addRule(RULESET, "ArrayNamingShouldHaveBracketRule");
-//        addRule(RULESET, "PackageNamingRule");
+        addRule(RULESET, "AbstractClassShouldStartWithAbstractNamingRule");
+        addRule(RULESET, "ExceptionClassShouldEndWithExceptionRule");
+        addRule(RULESET, "TestClassShouldEndWithTestNamingRule");
+        addRule(RULESET, "LowerCamelCaseVariableNamingRule");
+        addRule(RULESET, "AvoidStartWithDollarAndUnderLineNamingRule");
+        addRule(RULESET, "ConstantFieldShouldBeUpperCaseRule");
+        addRule(RULESET, "ServiceOrDaoClassShouldEndWithImplRule");
+        addRule(RULESET, "BooleanPropertyShouldNotStartWithIsRule");
+        addRule(RULESET, "ArrayNamingShouldHaveBracketRule");
+        addRule(RULESET, "PackageNamingRule");
     }
 }

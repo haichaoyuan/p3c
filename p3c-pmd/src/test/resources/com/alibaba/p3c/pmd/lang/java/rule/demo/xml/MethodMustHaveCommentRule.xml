@@ -47,12 +47,13 @@
 }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method main activity</description>
         <expected-problems>3</expected-problems>
         <code-ref id="method-main-activity"/>
     </test-code>
+
+
 
     <!-- 没有注释-->
     <code-fragment id="method-have-annotation-comment"><![CDATA[
@@ -74,12 +75,12 @@
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method have annotation comment</description>
         <expected-problems>0</expected-problems>
         <code-ref id="method-have-annotation-comment"/>
     </test-code>
+
 
 
     <!-- 没有注释-->
@@ -90,12 +91,13 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method have no comment</description>
         <expected-problems>1</expected-problems>
         <code-ref id="method-have-no-comment"/>
     </test-code>
+
+
 
     <!-- // 注释-->
     <code-fragment id="method-have-single-comment"><![CDATA[
@@ -106,12 +108,13 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method have single comment</description>
         <expected-problems>1</expected-problems>
         <code-ref id="method-have-single-comment"/>
     </test-code>
+
+
 
     <!-- // 注释-->
     <code-fragment id="method-have-single-comment-have-data"><![CDATA[
@@ -122,12 +125,13 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-have-single-comment-have-data</description>
         <expected-problems>1</expected-problems>
         <code-ref id="method-have-single-comment-have-data"/>
     </test-code>
+
+
 
     <!-- /* */ 注释-->
     <code-fragment id="method-have-formal-comment-no-data"><![CDATA[
@@ -140,12 +144,13 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-have-formal-comment-no-data</description>
         <expected-problems>1</expected-problems>
         <code-ref id="method-have-formal-comment-no-data"/>
     </test-code>
+
+
 
     <!-- /** */ 注释-->
     <code-fragment id="method-have-formal-comment"><![CDATA[
@@ -160,12 +165,13 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-have-formal-comment</description>
         <expected-problems>0</expected-problems>
         <code-ref id="method-have-formal-comment"/>
     </test-code>
+
+
 
     <!-- /** */ 注释-->
     <code-fragment id="method-have-formal-comment-no-data2"><![CDATA[
@@ -178,12 +184,12 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-have-formal-comment-no-data2</description>
         <expected-problems>3</expected-problems>
         <code-ref id="method-have-formal-comment-no-data2"/>
     </test-code>
+
 
 
     <!-- /** */ 注释里参数和return 也写点东西-->
@@ -202,7 +208,6 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-param-and-return-no-data</description>
         <expected-problems>3</expected-problems>
@@ -210,7 +215,7 @@ class Example {
     </test-code>
 
 
-     字段带is
+     <!--字段带is-->
     <code-fragment id="field-has-is-pre"><![CDATA[
 class Example {
         private boolean isGood;
@@ -225,7 +230,6 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>field-has-is-pre</description>
         <expected-problems>0</expected-problems>
@@ -247,12 +251,12 @@ class Example {
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>field-has-m-pre</description>
         <expected-problems>0</expected-problems>
         <code-ref id="field-has-m-pre"/>
     </test-code>
+
 
     <!-- 字段带@override 外还有其他注解-->
     <code-fragment id="method-with-override"><![CDATA[
@@ -264,10 +268,49 @@ class Example implements View.OnClickListener{
     }
     ]]>
     </code-fragment>
-
     <test-code>
         <description>method-with-override</description>
         <expected-problems>0</expected-problems>
         <code-ref id="method-with-override"/>
     </test-code>
+
+
+    <code-fragment id="method-with-onclick"><![CDATA[
+    class A {
+        @OnClick({R.id.tab_home_page, R.id.tab_home_work})
+        public void onClick(View view) {
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>interface- test</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="method-with-onclick"/>
+    </test-code>
+
+
+    <!-- /** */ 注释里带引号等特殊字符-->
+    <code-fragment id="special-method-description"><![CDATA[
+class Example {
+         /**
+         * 注释
+         * @param x  dialog宽度占屏幕的百分比(范围必须为>0,<=1)
+         * @param y "确定"按钮自定义名称
+         * @return 有回调，只有确定按钮的dialog
+         */
+        public int b(int x, int y){
+            int i = 0;
+            return i;
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>method-param-and-return-no-data</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-method-description"/>
+    </test-code>
+
+
 </test-data>
