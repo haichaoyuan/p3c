@@ -72,7 +72,4 @@ public class AbstractAliCommentRule extends AbstractCommentRule {
         return excludeByClassName;
     }
 
-    public void setExcludeByClassName(boolean excludeByClassName) {
-        this.excludeByClassName = excludeByClassName;
-    }
 }

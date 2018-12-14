@@ -4,7 +4,6 @@ import com.alibaba.p3c.pmd.lang.java.rule.comment.AbstractAliCommentRule;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
-import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 import org.jaxen.JaxenException;
 
 import java.util.List;

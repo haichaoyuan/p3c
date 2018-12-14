@@ -516,6 +516,10 @@ Note: If attribute is null or does not exist, ${var} will be shown directly on w
         <![CDATA[method【%s】need comments]]>
     </entry>
     <entry key="java.demo.rule.XHCoreRule">
-        <![CDATA[XHCore check]]>
+        <![CDATA[XHCore config check]]>
+    </entry>
+
+    <entry key="java.demo.rule.DensityAdapterRule">
+        <![CDATA[density adapter rule check]]>
     </entry>
 </properties>

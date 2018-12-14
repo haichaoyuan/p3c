@@ -49,7 +49,45 @@
 
     <rule name="XHCoreRule" message="java.demo.rule.XHCoreRule"
           class="com.alibaba.p3c.pmd.lang.java.rule.demo.XHCoreRule">
-        <description>XHCore 检查</description>
+        <description>XHCore 使用检查，继承自XhBaseApplication的自定义 Application，必须实现 getAppConfig 方法进行参数配置</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    public class XHApplication extends XhBaseApplication {
+
+    @Override
+    protected BaseXHAppConfig getAppConfig() {
+        return new BaseXHAppConfig() {
+            @Override
+            public Map<String, String> getMicroServerDefaultMap() {
+                return new HashMap<String, String>(5) {
+                    {
+                        //应用
+                        put("SB103016", "http://filesoss.yunzuoye.net");
+
+                    }
+                };
+            }
+
+            @Override
+            public MicroServerVersion getMicroServerVersion() {
+                return MicroServerVersion.VERSION2;
+            }
+
+            @Override
+            public HttpConst.RequestStrategy getRequestStrategy() {
+                return HttpConst.RequestStrategy.STRATEGY_LIB_CURL;
+            }
+        };
+    }
+]]>
+        </example>
+    </rule>
+
+    <rule name="DensityAdapterRule" message="java.demo.rule.DensityAdapterRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.demo.DensityAdapterRule">
+        <description>屏幕适配的规则检查, 包括弃用类的使用检查，getResource 方法的继承检查，详情见《今日头条屏幕适配方案迁移(第二版)》</description>
         <priority>3</priority>
 
         <example>

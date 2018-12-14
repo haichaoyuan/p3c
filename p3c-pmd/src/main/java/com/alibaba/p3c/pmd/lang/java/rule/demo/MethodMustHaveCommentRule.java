@@ -286,7 +286,7 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
      * @param method
      * @param data
      */
-    public void checkMethodCommentFormat(ASTMethodDeclaration method, Object data) {
+    private void checkMethodCommentFormat(ASTMethodDeclaration method, Object data) {
         Comment comment = method.comment();
         String commentContent = comment.getImage();
 

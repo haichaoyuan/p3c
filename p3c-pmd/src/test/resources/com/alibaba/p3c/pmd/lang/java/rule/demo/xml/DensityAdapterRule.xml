@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+    <!-- XHDensityUtil 使用监测-->
+    <test-code>
+        <description>xh-density-util-use</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="xh-density-util-use"/>
+    </test-code>
+    <code-fragment id="xh-density-util-use"><![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+
+    import com.xh.xhcore.common.util.XHDensityUtil;
+
+    public class HttpReqActivity {
+        public static final String TEST_URL_HTTPS_PRODUCTION = "https://ztp.yunzuoye.net/api/v1/platform/dateTime";
+        public static final int i = XHDensityUtil.dp2px(1);
+        private int wq = HDensiXtyUtil.dp2px(1);
+
+
+        @Override
+        public int getLayoutResId() {
+        return R.layout.activity_http_req;
+        }
+
+        @Override
+        public void initView() {
+        //        new TimerHelper().testLog();
+        }
+
+        @Override
+        public HttpReqPresenter initPresenter() {
+        return new HttpReqPresenter();
+        }
+
+        private void tmp(){
+        int i = XHDensityUtil.dp2px(1);
+        }
+    }
+
+    ]]>
+    </code-fragment>
+
+
+
+    <!-- toast 使用监测-->
+    <test-code>
+        <description>xh-toast-util-use</description>
+        <expected-problems>2</expected-problems>
+        <code-ref id="xh-toast-util-use"/>
+    </test-code>
+    <code-fragment id="xh-toast-util-use"><![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+
+    import com.xh.xhcore.common.util.XHToast;
+    import com.xh.view.TipToast;
+
+    public class HttpReqActivity {
+    }
+
+    ]]>
+    </code-fragment>
+
+
+
+    <!-- Activity 后缀 和 Application 后缀 不可重写 getResource 方法监测-->
+    <test-code>
+        <description>xh-method-getResource-check</description>
+        <expected-problems>3</expected-problems>
+        <code-ref id="xh-method-getResource-check"/>
+    </test-code>
+    <code-fragment id="xh-method-getResource-check"><![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+
+    import com.xh.xhcore.common.util.XHToast;
+    import com.xh.view.TipToast;
+
+    public class HttpReqActivity {
+        @Override
+        public Resources getResources() {
+            return super.getResources();
+        }
+    }
+    ]]>
+    </code-fragment>
+
+
+
+
+    <!-- Activity 后缀 和 Application 后缀 不可重写 getResource 方法监测-->
+    <test-code>
+        <description>xh-application-method-getResource-check</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="xh-application-method-getResource-check"/>
+    </test-code>
+    <code-fragment id="xh-application-method-getResource-check"><![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+
+    public class HttpReqApplication {
+        @Override
+        public Resources getResources() {
+            return super.getResources();
+        }
+    }
+    ]]>
+    </code-fragment>
+
+
+
+    <!-- normal-->
+    <test-code>
+        <description>normal</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="xh-normal"/>
+    </test-code>
+    <code-fragment id="xh-normal"><![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+    import com.xh.xhcore.common.util.XHToast2;
+    import com.xh.view.TipToast2;
+
+
+    public class HttpReqApplication2 {
+        @Override
+        public Resources getResources() {
+            return super.getResources();
+        }
+    }
+    ]]>
+    </code-fragment>
+</test-data>
