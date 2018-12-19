@@ -520,6 +520,6 @@
         <![CDATA[XHCore 配置检查]]>
     </entry>
     <entry key="java.demo.rule.DensityAdapterRule">
-        <![CDATA[屏幕适配的规则检查]]>
+        <![CDATA[屏幕适配的检查规则]]>
     </entry>
 </properties>

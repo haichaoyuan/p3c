@@ -9,6 +9,15 @@
     <change-notes>
         <![CDATA[
         <ul>
+            2.0.5
+            <li>功能。注释监测规则，增加去除 butterKnife 自动生成的 onClick 注解的方法(感谢董建慧)</li>
+            <li>功能。注释监测规则，注释内容增加引号开头的兼容，允许注释之前有一个特殊字符(感谢杨博文)</li>
+            <li>重构，注释监测规则局部代码重构</li>
+            <li>功能，字段小驼峰规则，增加去除检查 @Interface 注解接口(感谢符治学)</li>
+            <li>功能，新增规则 XHCoreRule , 检查继承XhBaseApplication的需要实现getAppConfig方法，具体见文档</li>
+            <li>功能，新增屏幕适配规则 DensityAdapterRule , 检查学海 XHCore 已被声明弃用的类的监测，XHDensityUtil、XHToast、TipToast；检查 Activity 或者 Application 不可重写 getResource 方法</li>
+        </ul>
+        <ul>
             2.0.4
             <li>优化。ClassNamingShouldBeCamelRule 规则增加去除对 XH、DB、IO 的监测</li>
             <li>新增。 XHCoreRule 规则，监测继承XHBaseApplication 的微服务配置监测</li>

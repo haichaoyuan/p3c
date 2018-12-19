@@ -109,6 +109,34 @@ Positive example: For codes which are temporarily removed and likely to be reuse
     </rule>
 
 
+    <!-- -->
+    <rule name="DensityAdapterRule" message="java.demo.rule.DensityAdapterRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.demo.DensityAdapterRule">
+        <description>屏幕适配规则 DensityAdapterRule , 检查学海 XHCore 已被声明弃用的类的监测，XHDensityUtil、XHToast、TipToast；检查 Activity 或者 Application 不可重写 getResource 方法</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    package com.xh.xhsample.business.http.ui.impl;
+
+    import com.xh.xhcore.common.util.XHToast;
+    import com.xh.view.TipToast;
+
+    public class HttpReqActivity {
+        @Override
+        public Resources getResources() {
+            // 不可使用类 XHToast
+            XHToast.show(R.string.do_exercise_continuous_rights_message, Toast.LENGTH_LONG);
+            // 不可使用类 TipToast
+            TipToast.showToast(this, "aaa", Toast.LENGTH_LONG);
+            return super.getResources();
+        }
+    }
+]]>
+        </example>
+    </rule>
+
+
 
 
 
