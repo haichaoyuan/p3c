@@ -12,6 +12,8 @@ import java.util.List;
 /**
  * 屏幕适配规则
  * 1. 学海 XHCore 已被声明弃用的类的监测，XHDensityUtil、XHToast、TipToast
+ * 2. 检查 Activity 后缀或者 Application 后缀 不可重写 getResource
+ * 3.
  */
 public class DensityAdapterRule extends AbstractAliCommentRule {
     /**
