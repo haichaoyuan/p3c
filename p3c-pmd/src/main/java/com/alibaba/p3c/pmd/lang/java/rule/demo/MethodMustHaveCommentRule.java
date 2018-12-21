@@ -44,7 +44,7 @@ public class MethodMustHaveCommentRule extends AbstractAliCommentRule {
     /**
      * 忽略的注解
      */
-    private static final String[] ignoreAnnotation = {"Override", "OnClick"};
+    private static final String[] ignoreAnnotation = {"Override", "OnClick", "Generated"};
 
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {

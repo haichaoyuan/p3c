@@ -28,7 +28,7 @@ public class CamelClassNameRule {
     <test-code>
         <description>Class Name Should Camel</description>
         <expected-problems>5</expected-problems>
-        <code-ref id="CamelClassNaming" />
+        <code-ref id="CamelClassNaming"/>
         <expected-linenumbers>4,5,7,13,14</expected-linenumbers>
     </test-code>
 
@@ -41,7 +41,7 @@ public class XHCoreRule {
     <test-code>
         <description>Class Name Should Camel1</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="XHApple" />
+        <code-ref id="XHApple"/>
     </test-code>
 
 
@@ -54,7 +54,7 @@ public class CamelClassNameRule {
     <test-code>
         <description>Class Name Should Camel1</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming1" />
+        <code-ref id="CamelClassNaming1"/>
     </test-code>
 
     <code-fragment id="CamelClassNaming2">
@@ -66,7 +66,7 @@ public class AbstractDAOImpl {
     <test-code>
         <description>Class Name Should Camel2</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming2" />
+        <code-ref id="CamelClassNaming2"/>
     </test-code>
 
     <code-fragment id="CamelClassNaming3">
@@ -78,7 +78,7 @@ public class AbstractBO {
     <test-code>
         <description>Class Name Should Camel3</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming3" />
+        <code-ref id="CamelClassNaming3"/>
     </test-code>
 
     <code-fragment id="CamelClassNaming4">
@@ -90,7 +90,7 @@ public class TestBO {
     <test-code>
         <description>Class Name Should Camel4</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming4" />
+        <code-ref id="CamelClassNaming4"/>
     </test-code>
 
     <code-fragment id="CamelClassNaming5">
@@ -102,7 +102,7 @@ public class RoutingBranchRouteBO extends AbstractBO {
     <test-code>
         <description>Class Name Should Camel5</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming5" />
+        <code-ref id="CamelClassNaming5"/>
     </test-code>
     <code-fragment id="CamelClassNaming6">
         <![CDATA[
@@ -113,13 +113,11 @@ public class RoutingBranchRoutePO{
     <test-code>
         <description>Class Name Should Camel6</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming6" />
+        <code-ref id="CamelClassNaming6"/>
     </test-code>
 
 
-
-
-    <code-fragment id="CamelClassNaming60">
+    <code-fragment id="CamelClassNaming7">
         <![CDATA[
 public class CamelClassNameRule {
     class Abc{}
@@ -130,6 +128,18 @@ public class CamelClassNameRule {
     <test-code>
         <description>Class Name Should Camel111</description>
         <expected-problems>0</expected-problems>
-        <code-ref id="CamelClassNaming60" />
+        <code-ref id="CamelClassNaming7"/>
+    </test-code>
+
+    <code-fragment id="CamelClassNaming8">
+        <![CDATA[
+public interface IObjectiveUserAnswerView {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>Class Name Should Camel111</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="CamelClassNaming8"/>
     </test-code>
 </test-data>

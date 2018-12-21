@@ -312,5 +312,23 @@ class Example {
         <code-ref id="special-method-description"/>
     </test-code>
 
+    <!-- /** */ 注释里带引号等特殊字符-->
+    <code-fragment id="special-method-generated"><![CDATA[
+    class Example {
+         /** called by internal mechanisms, do not call yourself. */
+        @Generated(hash = 252290607)
+        public void __setDaoSession(DaoSession daoSession) {
+            this.daoSession = daoSession;
+            myDao = daoSession != null ? daoSession.getClassInfoDao() : null;
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-method-generated</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-method-generated"/>
+    </test-code>
+
 
 </test-data>

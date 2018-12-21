@@ -13,9 +13,9 @@ public class DemoRulesTest extends SimpleAggregatorTst {
 
 
         //[1]  需要规则测试文件了。
-//        addRule(RULESET, "MethodMustHaveCommentRule");
+        addRule(RULESET, "MethodMustHaveCommentRule");
         //[2] XHCore 的规则
-//        addRule(RULESET, "XHCoreRule");
+        addRule(RULESET, "XHCoreRule");
         //[3] XHCore 的规则
         addRule(RULESET, "DensityAdapterRule");
         super.setUp();

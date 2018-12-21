@@ -63,6 +63,10 @@ public class ClassNamingShouldBeCamelRule extends AbstractAliRule {
         }
         for (String s : NO_CHECK_NAME) {
             if (image.contains(s)) {
+                //特殊情况，接口 IObjectiveUserAnswerView
+                if("IO".equals(s) && node.isInterface()){
+                    continue;
+                }
                 image = image.replace(s, "");
             }
         }
