@@ -9,6 +9,11 @@
     <change-notes>
         <![CDATA[
         <ul>
+            2.0.6_test
+            <li>优化。类名使用UpperCamelCase风格规则对于 IObjectView 类名的监测出错(感谢沈永笑)</li>
+            <li>优化。代码注释监测规则，对 @Generate 注解的方法监测排除(感谢刘畅)</li>
+        </ul>
+        <ul>
             2.0.5
             <li>功能。注释监测规则，增加去除 butterKnife 自动生成的 onClick 注解的方法(感谢董建慧)</li>
             <li>功能。注释监测规则，注释内容增加引号开头的兼容，允许注释之前有一个特殊字符(感谢杨博文)</li>
