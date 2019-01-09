@@ -183,6 +183,626 @@ public interface BizConstants {
         <expected-problems>0</expected-problems>
         <code-ref id="LowerCamelCaseVariableNamingRuleTest9"/>
     </test-code>
+
+    /** */ 注释里带引号等特殊字符
+    <code-fragment id="special-method-generated"><![CDATA[
+    @Entity
+    class Example {
+         /** called by internal mechanisms, do not call yourself. */
+        @Generated(hash = 252290607)
+        public void __setDaoSession(DaoSession daoSession) {
+            this.daoSession = daoSession;
+            myDao = daoSession != null ? daoSession.getClassInfoDao() : null;
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-method-generated</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-method-generated"/>
+    </test-code>
+
+
+    <!-- /** */ 注释里带引号等特殊字符-->
+    <code-fragment id="special-method-generated2"><![CDATA[
+    package com.xh.common.http.request;
+
+import com.xh.alstch.mine.bean.CustomClazzSummaryDTO;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.ToMany;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
+
+import com.xh.alstch.db.DaoSession;
+import com.xh.alstch.db.CustomClazzSummaryDTODao;
+import com.xh.alstch.db.CustomClazzMemberDTODao;
+
+/**
+ * auth: wangqiankun
+ * time: 2018/3/29 0029
+ */
+@Entity
+public class CustomClazzMemberDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+
+    @ToMany(referencedJoinProperty = "customClazzId")
+    List<CustomClazzSummaryDTO> clazzes;
+
+    int fromClazzId;//:	integer ($int32)
+    ;//  来源班级ID
+    String fromClazzName;//:	string
+    ;//  来源班级名称
+    int fromClazzType;//:	integer ($int32)
+    ;//   来源班级类型
+    int fromSchoolId;//:	integer ($int32)
+    ;// 来源学校ID
+    String fromSchoolName;//:	string
+    ;//        来源学校名称
+    String name;//:	string
+
+    ;//  用户姓名
+    long userId;//:	integer ($int32)
+    String userName;
+    float average;
+    int lateDelivery;
+    int classId;
+    String className;//
+    @Id
+    Long id;
+
+    private String groupInfoJson;
+
+
+    /**
+     * Used to resolve relations
+     */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+
+    /**
+     * Used for active entity operations.
+     */
+    @Generated(hash = 1982607131)
+    private transient CustomClazzMemberDTODao myDao;
+
+
+    @Generated(hash = 1218026941)
+    public CustomClazzMemberDTO(int fromClazzId, String fromClazzName, int fromClazzType,
+                                int fromSchoolId, String fromSchoolName, String name, long userId, String userName,
+                                float average, int lateDelivery, int classId, String className, Long id,
+                                String groupInfoJson) {
+        this.fromClazzId = fromClazzId;
+        this.fromClazzName = fromClazzName;
+        this.fromClazzType = fromClazzType;
+        this.fromSchoolId = fromSchoolId;
+        this.fromSchoolName = fromSchoolName;
+        this.name = name;
+        this.userId = userId;
+        this.userName = userName;
+        this.average = average;
+        this.lateDelivery = lateDelivery;
+        this.classId = classId;
+        this.className = className;
+        this.id = id;
+        this.groupInfoJson = groupInfoJson;
+    }
+
+
+    @Generated(hash = 1645617811)
+    public CustomClazzMemberDTO() {
+    }
+
+
+    public int getFromClazzId() {
+        return this.fromClazzId;
+    }
+
+
+    public void setFromClazzId(int fromClazzId) {
+        this.fromClazzId = fromClazzId;
+    }
+
+
+    public String getFromClazzName() {
+        return this.fromClazzName;
+    }
+
+
+    public void setFromClazzName(String fromClazzName) {
+        this.fromClazzName = fromClazzName;
+    }
+
+
+    public int getFromClazzType() {
+        return this.fromClazzType;
+    }
+
+
+    public void setFromClazzType(int fromClazzType) {
+        this.fromClazzType = fromClazzType;
+    }
+
+
+    public int getFromSchoolId() {
+        return this.fromSchoolId;
+    }
+
+
+    public void setFromSchoolId(int fromSchoolId) {
+        this.fromSchoolId = fromSchoolId;
+    }
+
+
+    public String getFromSchoolName() {
+        return this.fromSchoolName;
+    }
+
+
+    public void setFromSchoolName(String fromSchoolName) {
+        this.fromSchoolName = fromSchoolName;
+    }
+
+
+    public String getName() {
+        return this.name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public long getUserId() {
+        return this.userId;
+    }
+
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+
+    public String getGroupInfoJson() {
+        return this.groupInfoJson;
+    }
+
+
+    public void setGroupInfoJson(String groupInfoJson) {
+        this.groupInfoJson = groupInfoJson;
+    }
+
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 2123555965)
+    public List<CustomClazzSummaryDTO> getClazzes() {
+        if (clazzes == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            CustomClazzSummaryDTODao targetDao = daoSession.getCustomClazzSummaryDTODao();
+            List<CustomClazzSummaryDTO> clazzesNew = targetDao._queryCustomClazzMemberDTO_Clazzes(id);
+            synchronized (this) {
+                if (clazzes == null) {
+                    clazzes = clazzesNew;
+                }
+            }
+        }
+        return clazzes;
+    }
+
+
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 717778182)
+    public synchronized void resetClazzes() {
+        clazzes = null;
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 1896196498)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getCustomClazzMemberDTODao() : null;
+    }
+
+
+    public int getClassId() {
+        return this.classId;
+    }
+
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public String getClassName() {
+        return this.className;
+    }
+
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CustomClazzMemberDTO)) return false;
+
+        CustomClazzMemberDTO dto = (CustomClazzMemberDTO) o;
+
+        if (userId != dto.userId) return false;
+        return name != null ? name.equals(dto.name) : dto.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        return result;
+    }
+
+
+    public float getAverage() {
+        return this.average;
+    }
+
+
+    public void setAverage(float average) {
+        this.average = average;
+    }
+
+
+    public int getLateDelivery() {
+        return this.lateDelivery;
+    }
+
+
+    public void setLateDelivery(int lateDelivery) {
+        this.lateDelivery = lateDelivery;
+    }
+
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomClazzMemberDTO{" +
+                "clazzes=" + clazzes +
+                ", fromClazzId=" + fromClazzId +
+                ", fromClazzName='" + fromClazzName + '\'' +
+                ", fromClazzType=" + fromClazzType +
+                ", fromSchoolId=" + fromSchoolId +
+                ", fromSchoolName='" + fromSchoolName + '\'' +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", average=" + average +
+                ", lateDelivery=" + lateDelivery +
+                ", classId=" + classId +
+                ", className='" + className + '\'' +
+                ", id=" + id +
+                ", groupInfoJson='" + groupInfoJson + '\'' +
+                ", daoSession=" + daoSession +
+                ", myDao=" + myDao +
+                '}';
+    }
+}
+
+
+
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-method-generated</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-method-generated2"/>
+    </test-code>
+
+
+    <!-- /** */ 注释里带引号等特殊字符-->
+    <code-fragment id="special-method-generated3"><![CDATA[
+    package com.xh.common.db.bean;
+
+
+import com.xh.module_base.bean.BaseClass;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.ToMany;
+
+import java.io.Serializable;
+import java.util.List;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
+import com.xh.alstch.db.DaoSession;
+import com.xh.alstch.db.StudentDtoDao;
+import com.xh.alstch.db.ClassInfoDao;
+
+/**
+ * auth: wangqiankun
+ * time: 2018/3/17 0017
+ */
+@Entity
+public class ClassInfo extends BaseClass implements Serializable  {
+    private static final long serialVersionUID = 1L;
+    int clazzType;//:	integer ($int32)
+    ;// 班级类型：0-行政班 1-培优班
+    int enrollYear;//:	integer ($int32)
+    ;// 入学年份
+    int grade;//:	integer ($int32)
+
+    int teacherId;
+
+
+
+    ;//学段
+    @ToMany(referencedJoinProperty = "fromClazzId")
+    List<StudentDto> members;//:	[...]
+    int schoolId;//:	integer ($int32)
+    ;// 学校ID
+    String schoolName;//:	string
+    ;// 学校名称
+    String subject;//:	string
+
+
+    public ClassInfo(String clazzName) {
+        this.clazzName = clazzName;
+    }
+    @Generated(hash = 1874580886)
+    public ClassInfo(int clazzType, int enrollYear, int grade, int teacherId, int schoolId,
+            String schoolName, String subject, String clazzName, long clazzId) {
+        this.clazzType = clazzType;
+        this.enrollYear = enrollYear;
+        this.grade = grade;
+        this.teacherId = teacherId;
+        this.schoolId = schoolId;
+        this.schoolName = schoolName;
+        this.subject = subject;
+        this.clazzName = clazzName;
+        this.clazzId = clazzId;
+    }
+    @Generated(hash = 295356596)
+    public ClassInfo() {
+    }
+    public int getClazzType() {
+        return this.clazzType;
+    }
+    public void setClazzType(int clazzType) {
+        this.clazzType = clazzType;
+    }
+    public int getEnrollYear() {
+        return this.enrollYear;
+    }
+    public void setEnrollYear(int enrollYear) {
+        this.enrollYear = enrollYear;
+    }
+    public int getGrade() {
+        return this.grade;
+    }
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+    public int getSchoolId() {
+        return this.schoolId;
+    }
+    public void setSchoolId(int schoolId) {
+        this.schoolId = schoolId;
+    }
+    public String getSchoolName() {
+        return this.schoolName;
+    }
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+    public String getSubject() {
+        return this.subject;
+    }
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    public String getClazzName() {
+        return this.clazzName;
+    }
+    public void setClazzName(String clazzName) {
+        this.clazzName = clazzName;
+    }
+    public long getClazzId() {
+        return this.clazzId;
+    }
+    public void setClazzId(long clazzId) {
+        this.clazzId = clazzId;
+    }
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 274406372)
+    public List<StudentDto> getMembers() {
+        if (members == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            StudentDtoDao targetDao = daoSession.getStudentDtoDao();
+            List<StudentDto> membersNew = targetDao
+                    ._queryClassInfo_Members(clazzId);
+            synchronized (this) {
+                if (members == null) {
+                    members = membersNew;
+                }
+            }
+        }
+        return members;
+    }
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 1358688666)
+    public synchronized void resetMembers() {
+        members = null;
+    }
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+    public int getTeacherId() {
+        return this.teacherId;
+    }
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
+    }
+
+
+    String clazzName;
+    @Id
+    long clazzId;
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+    /** Used for active entity operations. */
+    @Generated(hash = 166870829)
+    private transient ClassInfoDao myDao;
+
+    @Override
+    public String toString() {
+        return "ClassInfo{" +
+                "clazzType=" + clazzType +
+                ", enrollYear=" + enrollYear +
+                ", grade=" + grade +
+                ", teacherId=" + teacherId +
+                ", members=" + members +
+                ", schoolId=" + schoolId +
+                ", schoolName='" + schoolName + '\'' +
+                ", subject='" + subject + '\'' +
+                ", clazzName='" + clazzName + '\'' +
+                ", clazzId=" + clazzId +
+                ", daoSession=" + daoSession +
+                ", myDao=" + myDao +
+                '}';
+    }
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 252290607)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getClassInfoDao() : null;
+    }
+}
+
+
+
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-method-generated</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-method-generated3"/>
+    </test-code>
 </test-data>
 
 

@@ -17,8 +17,7 @@ package com.alibaba.p3c.pmd.lang.java.rule;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.fix.FixClassTypeResolver;
-
-import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
+import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameManager;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
@@ -30,16 +29,19 @@ import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
  * @date 2016/11/20
  */
 public abstract class AbstractAliRule extends AbstractJavaRule {
-    private boolean excludeByClassName;//排序一些不检测的类
+    private CheckExcludeClassNameManager manager;
 
     @Override
     public Object visit(ASTCompilationUnit node, Object data) {
-        excludeByClassName = false;
+        manager = new CheckExcludeClassNameManager(node);
+
         FixClassTypeResolver classTypeResolver = new FixClassTypeResolver(AbstractAliRule.class.getClassLoader());
         node.setClassTypeResolver(classTypeResolver);
         node.jjtAccept(classTypeResolver, data);
+
         return super.visit(node, data);
     }
+
 
     @Override
     public void setDescription(String description) {
@@ -59,25 +61,19 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
     @Override
     public void addViolationWithMessage(Object data, Node node, String message, Object[] args) {
         super.addViolationWithMessage(data, node,
-            String.format(I18nResources.getMessageWithExceptionHandled(message), args));
+                String.format(I18nResources.getMessageWithExceptionHandled(message), args));
     }
 
-    /** 当前类是否被排除
-     * @param mClassName 类名
+
+    /**
+     * @return 是否被排除，默认不排除
      */
-    public void exeExcludeByClassName(String mClassName){
-        boolean tmp = CheckExcludeClassNameUtil.isExcludeByClassName(mClassName);
-        if(tmp){//防止单个类文件里面有多个类
-            excludeByClassName = true;
-        }
+    protected void exeExcludeByClassName(String image) {
+        manager.exeExcludeByClassName(image);
     }
 
     public boolean isExcludeByClassName() {
-        return excludeByClassName;
-    }
-
-    public void setExcludeByClassName(boolean excludeByClassName) {
-        this.excludeByClassName = excludeByClassName;
+        return manager.isExcludeByClassName();
     }
 }
 

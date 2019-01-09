@@ -42,4 +42,38 @@ public enum Level {
         <expected-problems>1</expected-problems>
         <code-ref id="enum-with-single-line-comment"/>
     </test-code>
+
+
+    <!-- nullpointer -->
+    <code-fragment id="one-null-pointer"><![CDATA[
+package com.xh.module_seaworld.common.annotation;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * des:统计界面筛选类型
+ * @date 2018/3/26 15:34
+ * @author xqf
+ */
+public enum SortEnum implements Serializable{
+    //人机对话统计_左
+    /**
+     * 全部
+     */
+    MML_ALL("全部", "all", 0),
+    /**
+     * 已对话的
+     */
+    MML_TALKED("已对话的", "talked", 1)
+}
+
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>one-null-pointer</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="one-null-pointer"/>
+    </test-code>
 </test-data>

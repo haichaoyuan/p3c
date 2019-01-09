@@ -20,13 +20,11 @@ import java.util.Set;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.AbstractAliRule;
-import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameUtil;
 import com.alibaba.p3c.pmd.lang.java.util.ViolationUtils;
 import com.alibaba.p3c.pmd.lang.java.util.namelist.NameListConfig;
 
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceType;
-import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.ast.ASTFieldDeclaration;
 import org.apache.commons.lang3.StringUtils;
 

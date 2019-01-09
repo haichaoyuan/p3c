@@ -331,4 +331,37 @@ class Example {
     </test-code>
 
 
+    <!-- entity 注解-->
+    <code-fragment id="special-annotation-entity"><![CDATA[
+    @Entity
+    class Example {
+        public void __setDaoSession(DaoSession daoSession) {
+            this.daoSession = daoSession;
+            myDao = daoSession != null ? daoSession.getClassInfoDao() : null;
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-annotation-entity</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-annotation-entity"/>
+    </test-code>
+
+    <!-- dao 后缀的类-->
+    <code-fragment id="special-class-dao"><![CDATA[
+    class ExampleDao {
+        public void __setDaoSession(DaoSession daoSession) {
+            this.daoSession = daoSession;
+            myDao = daoSession != null ? daoSession.getClassInfoDao() : null;
+        }
+    }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>special-class-dao</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="special-class-dao"/>
+    </test-code>
+
 </test-data>

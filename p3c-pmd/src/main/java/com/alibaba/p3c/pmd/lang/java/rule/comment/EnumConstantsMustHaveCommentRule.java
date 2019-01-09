@@ -45,20 +45,30 @@ public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
         // Check comments between ASTEnumDeclaration and ASTEnumConstant.
         boolean isPreviousEnumDecl = false;
         boolean isReport = false;
+        boolean tmp = false;//
 
         for (Entry<Integer, Node> entry : itemsByLineNumber.entrySet()) {
             Node value = entry.getValue();
 
-            if (isReport) {
+            if (value instanceof ASTEnumDeclaration) {
+                // 1. 类声明
+                isPreviousEnumDecl = true;
+            } else if (value instanceof Comment && isPreviousEnumDecl) {
+                //2. 判断注释格式，是否\/**\/
+                if (value instanceof SingleLineComment || value instanceof MultiLineComment) {
+                    isReport = true;
+//                    isPreviousEnumDecl = false;
+                } else {
+                    isPreviousEnumDecl = false;
+                }
+            } else if (isReport) {
                 Node enumBody = value.jjtGetParent();
                 Node enumDeclaration = enumBody.jjtGetParent();
                 addViolationWithMessage(data, enumBody,
                         I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
                                 enumDeclaration.getImage()));
                 isReport = false;
-            } else if (value instanceof ASTEnumDeclaration) {
-                // 类声明
-                isPreviousEnumDecl = true;
+                isPreviousEnumDecl = false;
             } else if (value instanceof ASTEnumConstant && isPreviousEnumDecl) {
                 //这个意思是类声明(ASTEnumDeclaration)和枚举常量(ASTEnumConstant),中间没有其他属性，这里是注释
                 Node enumBody = value.jjtGetParent();
@@ -67,14 +77,6 @@ public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
                         I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
                                 enumDeclaration.getImage()));
                 isPreviousEnumDecl = false;
-            } else if (value instanceof Comment && isPreviousEnumDecl) {
-                //判断注释格式，是否\/**\/
-                if (value instanceof SingleLineComment || value instanceof MultiLineComment) {
-                    isReport = true;
-                    isPreviousEnumDecl = false;
-                } else {
-                    isPreviousEnumDecl = false;
-                }
             } else {
                 isPreviousEnumDecl = false;
             }
