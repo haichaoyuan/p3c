@@ -18,9 +18,14 @@ package com.alibaba.p3c.pmd.lang.java.rule;
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.fix.FixClassTypeResolver;
 import com.alibaba.p3c.pmd.lang.java.rule.util.CheckExcludeClassNameManager;
+import net.sourceforge.pmd.RuleContext;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * re calculate node type
