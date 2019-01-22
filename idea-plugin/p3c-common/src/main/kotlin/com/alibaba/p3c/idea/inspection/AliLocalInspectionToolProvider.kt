@@ -78,7 +78,8 @@ class AliLocalInspectionToolProvider : InspectionToolProvider {
 //                AliControlFlowStatementWithoutBracesInspection::class.java,
 
                 AliLongLiteralsEndingWithLowercaseLInspection::class.java,
-                AliEqualsAvoidNullInspection::class.java,
+                // todo :AliEqualsAvoidNullInspection 存在监测不出来的问题
+//                AliEqualsAvoidNullInspection::class.java,
                 AliArrayNamingShouldHaveBracketInspection::class.java,
                 AliWrapperTypeEqualityInspection::class.java
         )

@@ -9,7 +9,19 @@
     <change-notes>
         <![CDATA[
         <ul>
-            2.0.6_test
+            2.0.8
+            <li>优化。EnumConstantsMustHaveCommentRule 规则忽略枚举类里面第一行斜杠注释的监测</li>
+            <li>优化。LowerCamelCaseVariableNamingRule 去除对注解里内容的检查 </li>
+            <li>bug。 CheckExcludeClassNameManager.java 增加判空 </li>
+        </ul>
+        <ul>
+            2.0.7
+            <li>bug。EnumConstantsMustHaveCommentRule 的一个 NullPointerException，已修改，并提 issues 给阿里,地址如下 https://github.com/alibaba/p3c/issues/442  (感谢刘畅)</li>
+            <li>优化。排除类名有 @Entity 注解的监测(感谢刘畅)</li>
+            <li>优化。解决Jenkins 插件会监测但是Android Studio 插件监测不出的情况，完美方案还未想明，临时修复下(感谢饶熙庭)</li>
+        </ul>
+        <ul>
+            2.0.6
             <li>优化。类名使用UpperCamelCase风格规则对于 IObjectView 类名的监测出错(感谢沈永笑)</li>
             <li>优化。代码注释监测规则，对 @Generate 注解的方法监测排除(感谢刘畅)</li>
         </ul>

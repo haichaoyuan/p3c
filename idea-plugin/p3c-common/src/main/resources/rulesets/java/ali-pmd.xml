@@ -13,7 +13,7 @@
         <exclude name="ArrayNamingShouldHaveBracketRule"/>
     </rule>
     <rule ref="rulesets/java/xh-oop.xml">
-        <exclude name="EqualsAvoidNullRule"/>
+        <!--<exclude name="EqualsAvoidNullRule"/>-->
         <exclude name="WrapperTypeEqualityRule"/>
     </rule>
 

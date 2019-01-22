@@ -20,7 +20,6 @@ import com.alibaba.p3c.idea.compatible.inspection.Inspections
 import com.alibaba.p3c.idea.config.SmartFoxProjectConfig
 import com.alibaba.p3c.idea.i18n.P3cBundle
 import com.alibaba.p3c.idea.inspection.AliBaseInspection
-import com.alibaba.smartfox.idea.common.util.getService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.ServiceManager
@@ -39,7 +38,6 @@ class ToggleProjectInspectionAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
         val smartFoxConfig = ServiceManager.getService(project, SmartFoxProjectConfig::class.java)
-        // val smartFoxConfig2 = SmartFoxProjectConfig::class.java.getService();
         val tools = Inspections.aliInspections(project) {
             it.tool is AliBaseInspection
         }
