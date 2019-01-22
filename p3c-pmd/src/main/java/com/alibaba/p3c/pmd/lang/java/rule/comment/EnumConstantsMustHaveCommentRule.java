@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 import com.alibaba.p3c.pmd.I18nResources;
 import com.alibaba.p3c.pmd.lang.java.rule.util.NodeSortUtils;
 
 import net.sourceforge.pmd.lang.ast.Node;
-import net.sourceforge.pmd.lang.java.ast.*;
-import net.sourceforge.pmd.lang.vm.ast.ASTComment;
+import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
+import net.sourceforge.pmd.lang.java.ast.ASTEnumConstant;
+import net.sourceforge.pmd.lang.java.ast.ASTEnumDeclaration;
 
 /**
  * [Mandatory] All enumeration type fields should be commented as Javadoc style.
@@ -36,7 +36,6 @@ import net.sourceforge.pmd.lang.vm.ast.ASTComment;
  * @date 2016/12/14
  */
 public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
-    private static final Pattern EMPTY_CONTENT_PATTERN = Pattern.compile("", Pattern.DOTALL);
 
     @Override
     public Object visit(ASTCompilationUnit cUnit, Object data) {
@@ -44,33 +43,13 @@ public class EnumConstantsMustHaveCommentRule extends AbstractAliCommentRule {
 
         // Check comments between ASTEnumDeclaration and ASTEnumConstant.
         boolean isPreviousEnumDecl = false;
-        boolean isReport = false;
-        boolean tmp = false;//
 
         for (Entry<Integer, Node> entry : itemsByLineNumber.entrySet()) {
             Node value = entry.getValue();
 
             if (value instanceof ASTEnumDeclaration) {
-                // 1. 类声明
                 isPreviousEnumDecl = true;
-            } else if (value instanceof Comment && isPreviousEnumDecl) {
-                //2. 判断注释格式，是否\/**\/
-                if (value instanceof SingleLineComment || value instanceof MultiLineComment) {
-                    isReport = true;
-//                    isPreviousEnumDecl = false;
-                } else {
-                    isPreviousEnumDecl = false;
-                }
-            } else if (isReport) {
-                Node enumBody = value.jjtGetParent();
-                Node enumDeclaration = enumBody.jjtGetParent();
-                addViolationWithMessage(data, enumBody,
-                        I18nResources.getMessage("java.comment.EnumConstantsMustHaveCommentRule.violation.msg",
-                                enumDeclaration.getImage()));
-                isReport = false;
-                isPreviousEnumDecl = false;
             } else if (value instanceof ASTEnumConstant && isPreviousEnumDecl) {
-                //这个意思是类声明(ASTEnumDeclaration)和枚举常量(ASTEnumConstant),中间没有其他属性，这里是注释
                 Node enumBody = value.jjtGetParent();
                 Node enumDeclaration = enumBody.jjtGetParent();
                 addViolationWithMessage(data, enumBody,

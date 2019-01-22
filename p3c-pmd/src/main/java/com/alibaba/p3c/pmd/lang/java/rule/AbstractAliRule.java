@@ -30,15 +30,30 @@ import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
  */
 public abstract class AbstractAliRule extends AbstractJavaRule {
     private CheckExcludeClassNameManager manager;
+ 	private static final Map<String, Boolean> TYPE_RESOLVER_MAP = new ConcurrentHashMap<>(16);
+
+    private static final String EMPTY_FILE_NAME = "n/a";
+    private static final String DELIMITER = "-";
 
     @Override
     public Object visit(ASTCompilationUnit node, Object data) {
-        manager = new CheckExcludeClassNameManager(node);
+        
 
-        FixClassTypeResolver classTypeResolver = new FixClassTypeResolver(AbstractAliRule.class.getClassLoader());
-        node.setClassTypeResolver(classTypeResolver);
-        node.jjtAccept(classTypeResolver, data);
+        // Each CompilationUnit will be scanned only once by custom type resolver.
+        String sourceCodeFilename = ((RuleContext)data).getSourceCodeFilename();
 
+        // Do type resolve if file name is empty(unit tests).
+        if (StringUtils.isBlank(sourceCodeFilename) || EMPTY_FILE_NAME.equals(sourceCodeFilename)) {
+            resolveType(node, data);
+            return super.visit(node, data);
+        }
+
+        // If file name is not empty, use filename + hashcode to identify a compilation unit.
+        String uniqueId = sourceCodeFilename + DELIMITER + node.hashCode();
+        if (!TYPE_RESOLVER_MAP.containsKey(uniqueId)) {
+            resolveType(node, data);
+            TYPE_RESOLVER_MAP.put(uniqueId, true);
+        }
         return super.visit(node, data);
     }
 
@@ -62,6 +77,15 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
     public void addViolationWithMessage(Object data, Node node, String message, Object[] args) {
         super.addViolationWithMessage(data, node,
                 String.format(I18nResources.getMessageWithExceptionHandled(message), args));
+    }
+	
+	private void resolveType(ASTCompilationUnit node, Object data) {
+		
+		manager = new CheckExcludeClassNameManager(node);
+
+        FixClassTypeResolver classTypeResolver = new FixClassTypeResolver(AbstractAliRule.class.getClassLoader());
+        node.setClassTypeResolver(classTypeResolver);
+        node.jjtAccept(classTypeResolver, data);
     }
 
 

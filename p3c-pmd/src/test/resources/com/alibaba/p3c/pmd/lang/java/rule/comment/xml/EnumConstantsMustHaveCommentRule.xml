@@ -73,7 +73,8 @@ public enum SortEnum implements Serializable{
     </code-fragment>
     <test-code>
         <description>one-null-pointer</description>
-        <expected-problems>1</expected-problems>
+        <expected-problems>0</expected-problems>
         <code-ref id="one-null-pointer"/>
     </test-code>
+
 </test-data>

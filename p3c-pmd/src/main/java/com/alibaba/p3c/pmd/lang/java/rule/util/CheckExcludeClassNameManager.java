@@ -88,6 +88,9 @@ public class CheckExcludeClassNameManager {
      * @param node
      */
     private void initClassNameAndAnnotation(ASTCompilationUnit node) {
+        if(node == null){
+            return;
+        }
         classAnnotation = null;
         int i = node.jjtGetNumChildren();
         Node typeNode = node.jjtGetChild(i -1);
