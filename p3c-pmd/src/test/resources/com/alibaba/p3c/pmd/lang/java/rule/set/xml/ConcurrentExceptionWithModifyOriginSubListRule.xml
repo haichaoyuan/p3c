@@ -19,15 +19,15 @@
 	</test-code>
  
 	<code-fragment id="sets-warn"><![CDATA[
-  	  public class Foo {   
-            private void method(long aLong) {  
+  	  public class Foo {
+            private void method(long aLong) {
                 List<String> originList = new ArrayList<String>();
                 originList.add("22");
                 List<String> subList = originList.subList(0, 1);
                 originList.add("22");
                 originList.remove("22");
                 originList.clear(); 	   
-             } 
+             }
         }
     ]]>
 	</code-fragment>

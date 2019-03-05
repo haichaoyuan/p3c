@@ -23,6 +23,7 @@
 ]]>
       </example>
     </rule>
+
     <rule name="AvoidMissUseOfMathRandomRule" language="java"
           message="java.other.AvoidMissUseOfMathRandomRule.rule.msg"
           class="com.alibaba.p3c.pmd.lang.java.rule.other.AvoidMissUseOfMathRandomRule">

@@ -42,7 +42,7 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
 
     @Override
     public Object visit(ASTCompilationUnit node, Object data) {
-        
+        manager = new CheckExcludeClassNameManager(node);
 
         // Each CompilationUnit will be scanned only once by custom type resolver.
         String sourceCodeFilename = ((RuleContext)data).getSourceCodeFilename();
@@ -86,7 +86,7 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
 	
 	private void resolveType(ASTCompilationUnit node, Object data) {
 		
-		manager = new CheckExcludeClassNameManager(node);
+
 
         FixClassTypeResolver classTypeResolver = new FixClassTypeResolver(AbstractAliRule.class.getClassLoader());
         node.setClassTypeResolver(classTypeResolver);
@@ -98,10 +98,16 @@ public abstract class AbstractAliRule extends AbstractJavaRule {
      * @return 是否被排除，默认不排除
      */
     protected void exeExcludeByClassName(String image) {
+        if(manager == null){
+            throw new NullPointerException("manager is null");
+        }
         manager.exeExcludeByClassName(image);
     }
 
     public boolean isExcludeByClassName() {
+        if(manager == null){
+            throw new NullPointerException("manager is null");
+        }
         return manager.isExcludeByClassName();
     }
 }
