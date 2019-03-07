@@ -1,4 +1,4 @@
-package com.alibaba.p3c.pmd.lang.java.rule.demo;
+package com.alibaba.p3c.pmd.lang.java.rule.special;
 
 import com.alibaba.p3c.pmd.lang.java.rule.comment.AbstractAliCommentRule;
 import net.sourceforge.pmd.lang.ast.Node;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+    <!-- try catch 方法检查-->
+    <test-code>
+        <description>try catch</description>
+        <expected-problems>1</expected-problems>
+        <code-ref id="try-catch-test"/>
+    </test-code>
+    <code-fragment id="try-catch-test"><![CDATA[
+public class AbcApplication{
+    public void fun(){
+        int i = 0;
+        try{
+            i = 1;
+        }catch(Exception e){
+            // say something
+        }finally{
+
+        }
+    }
+}
+    ]]>
+    </code-fragment>
+
+    <!-- try catch 方法检查-->
+    <test-code>
+        <description>try catch</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="try-catch-test2"/>
+    </test-code>
+    <code-fragment id="try-catch-test2"><![CDATA[
+public class AbcApplication{
+    public void fun(){
+        int i = 0;
+        try{
+            i = 1;
+        }catch(Exception e){
+            i = 2;
+            i = 3;
+            i = 4;
+        }finally{
+
+        }
+    }
+}
+    ]]>
+    </code-fragment>
+
+</test-data>

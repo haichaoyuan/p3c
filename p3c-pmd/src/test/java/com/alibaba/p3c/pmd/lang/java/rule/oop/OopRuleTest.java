@@ -26,7 +26,7 @@ import net.sourceforge.pmd.testframework.SimpleAggregatorTst;
  */
 public class OopRuleTest extends SimpleAggregatorTst {
 
-    // 加载CLASSPATH下的rulesets/java/ali-oop.demo
+    // 加载CLASSPATH下的rulesets/java/ali-oop.special
     private static final String RULESET = "java-ali-oop";
 
     @Override

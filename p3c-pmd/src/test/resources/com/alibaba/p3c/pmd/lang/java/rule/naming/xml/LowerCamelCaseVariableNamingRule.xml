@@ -803,6 +803,22 @@ public class ClassInfo extends BaseClass implements Serializable  {
         <expected-problems>0</expected-problems>
         <code-ref id="special-method-generated3"/>
     </test-code>
+
+
+
+
+    <code-fragment id="LowerCamelCaseNativeMethodTest">
+        <![CDATA[
+        public class VariableNameRule {
+            public static native int Authorization(char[] name);
+        }
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>LowerCamelCaseNativeMethodTest</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="LowerCamelCaseNativeMethodTest"/>
+    </test-code>
 </test-data>
 
 

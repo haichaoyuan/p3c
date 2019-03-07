@@ -4,26 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
-    <rule name="MethodMustHaveCommentRule" message="java.demo.rule.MethodMustHaveCommentRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.MethodMustHaveCommentRule">
-        <description>方法需要增加完备注释，参数的说明，返回值的说明都需要</description>
-        <priority>1</priority>
 
-        <example>
-            <![CDATA[
-    /**
-     * 这是注释
-     * @param x 这是参数x意思
-     * @param y 这是参数y意思
-     * @return 这是返回值
-     */
-    public int b(int x, int y){
-        int i = 0;
-        return i;
-    }
-]]>
-        </example>
-    </rule>
 
     <rule name="EnumConstantsMustHaveCommentRule" message="java.comment.EnumConstantsMustHaveCommentRule.rule.msg"
           class="com.alibaba.p3c.pmd.lang.java.rule.comment.EnumConstantsMustHaveCommentRule">
@@ -55,6 +36,8 @@
         </example>
     </rule>
 
+
+
     <rule name="RemoveCommentedCodeRule"
           message="java.comment.RemoveCommentedCodeRule.rule.msg"
           class="com.alibaba.p3c.pmd.lang.java.rule.comment.RemoveCommentedCodeRule">
@@ -72,71 +55,6 @@ Positive example: For codes which are temporarily removed and likely to be reuse
 ]]>
         </example>
     </rule>
-
-
-    <rule name="XHCoreRule" message="java.demo.rule.XHCoreRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.XHCoreRule">
-        <description>XHCore 检查，包括微服务的使用</description>
-        <priority>3</priority>
-
-        <example>
-            <![CDATA[
-    public class XHApplication extends XhBaseApplication implements Abc{
-
-    @Override
-    protected BaseXHAppConfig getAppConfig() {
-        return new BaseXHAppConfig() {
-            @Override
-            public Map<String, String> getMicroServerDefaultMap() {
-                return new HashMap<String, String>(5) {
-                    {
-                        //应用
-                        put("SB103016", "http://filesoss.yunzuoye.net");
-
-                    }
-                };
-            }
-
-            @Override
-            public MicroServerVersion getMicroServerVersion() {
-                return MicroServerVersion.VERSION2;
-            }
-        };
-    }
-}
-]]>
-        </example>
-    </rule>
-
-
-    <!-- -->
-    <rule name="DensityAdapterRule" message="java.demo.rule.DensityAdapterRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.DensityAdapterRule">
-        <description>屏幕适配规则 DensityAdapterRule , 检查学海 XHCore 已被声明弃用的类的监测，XHDensityUtil、XHToast、TipToast；检查 Activity 或者 Application 不可重写 getResource 方法</description>
-        <priority>3</priority>
-
-        <example>
-            <![CDATA[
-    package com.xh.xhsample.business.http.ui.impl;
-
-    import com.xh.xhcore.common.util.XHToast;
-    import com.xh.view.TipToast;
-
-    public class HttpReqActivity {
-        @Override
-        public Resources getResources() {
-            // 不可使用类 XHToast
-            XHToast.show(R.string.do_exercise_continuous_rights_message, Toast.LENGTH_LONG);
-            // 不可使用类 TipToast
-            TipToast.showToast(this, "aaa", Toast.LENGTH_LONG);
-            return super.getResources();
-        }
-    }
-]]>
-        </example>
-    </rule>
-
-
 
 
 

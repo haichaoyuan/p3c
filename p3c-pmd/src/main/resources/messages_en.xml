@@ -508,7 +508,7 @@ Note: If attribute is null or does not exist, ${var} will be shown directly on w
         <![CDATA[variable [%s] should add ! after $]]>
     </entry>
 
-    <!-- demo -->
+    <!-- special -->
     <entry key="java.demo.rule.msg">
         <![CDATA[one demo yeah]]>
     </entry>
@@ -521,5 +521,8 @@ Note: If attribute is null or does not exist, ${var} will be shown directly on w
 
     <entry key="java.demo.rule.DensityAdapterRule">
         <![CDATA[density adapter rule check]]>
+    </entry>
+    <entry key="java.demo.rule.TryCatchRule">
+        <![CDATA[check TryCatch block，must write something in catch block]]>
     </entry>
 </properties>

@@ -6,7 +6,7 @@
 
 
     <rule name="WhileLoopsMustUseBracesRule" message="java.demo.rule.msg"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.WhileLoopsMustUseBracesRule">
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.WhileLoopsMustUseBracesRule">
         <description>怎么可以没有括号</description>
         <priority>3</priority>
 
@@ -27,9 +27,9 @@
     </rule>
 
     <rule name="MethodMustHaveCommentRule" message="java.demo.rule.MethodMustHaveCommentRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.MethodMustHaveCommentRule">
-        <description>方法需要增加完备注释，参数的说明，返回值的说明都需要</description>
-        <priority>3</priority>
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.MethodMustHaveCommentRule">
+        <description>说明：方法需要增加完备注释，参数的说明，返回值的说明都需要</description>
+        <priority>2</priority>
 
         <example>
             <![CDATA[
@@ -48,8 +48,8 @@
     </rule>
 
     <rule name="XHCoreRule" message="java.demo.rule.XHCoreRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.XHCoreRule">
-        <description>XHCore 使用检查，继承自XhBaseApplication的自定义 Application，必须实现 getAppConfig 方法进行参数配置</description>
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.XHCoreRule">
+        <description>说明：XHCore 使用检查，继承自XhBaseApplication的自定义 Application，必须实现 getAppConfig 方法进行参数配置</description>
         <priority>3</priority>
 
         <example>
@@ -86,8 +86,8 @@
     </rule>
 
     <rule name="DensityAdapterRule" message="java.demo.rule.DensityAdapterRule"
-          class="com.alibaba.p3c.pmd.lang.java.rule.demo.DensityAdapterRule">
-        <description>屏幕适配的规则检查, 包括弃用类的使用检查，getResource 方法的继承检查，详情见《今日头条屏幕适配方案迁移(第二版)》</description>
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.DensityAdapterRule">
+        <description>说明：屏幕适配的规则检查, 包括弃用类的使用检查，getResource 方法的继承检查，详情见《今日头条屏幕适配方案迁移(第二版)》</description>
         <priority>3</priority>
 
         <example>
@@ -96,4 +96,36 @@
 ]]>
         </example>
     </rule>
+
+    <rule name="DensityAdapterRule2" message="java.demo.rule.TryCatchRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.DensityAdapterRule">
+        <description>说明：屏幕适配的规则检查, 包括弃用类的使用检查，getResource 方法的继承检查，详情见《今日头条屏幕适配方案迁移(第二版)》</description>
+        <priority>3</priority>
+
+        <example>
+            <![CDATA[
+    todo
+]]>
+        </example>
+    </rule>
+
+
+    <rule name="TryCatchRule" message="java.demo.rule.TryCatchRule"
+          class="com.alibaba.p3c.pmd.lang.java.rule.special.TryCatchRule">
+        <description>说明：监测TryCatch代码块里，需要在catch块里写点代码，写注释不算的</description>
+        <priority>2</priority>
+
+        <example>
+            <![CDATA[
+    public void fun(){
+        try{
+        }carch(Exception e){
+            //此处写点处理异常代码
+            e.printException();
+        }
+    }
+]]>
+        </example>
+    </rule>
+
 </ruleset>

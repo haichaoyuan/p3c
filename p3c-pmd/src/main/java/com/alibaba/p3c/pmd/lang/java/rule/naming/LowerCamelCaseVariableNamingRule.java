@@ -38,6 +38,8 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
     private static final String MESSAGE_KEY_PREFIX = "java.naming.LowerCamelCaseVariableNamingRule.violation.msg";
     private Pattern pattern = Pattern.compile("^[a-z|$][a-z0-9]*([A-Z][a-z0-9]*)*(DO|DTO|VO|DAO)?$");
 
+    private boolean isMethodNotCheck;//方法无需监测
+
     @Override
     public Object visit(ASTClassOrInterfaceDeclaration node, Object data) {
         super.exeExcludeByClassName(node.getImage());
@@ -63,7 +65,7 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
         if(astFieldDeclaration != null){
             //全局变量
             boolean isNotCheck = astFieldDeclaration.isFinal() || astFieldDeclaration
-                    .isStatic();
+                    .isStatic()|| astFieldDeclaration.isNative();
             if (isNotCheck) {
                 return super.visit(node, data);
             }
@@ -86,17 +88,33 @@ public class LowerCamelCaseVariableNamingRule extends AbstractAliRule {
         return super.visit(node, data);
     }
 
+
     /**
-     * 方法
+     * 方法，包含属性
      *
      * @param node
      * @param data
      * @return
      */
     @Override
+    public Object visit(ASTMethodDeclaration node, Object data) {
+        isMethodNotCheck = node.isNative();
+        return super.visit(node, data);
+    }
 
+    /**
+     * 方法，包含方法名
+     *
+     * @param node
+     * @param data
+     * @return
+     */
+    @Override
     public Object visit(ASTMethodDeclarator node, Object data) {
         if (super.isExcludeByClassName()) {
+            return super.visit(node, data);
+        }
+        if(isMethodNotCheck){
             return super.visit(node, data);
         }
         if (!(pattern.matcher(node.getImage()).matches())) {

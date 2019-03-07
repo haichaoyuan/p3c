@@ -506,7 +506,7 @@
     </entry>
 
 
-    <!-- demo -->
+    <!-- special -->
     <entry key="java.demo.rule.msg">
         <![CDATA[我写的一个demo yeah]]>
     </entry>
@@ -521,5 +521,8 @@
     </entry>
     <entry key="java.demo.rule.DensityAdapterRule">
         <![CDATA[屏幕适配的检查规则]]>
+    </entry>
+    <entry key="java.demo.rule.TryCatchRule">
+        <![CDATA[监测TryCatch代码块里，需要在catch块里写点代码]]>
     </entry>
 </properties>

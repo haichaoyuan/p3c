@@ -1,4 +1,4 @@
-package com.alibaba.p3c.pmd.lang.java.rule.demo;
+package com.alibaba.p3c.pmd.lang.java.rule.special;
 
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTBlock;

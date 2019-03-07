@@ -1,13 +1,10 @@
-package com.alibaba.p3c.pmd.lang.java.rule.demo;
+package com.alibaba.p3c.pmd.lang.java.rule.special;
 
 import com.alibaba.p3c.pmd.lang.java.rule.comment.AbstractAliCommentRule;
-import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.java.ast.ASTClassOrInterfaceDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.ast.ASTImportDeclaration;
 import net.sourceforge.pmd.lang.java.ast.ASTMethodDeclarator;
-
-import java.util.List;
 
 /**
  * 屏幕适配规则
