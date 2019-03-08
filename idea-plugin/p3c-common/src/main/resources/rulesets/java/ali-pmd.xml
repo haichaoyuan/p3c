@@ -17,24 +17,31 @@
         <exclude name="WrapperTypeEqualityRule"/>
     </rule>
 
-    <!--<rule ref="rulesets/java/ali-concurrent.xml"/>-->
+    <!-- 2.0.9 版本-->
+    <rule ref="rulesets/java/xh-special.xml">
+        <exclude name="WhileLoopsMustUseBracesRule"/>
+    </rule>
+    <rule ref="rulesets/java/xh-other.xml"/>
+    <rule ref="rulesets/java/xh-flowcontrol.xml">
+        <exclude name="NeedBraceRule"/>
+    </rule>
+
+    <!--<rule ref="rulesets/java/xh-concurrent.xml"/>-->
     <!--<rule ref="rulesets/java/ali-comment.xml"/>-->
 
     <!--<rule ref="rulesets/java/ali-naming.xml">-->
-        <!--<exclude name="ArrayNamingShouldHaveBracketRule"/>-->
+    <!--<exclude name="ArrayNamingShouldHaveBracketRule"/>-->
     <!--</rule>-->
     <!--<rule ref="rulesets/java/ali-constant.xml">-->
-        <!--<exclude name="UpperEllRule"/>-->
+    <!--<exclude name="UpperEllRule"/>-->
     <!--</rule>-->
-    <!--<rule ref="rulesets/java/ali-other.xml"/>-->
+
     <!--<rule ref="rulesets/java/ali-orm.xml"/>-->
     <!--<rule ref="rulesets/java/ali-exception.xml"/>-->
     <!--<rule ref="rulesets/java/ali-oop.xml">-->
-        <!--<exclude name="EqualsAvoidNullRule"/>-->
-        <!--<exclude name="WrapperTypeEqualityRule"/>-->
+    <!--<exclude name="EqualsAvoidNullRule"/>-->
+    <!--<exclude name="WrapperTypeEqualityRule"/>-->
     <!--</rule>-->
     <!--<rule ref="rulesets/java/ali-set.xml"/>-->
-    <!--<rule ref="rulesets/java/ali-flowcontrol.xml">-->
-        <!--<exclude name="NeedBraceRule"/>-->
-    <!--</rule>-->
+
 </ruleset>

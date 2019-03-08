@@ -9,6 +9,10 @@
     <change-notes>
         <![CDATA[
         <ul>
+            2.1.0
+            <li>解决一个bug，新增三条需求，新增强制性修改规则5条，仅提示可不修改规则3条</li>
+        </ul>
+        <ul>
             2.0.8
             <li>优化。EnumConstantsMustHaveCommentRule 规则忽略枚举类里面第一行斜杠注释的监测</li>
             <li>优化。LowerCamelCaseVariableNamingRule 去除对注解里内容的检查 </li>

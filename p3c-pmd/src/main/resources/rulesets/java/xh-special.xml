@@ -121,7 +121,7 @@
         try{
         }carch(Exception e){
             //此处写点处理异常代码
-            e.printException();
+            e.printStackTrace();
         }
     }
 ]]>

@@ -75,13 +75,15 @@ class AliLocalInspectionToolProvider : InspectionToolProvider {
 //                AliAccessStaticViaInstanceInspection::class.java,
 //                AliDeprecationInspection::class.java,
 //                MapOrSetKeyShouldOverrideHashCodeEqualsInspection::class.java,
-//                AliControlFlowStatementWithoutBracesInspection::class.java,
+
 
                 AliLongLiteralsEndingWithLowercaseLInspection::class.java,
                 // todo :AliEqualsAvoidNullInspection 存在监测不出来的问题
 //                AliEqualsAvoidNullInspection::class.java,
                 AliArrayNamingShouldHaveBracketInspection::class.java,
-                AliWrapperTypeEqualityInspection::class.java
+                AliWrapperTypeEqualityInspection::class.java,
+                // 2.1.0 增加 needBraces 规则
+                AliControlFlowStatementWithoutBracesInspection::class.java
         )
         val javaShouldInspectChecker = object : ShouldInspectChecker {
             override fun shouldInspect(file: PsiFile): Boolean {
