@@ -28,7 +28,7 @@ public class CheckExcludeClassNameManager {
     private boolean excludeByClassName;//排序一些不检测的类
     private String classAnnotation;//类名注解，剔除不检测的类
 
-    public CheckExcludeClassNameManager(ASTCompilationUnit node){
+    public CheckExcludeClassNameManager(ASTCompilationUnit node) {
         excludeByClassName = false;
         initClassNameAndAnnotation(node);
     }
@@ -53,11 +53,11 @@ public class CheckExcludeClassNameManager {
     }
 
     /**
-     * @param className 类名
+     * @param className       类名
      * @param classAnnotation 注解名
      * @return true, 被排除
      */
-    public static boolean isExcludeByClassName(String className, String classAnnotation){
+    public static boolean isExcludeByClassName(String className, String classAnnotation) {
         // 1. 判断类名是否被排除
         if (className != null) {
             for (String s : classNameExcludeList) {
@@ -74,7 +74,7 @@ public class CheckExcludeClassNameManager {
             return true;
         }
         // 2. 判断注解名是否被排除
-        if (classAnnotation != null){
+        if (classAnnotation != null) {
             for (String s : annotationNameExcludeList) {
                 if (classAnnotation.equals(s)) {
                     return true;
@@ -84,16 +84,21 @@ public class CheckExcludeClassNameManager {
         return false;
     }
 
-    /** 初始化类名和注解
+    /**
+     * 初始化类名和注解
+     *
      * @param node
      */
     private void initClassNameAndAnnotation(ASTCompilationUnit node) {
-        if(node == null){
+        classAnnotation = null;
+        if (node == null) {
             return;
         }
-        classAnnotation = null;
         int i = node.jjtGetNumChildren();
-        Node typeNode = node.jjtGetChild(i -1);
+        if (i <= 0) {
+            return;
+        }
+        Node typeNode = node.jjtGetChild(i - 1);
         if (typeNode instanceof ASTTypeDeclaration) {
             Node annoNode = typeNode.jjtGetChild(0);
             if (annoNode instanceof ASTAnnotation) {

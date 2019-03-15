@@ -19,7 +19,9 @@ public class SpecialRulesTest extends SimpleAggregatorTst {
 //        //[3] DensityAdapterRule 的规则
         addRule(RULESET, "DensityAdapterRule");
         //[4] TryCatchRule 的规则
+
         addRule(RULESET, "TryCatchRule");
+
         super.setUp();
     }
 
