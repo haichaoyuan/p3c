@@ -9,6 +9,11 @@
     <change-notes>
         <![CDATA[
         <ul>
+            2.1.1
+            <li>去除类名必须符合驼峰规则对特定类名的监测，WWHandWrite</li>
+            <li>一个NPE 修复，在CheckExcludeClassNameManager.initClassNameAndAnnotation</li>
+        </ul>
+        <ul>
             2.1.0
             <li>解决一个bug，新增三条需求，新增强制性修改规则5条，仅提示可不修改规则3条</li>
         </ul>
